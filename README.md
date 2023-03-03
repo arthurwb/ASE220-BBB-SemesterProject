@@ -1,6 +1,6 @@
 # ASE220-BBB-SemesterProject
 
-HTML/CSS
+HTML/CSS\n
 ⦁ Create the main UI for the index page and the review page.
 ⦁ Design and create the CSS for the site.
 ⦁ Figure out a layout that will be able to store and present the info stored in the JSON file.
