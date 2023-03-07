@@ -1,0 +1,40 @@
+{
+    "posts": [
+        {
+            "username": "Brooks",
+            "artist": "Weezer",
+            "album": "Weezer",
+            "song": "Say It Ain't So",
+            "rating": 6.5,
+            "title": "Weezer is just OK",
+            "review": "Say It Ain't So is one the finer tracks to be found on the record that launched a hundred emo bands, Weezer's stellar 1994 self-titled debut. The track has all the ingredients of a great song: crisp production, subtle verses, and head-smacking choruses that are both tuneful and poignant."
+        },
+        {
+            "username": "Jimmathin",
+            "artist": "AJR",
+            "album": "",
+            "song": "",
+            "rating": 1,
+            "title": "AJR sucks so much I almost puked",
+            "review": "I have been recommended AJR by some friends. I know that Fantano has talked about how bad the music is, so I said sure. I will give it a listen to see if Fantano is exaggerating on how bad it is or if my friends have awful taste in music. So currently I am studying for finals and need something mindless to listen to while studying, so I decided to listen to “the Click”. I made it through 2 songs before I started to get a headache from the amount of autotune and awful production. I had eaten about 3 hours before I started to listen, but halfway through weak, my stomach started to feel weak. I made it to the song Drama and gave up, because I felt sick to my stomach from the music, I felt like I had to puke like 2 times during my listen. As soon as I stopped listening, I started to feel less nauseous and no issues with my stomach. How can people listen to AJR and not find the music repulsive? It is the most boring music I have ever listened to. Everything about the music is so nauseating, in my case, literally."
+        },
+        {
+            "username": "GarlicMango64",
+            "artist": "Jack Stauber",
+            "album": "Pop Food",
+            "song": "",
+            "rating": 8,
+            "title": "He's Pretty Great!",
+            "review": "I discovered Jack on a live, where someone sent one of his weird ass animations, which led me to his YouTube page, and eventually to his Apple Music page, and eventually here, with me listening to his albums. I've always had an affinity with his material, with \"Buttercup\" being one of my favorite songs oat, and I was just super excited to check out this album. And yeah, this was pretty great! I love the LoFi deep fried aesthetic, with the instrumentals being super compressed. Songs like \"Bothersome\" and \"Oh Klahoma\" perfectly encapsulate the LoFi feel of \"Buttercup\" without trying to blatantly copy it. And then songs like \"Safe Socks\" and \"I Love You Verne Troyer\" are just super cute and adorable songs in general. I don't know, this is just a great LoFi album, possibly one of my favorites."
+        },
+        {
+            "username": "CodeTester420",
+            "artist": "I am trying to break your code",
+            "album": "Null",
+            "song": "56123",
+            "rating": 8,
+            "title": "Here are some things to note when you are testing the data that is being sent to the api",
+            "review": "1) If the use inputs a \", you will need to add a back-slash in front of it or else it might corrupt the rest of the data. 2) for the ratings, you will need to make sure to not let the users input anything less than 0 or greater than 10. 3) It may be worth while putting a character limit on what the user can input into the fields."
+        }
+    ]
+}
