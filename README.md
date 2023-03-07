@@ -16,3 +16,12 @@ JSON<br />
 ⦁ Determine what data we will need to take in and display to the user (username, review text, comment text, etc.).<br />
 ⦁ Create the JSON file using jsonBlob.com as well as a backup which will be stored on GitHub with the other files.<br />
 ⦁ This will likely be the easiest job so you will be needed to help the html/css guy and the javascript guy as needed.<br />
+<br />
+<br />
+<b>Review form features</b><br />
+Username - required<br />
+Artist - optional<br />
+Album - optional<br />
+Song - optional<br />
+Rating 1-10 - optional<br />
+Review - required<br />
