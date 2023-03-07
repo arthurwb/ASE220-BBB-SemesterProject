@@ -24,4 +24,11 @@ Artist - optional<br />
 Album - optional<br />
 Song - optional<br />
 Rating 1-10 - optional<br />
+Title - required<br />
 Review - required<br />
+
+<h1><b>Index Page</b></h1>
+<p>Username, artist/album/song, title</p>
+
+<h1><b>Detail Page</b></h1>
+<p>Username, artist/album/song, rating, title, review</p>
