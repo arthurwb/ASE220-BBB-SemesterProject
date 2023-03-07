@@ -16,11 +16,23 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
-
+    <div class="d-grid gap-2" style="margin: 30px;">
+      <button id="create-post-button" class="btn btn-primary" type="button" onclick="showCreatePostForm()">Create New Post</button>
+      <button id="delete-post-button" class="btn btn-secondary" type="button" style="border-color: grey" onclick="showDeletePostForm()">Delete Existing Post</button>
+    </div>
+  
+    <div id="postForm" style="display: none; margin: 30px;">
+      <form>
+        <!-- Form fields go here -->
+        <button class="btn btn-primary" type="button" onclick="submitForm()">Submit</button>
+        <button class="btn btn-secondary" type="button" style="border-color: grey" onclick="cancelForm()">Cancel</button>
+      </form>
+    </div>
+  
     <!--The ASSETS-->
     <script src="assets/api.js"></script>
     <script src="assets/database.js"></script>
     <script src="assets/getAllURLParams.js"></script>
     <script src="JavaScript/app.js"></script>
-</body>
+  </body>  
 </html>
