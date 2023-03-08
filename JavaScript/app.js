@@ -53,9 +53,17 @@ function createPost() {
     const title = document.getElementById("title").value;
     const review = document.getElementById("review").value;
     const timestamp = getCurrentDateTime();
-    
-    // Create a data object with the form input values
-    const newData = {
+  
+    // Get the current data from the JSON blob
+    api.GET(documentID, function(response) {
+      // Generate a random 6 digit number that is not already in use
+      let id = Math.floor(Math.random() * 900000) + 100000;
+      while (response.data.some(post => post.id === id)) {
+        id = Math.floor(Math.random() * 900000) + 100000;
+      }
+  
+      // Create a data object with the form input values and assigned ID
+      const newData = {
         username,
         artist,
         album,
@@ -64,13 +72,16 @@ function createPost() {
         title,
         review,
         timestamp,
-    };
-    
-    // Send an UPDATE request
-    api.UPDATE(documentID, newData, displaySuccessMessage());
-}
+        id,
+      };
+  
+      // Send an UPDATE request
+      api.UPDATE(documentID, newData, displaySuccessMessage());
+    });
+  }    
 
-api.GET('1082768886235152384', function(response) {  
+//appends cards to index page
+api.GET(documentID, function(response) {  
     for (i = 0; i < response.data.length; i++) {
         //template for creating a new post
         var newPost = `
@@ -83,7 +94,7 @@ api.GET('1082768886235152384', function(response) {
                 </div>
                 <div class="card-footer bg-transparent border-success">
                     ${response.data[i].timestamp}
-                    <a href="#" class="btn btn-primary" style="float: right;">View Post</a>
+                    <a class="btn btn-primary" style="float: right;" onclick="location.href ='post.html?id=${response.data[i].id}';">View Post</a>
                 </div>
             </div>
         </div>`;
