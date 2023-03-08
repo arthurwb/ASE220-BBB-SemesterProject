@@ -39,12 +39,15 @@ async function createComment() {
         commentUsername: commentUsername,
         commentText: commentText
     }
+    // collectes data from api
     api.GET(documentID, function(response) {
         for (let i = 0; i < response.data.length; i++) {
             if (id == response.data[i].id) {
                 var post = response.data[i];
+                // puts new comment after all existing comments
                 post.comments.push(newComment);
 
+                // pushes all data including new comment to the api
                 api.PUT(documentID,response.data,function(putRes){
                     console.log(putRes);
                     displaySuccessMessage();
@@ -55,8 +58,9 @@ async function createComment() {
     });
 }
 
+// most of this code has been taken from app.js and slightly altered
 function showCreateCommentForm() {
-    // Hide the original "Create New Post" button
+    // Hide the original "Create New Comment" button
     const createCommentButton = document.getElementById("post-comment-button");
     createCommentButton.style.display = "none";
 
@@ -66,7 +70,6 @@ function showCreateCommentForm() {
 }
 
 async function commentSubmitForm() {
-    // Your code to handle form submission goes here
     createComment();
     console.log('Comment submitted!');
     document.getElementById('post-comment-button').style.display = 'block';
