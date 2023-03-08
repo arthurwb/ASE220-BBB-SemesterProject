@@ -8,13 +8,14 @@ const id = getAllUrlParams().id;
 api.GET(documentID, function(response) {  
     for (i = 0; i < response.data.length; i++) {
         if (id == response.data[i].id) {
-            document.getElementById("title").innerText = response.data[i].title;
-            document.getElementById("posted").innerText = `Posted by ${response.data[i].username} at ${response.data[i].timestamp}`
-            document.getElementById("song").innerText = `Song - ${response.data[i].song}`;
-            document.getElementById("artist").innerText = `Artist - ${response.data[i].artist}`;
-            document.getElementById("album").innerText = `Album - ${response.data[i].album}`;
-            document.getElementById("rating").innerText = `Rating - ${response.data[i].rating} out of 10`;
-            document.getElementById("review").innerText = `Review - ${response.data[i].review}`;
+            var post = response.data[i];
+            document.getElementById("title").innerText = post[i].title;
+            document.getElementById("posted").innerText = `Posted by ${post.username} at ${post.timestamp}`
+            document.getElementById("song").innerText = `Song - ${post.song}`;
+            document.getElementById("artist").innerText = `Artist - ${post.artist}`;
+            document.getElementById("album").innerText = `Album - ${post.album}`;
+            document.getElementById("rating").innerText = `Rating - ${post.rating} out of 10`;
+            document.getElementById("review").innerText = `Review - ${post.review}`;
         }
     }
 });
