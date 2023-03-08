@@ -9,13 +9,71 @@ api.GET(documentID, function(response) {
     for (i = 0; i < response.data.length; i++) {
         if (id == response.data[i].id) {
             var post = response.data[i];
-            document.getElementById("title").innerText = post[i].title;
+            document.getElementById("title").innerText = post.title;
             document.getElementById("posted").innerText = `Posted by ${post.username} at ${post.timestamp}`
             document.getElementById("song").innerText = `Song - ${post.song}`;
             document.getElementById("artist").innerText = `Artist - ${post.artist}`;
             document.getElementById("album").innerText = `Album - ${post.album}`;
             document.getElementById("rating").innerText = `Rating - ${post.rating} out of 10`;
             document.getElementById("review").innerText = `Review - ${post.review}`;
+            post.comments.forEach(comment => {
+                document.getElementById("post-comments").innerHTML += `
+                <div class="border rounded p-2 mb-1">
+                    <p><b>${comment.commentUsername}</b></p>
+                    <p>${comment.commentText}</p>
+                </div>
+                `;
+            });
         }
     }
 });
+
+function displaySuccessMessage() {
+    console.log('Post successfully added!');
+}
+
+async function createComment() {
+    const commentUsername = document.getElementById("username").value;
+    const commentText = document.getElementById("comment-text").value;
+    const newComment = {
+        commentUsername: commentUsername,
+        commentText: commentText
+    }
+    api.GET(documentID, function(response) {
+        for (let i = 0; i < response.data.length; i++) {
+            if (id == response.data[i].id) {
+                var post = response.data[i];
+                post.comments.push(newComment);
+
+                api.PUT(documentID,response.data,function(putRes){
+                    console.log(putRes);
+                    displaySuccessMessage();
+                    document.location.reload();
+                });
+            };
+        }
+    });
+}
+
+function showCreateCommentForm() {
+    // Hide the original "Create New Post" button
+    const createCommentButton = document.getElementById("post-comment-button");
+    createCommentButton.style.display = "none";
+
+    // Show the form
+    const createCommentForm = document.getElementById("comment-form");
+    createCommentForm.style.display = "block";
+}
+
+async function commentSubmitForm() {
+    // Your code to handle form submission goes here
+    createComment();
+    console.log('Comment submitted!');
+    document.getElementById('post-comment-button').style.display = 'block';
+    document.getElementById('comment-form').style.display = 'none';
+}
+
+function commentCancelForm() {
+    document.getElementById('post-comment-button').style.display = 'block';
+    document.getElementById('comment-form').style.display = 'none';
+}
