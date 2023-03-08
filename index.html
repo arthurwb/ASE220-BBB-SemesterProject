@@ -16,18 +16,48 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    <div class="d-grid gap-2" style="margin: 30px;">
-      <button id="create-post-button" class="btn btn-primary" type="button" onclick="showCreatePostForm()">Create New Post</button>
-      <button id="delete-post-button" class="btn btn-secondary" type="button" style="border-color: grey" onclick="showDeletePostForm()">Delete Existing Post</button>
+  <div class="row">
+    <div class="col-10 offset-1">
+      <div class="d-grid gap-2" style="margin-top: 2em;">
+        <button id="create-post-button" class="btn btn-primary" type="button" onclick="showCreatePostForm()">Create New Post</button>
+      </div>
+    
+      <div id="postForm" style="display: none;">
+        <form style="background-color: lightgray; padding: 20px;  border-radius: 10px;">
+          <div class="mb-3">
+            <label for="username" class="form-label">Username *</label>
+            <input type="text" class="form-control" id="username" required>
+          </div>
+          <div class="mb-3">
+            <label for="artist" class="form-label">Artist</label>
+            <input type="text" class="form-control" id="artist">
+          </div>
+          <div class="mb-3">
+            <label for="album" class="form-label">Album</label>
+            <input type="text" class="form-control" id="album">
+          </div>
+          <div class="mb-3">
+            <label for="song" class="form-label">Song</label>
+            <input type="text" class="form-control" id="song">
+          </div>
+          <div class="mb-3">
+            <label for="rating" class="form-label">Rating (1-10)</label>
+            <input type="number" class="form-control" id="rating" min="1" max="10">
+          </div>
+          <div class="mb-3">
+            <label for="title" class="form-label">Title *</label>
+            <input type="text" class="form-control" id="title" required>
+          </div>
+          <div class="mb-3">
+            <label for="review" class="form-label">Review *</label>
+            <textarea class="form-control" id="review" rows="3" required></textarea>
+          </div>
+          <button class="btn btn-secondary" type="button" style="border-color: grey" onclick="cancelForm()">Cancel</button>
+          <button class="btn btn-primary" type="button" onclick="submitForm()">Submit</button>
+        </form>
+      </div>
     </div>
-  
-    <div id="postForm" style="display: none; margin: 30px;">
-      <form>
-        <!-- Form fields go here -->
-        <button class="btn btn-primary" type="button" onclick="submitForm()">Submit</button>
-        <button class="btn btn-secondary" type="button" style="border-color: grey" onclick="cancelForm()">Cancel</button>
-      </form>
-    </div>
+  </div>
   
     <!--The ASSETS-->
     <script src="assets/api.js"></script>
