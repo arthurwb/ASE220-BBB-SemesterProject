@@ -1,5 +1,6 @@
 //id of the jsonBlob page
 const documentID = '1082748833116733440';
+// 1082748833116733440
 
 //gets id
 const id = getAllUrlParams().id;
@@ -51,6 +52,7 @@ async function createComment() {
                 api.PUT(documentID,response.data,function(putRes){
                     console.log(putRes);
                     displaySuccessMessage();
+                    // reloads the page so that you can see the new comment
                     document.location.reload();
                 });
             };
