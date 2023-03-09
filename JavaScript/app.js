@@ -53,6 +53,7 @@ function createPost() {
     const title = document.getElementById("title").value;
     const review = document.getElementById("review").value;
     const timestamp = getCurrentDateTime();
+    const comments = [];
   
     // Get the current data from the JSON blob
     api.GET(documentID, function(response) {
@@ -73,6 +74,7 @@ function createPost() {
         review,
         timestamp,
         id,
+        comments,
       };
   
       // Send an UPDATE request
