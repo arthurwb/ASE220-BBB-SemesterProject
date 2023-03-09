@@ -1,5 +1,6 @@
 //id of the jsonBlob page
 const documentID = '1082748833116733440';
+// 1082748833116733440
 
 //gets id
 const id = getAllUrlParams().id;
@@ -32,6 +33,21 @@ function displaySuccessMessage() {
     console.log('Post successfully added!');
 }
 
+// used to test the validation of a new comment
+function validation(commentUsername, commentText) {
+    let response;
+
+    if (commentUsername == "") {
+        response = false;
+    } else if (commentText == "") {
+        response = false;
+    } else {
+        response = true;
+    }
+
+    return response;
+}
+
 async function createComment() {
     const commentUsername = document.getElementById("username").value;
     const commentText = document.getElementById("comment-text").value;
@@ -39,23 +55,29 @@ async function createComment() {
         commentUsername: commentUsername,
         commentText: commentText
     }
-    // collectes data from api
-    api.GET(documentID, function(response) {
-        for (let i = 0; i < response.data.length; i++) {
-            if (id == response.data[i].id) {
-                var post = response.data[i];
-                // puts new comment after all existing comments
-                post.comments.push(newComment);
 
-                // pushes all data including new comment to the api
-                api.PUT(documentID,response.data,function(putRes){
-                    console.log(putRes);
-                    displaySuccessMessage();
-                    document.location.reload();
-                });
-            };
-        }
-    });
+    if (validation(commentUsername, commentText)) {
+        // collectes data from api
+        api.GET(documentID, function(response) {
+            for (let i = 0; i < response.data.length; i++) {
+                if (id == response.data[i].id) {
+                    var post = response.data[i];
+                    // puts new comment after all existing comments
+                    post.comments.push(newComment);
+
+                    // pushes all data including new comment to the api
+                    api.PUT(documentID,response.data,function(putRes){
+                        console.log(putRes);
+                        displaySuccessMessage();
+                        // reloads the page so that you can see the new comment
+                        document.location.reload();
+                    });
+                };
+            }
+        });
+    } else {
+        alert("Username or comment text left empty");
+    }
 }
 
 // most of this code has been taken from app.js and slightly altered

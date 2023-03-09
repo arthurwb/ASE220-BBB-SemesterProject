@@ -1,5 +1,6 @@
 //id of the jsonBlob page
 const documentID = '1082748833116733440';
+// 1082748833116733440
 
 //function for getting formatted timestamp
 function getCurrentDateTime() {
@@ -43,6 +44,24 @@ function displaySuccessMessage() {
     console.log('Post successfully added!');
 }
 
+// used to test the validation of a new post
+function validation(username, title, review, rating) {
+    let response;
+    if (rating < 0 || rating > 10) {
+        response = false
+    } else if (username == "") {
+        response = false
+    } else if (title == "") {
+        response = false
+    } else if (review == "") {
+        response = false
+    } else {
+        response = true
+    }
+
+    return response;
+}
+
 function createPost() {
     // Get the form input values
     const username = document.getElementById("username").value;
@@ -54,32 +73,37 @@ function createPost() {
     const review = document.getElementById("review").value;
     const timestamp = getCurrentDateTime();
     const comments = [];
-  
-    // Get the current data from the JSON blob
-    api.GET(documentID, function(response) {
-      // Generate a random 6 digit number that is not already in use
-      let id = Math.floor(Math.random() * 900000) + 100000;
-      while (response.data.some(post => post.id === id)) {
-        id = Math.floor(Math.random() * 900000) + 100000;
-      }
-  
-      // Create a data object with the form input values and assigned ID
-      const newData = {
-        username,
-        artist,
-        album,
-        song,
-        rating,
-        title,
-        review,
-        timestamp,
-        id,
-        comments,
-      };
-  
-      // Send an UPDATE request
-      api.UPDATE(documentID, newData, displaySuccessMessage());
-    });
+    let isValid = validation(username, title, review, rating);
+
+    if (isValid) {
+        // Get the current data from the JSON blob
+        api.GET(documentID, function(response) {
+            // Generate a random 6 digit number that is not already in use
+            let id = Math.floor(Math.random() * 900000) + 100000;
+            while (response.data.some(post => post.id === id)) {
+            id = Math.floor(Math.random() * 900000) + 100000;
+            }
+
+            // Create a data object with the form input values and assigned ID
+            const newData = {
+            username,
+            artist,
+            album,
+            song,
+            rating,
+            title,
+            review,
+            timestamp,
+            id,
+            comments,
+            };
+
+            // Send an UPDATE request
+            api.UPDATE(documentID, newData, displaySuccessMessage());
+        });
+    } else {
+        alert("Input not valid")
+    }
   }    
 
 //appends cards to index page
