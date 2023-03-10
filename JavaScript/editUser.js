@@ -72,6 +72,12 @@ function createNewUser() {
     }
 }
 
+async function deleteUser(index) {
+    await database.delete(documentID, index);
+    document.location.reload();
+    alert("user has been deleted");
+}
+
 function login() {
     const loginUsername = $("#loginUsername").val();
     const loginPassword = $("#loginPassword").val();
@@ -90,6 +96,7 @@ function login() {
                         <p class="offset-1">${element.firstName}</p>
                         <h3>Biography</h3>
                         <p class="offset-1">${element.bio}</p>
+                        <button class="btn btn-danger col-2" onclick="deleteUser(${i})">Delete User</button>
                     </div>
                 `);
             }
