@@ -80,26 +80,81 @@ function createPost() {
     });
   }    
 
+//initilize variables
+let postPerPage = 4;
+let numOfPosts = 0;
+var page = getAllUrlParams().page;
+var validPage = true;
+var index = 0;
+var back_page = 0;
+
+//checks for index page without params
+if (page == undefined) {
+    page = 1;
+}
+
+if (validPage == true) {
+    //gets the starting index for detail.json
+    if (getAllUrlParams().page >= 2) {
+      var i = 0;
+      while (i < (getAllUrlParams().page - 1) * postPerPage) {
+        i++;
+        index++;
+      }
+    }
+    else{
+      index = 0;
+    }
+}
+
 //appends cards to index page
 api.GET(documentID, function(response) {  
-    for (i = 0; i < response.data.length; i++) {
+    numOfPosts = response.data.length;
+    var counter = 0;
+    while (counter < postPerPage && response.data[index] + 1) {
         //template for creating a new post
         var newPost = `
         <div class="row">
             <div class="card col-12 border-success mb-3" style="margin-top: 2em; margin-bottom: 2em;">
-                <div class="card-header bg-transparent border-success">${response.data[i].username}</div>
+                <div class="card-header bg-transparent border-success">${response.data[index].username}</div>
                 <div class="card-body text-success">
-                    <h5 class="card-title">${response.data[i].title}</h5>
-                    <p class="card-text">${response.data[i].rating} out of 10</p>
+                    <h5 class="card-title">${response.data[index].title}</h5>
+                    <p class="card-text">${response.data[index].rating} out of 10</p>
                 </div>
                 <div class="card-footer bg-transparent border-success">
-                    ${response.data[i].timestamp}
-                    <a class="btn btn-primary" style="float: right;" onclick="location.href ='post.html?id=${response.data[i].id}';">View Post</a>
+                    ${response.data[index].timestamp}
+                    <a class="btn btn-primary" style="float: right;" onclick="location.href ='post.html?id=${response.data[index].id}';">View Post</a>
                 </div>
             </div>
         </div>`;
 
         //adds new post to page
         document.querySelector(".col-10").innerHTML += newPost;
+        counter++;
+        index++
+    }
+
+    //logic for determing the page number of the next page and previous page
+    var elements = document.getElementsByTagName("body");
+    if (getAllUrlParams().page > 1) {
+        page = parseInt(getAllUrlParams().page) + 1;
+        back_page = parseInt(getAllUrlParams().page) - 1;
+    }
+    else {
+        var page = 2;
+    }
+
+    //adds the back button as long as the page is not the first page
+    if (back_page > 0) {
+        elements[0].innerHTML += `<button type="button" onclick="location.href = 'index.html?page=${back_page}';" class="btn btn-sm btn-outline-secondary" style="margin: 20px;">Previous</button>`
+    }
+    // again below is mainly just for the formating of the buttons so that they always exist in one place and dont shift
+    else{
+        elements[0].innerHTML += `<button type="button" onclick="location.href = 'index.html?page=${back_page}';" class="btn btn-sm btn-outline-secondary" style="margin: 20px; visibility:hidden;">Previous</button>`
+    }
+
+    //adds the next button to the page
+    if (numOfPosts > (page * postPerPage) - postPerPage){
+        elements[0].innerHTML += `<button type="button" onclick="location.href = 'index.html?page=${page}';" class="btn btn-sm btn-outline-secondary" style="margin: 20px;">Next</button>`
     }
 });
