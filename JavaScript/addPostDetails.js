@@ -50,8 +50,10 @@ function validation(commentUsername, commentText) {
 }
 
 async function createComment() {
-    const commentUsername = document.getElementById("username").value;
-    const commentText = document.getElementById("comment-text").value;
+    const commentUsername = $("#username").val();
+    // const commentUsername = document.getElementById("username").value;
+    const commentText = $("#comment-text").val();
+    // const commentText = document.getElementById("comment-text").value;
     const newComment = {
         commentUsername: commentUsername,
         commentText: commentText
