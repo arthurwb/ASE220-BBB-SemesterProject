@@ -83,22 +83,20 @@ async function createComment() {
 // most of this code has been taken from app.js and slightly altered
 function showCreateCommentForm() {
     // Hide the original "Create New Comment" button
-    const createCommentButton = document.getElementById("post-comment-button");
-    createCommentButton.style.display = "none";
+    $("#post-comment-button").addClass("d-none").removeClass("d-block");
 
     // Show the form
-    const createCommentForm = document.getElementById("comment-form");
-    createCommentForm.style.display = "block";
+    $("#comment-form").addClass("d-block").removeClass("d-none");
 }
 
 async function commentSubmitForm() {
     createComment();
     console.log('Comment submitted!');
-    document.getElementById('post-comment-button').style.display = 'block';
-    document.getElementById('comment-form').style.display = 'none';
+    $("#post-comment-button").addClass("d-block").removeClass("d-none");
+    $("#comment-form").addClass("d-none").removeClass("d-block");
 }
 
 function commentCancelForm() {
-    document.getElementById('post-comment-button').style.display = 'block';
-    document.getElementById('comment-form').style.display = 'none';
+    $("#post-comment-button").addClass("d-block").removeClass("d-none");
+    $("#comment-form").addClass("d-none").removeClass("d-block");
 }

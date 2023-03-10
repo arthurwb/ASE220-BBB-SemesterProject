@@ -19,25 +19,23 @@ function getCurrentDateTime() {
 
 function showCreatePostForm() {
     // Hide the original "Create New Post" button
-    const createPostButton = document.getElementById("create-post-button");
-    createPostButton.style.display = "none";
+    $("#create-post-button").addClass("d-none").removeClass("d-block");
 
     // Show the form
-    const createPostForm = document.getElementById("postForm");
-    createPostForm.style.display = "block";
+    $("#postForm").addClass("d-block").removeClass("d-none");
 }
 
 function submitForm() {
     // Your code to handle form submission goes here
     createPost();
     console.log('Form submitted!');
-    document.getElementById('create-post-button').style.display = 'block';
-    document.getElementById('postForm').style.display = 'none';
+    $("#create-post-button").addClass("d-block").removeClass("d-none");
+    $("#postForm").addClass("d-none").removeClass("d-block");
 }
 
 function cancelForm() {
-    document.getElementById('create-post-button').style.display = 'block';
-    document.getElementById('postForm').style.display = 'none';
+    $("#create-post-button").addClass("d-block").removeClass("d-none");
+    $("#postForm").addClass("d-none").removeClass("d-block");
 }
 
 function displaySuccessMessage() {
@@ -64,13 +62,13 @@ function validation(username, title, review, rating) {
 
 function createPost() {
     // Get the form input values
-    const username = document.getElementById("username").value;
-    const artist = document.getElementById("artist").value || null;
-    const album = document.getElementById("album").value || null;
-    const song = document.getElementById("song").value || null;
-    const rating = document.getElementById("rating").value || null;
-    const title = document.getElementById("title").value;
-    const review = document.getElementById("review").value;
+    const username = $("#username").val();
+    const artist = $("#artist").val() || null;
+    const album = $("#album").val() || null;
+    const song = $("#song").val() || null;
+    const rating = $("#rating").val() || null;
+    const title = $("#title").val();
+    const review = $("#review").val();
     const timestamp = getCurrentDateTime();
     const comments = [];
     let isValid = validation(username, title, review, rating);
