@@ -10,20 +10,21 @@ api.GET(documentID, function(response) {
     for (i = 0; i < response.data.length; i++) {
         if (id == response.data[i].id) {
             var post = response.data[i];
-            document.getElementById("title").innerText = post.title;
-            document.getElementById("posted").innerText = `Posted by ${post.username} at ${post.timestamp}`
-            document.getElementById("song").innerText = `Song - ${post.song}`;
-            document.getElementById("artist").innerText = `Artist - ${post.artist}`;
-            document.getElementById("album").innerText = `Album - ${post.album}`;
-            document.getElementById("rating").innerText = `Rating - ${post.rating} out of 10`;
-            document.getElementById("review").innerText = `Review - ${post.review}`;
+
+            $("#title").text(post.title);
+            $("#posted").text(`Posted by ${post.username} at ${post.timestamp}`);
+            $("#song").text(`Song - ${post.song}`);
+            $("#artist").text(`Artist - ${post.artist}`);
+            $("#album").text(`Album - ${post.album}`);
+            $("#rating").text(`Rating - ${post.rating} out of 10`);
+            $("#review").text(`Review - ${post.review}`);
             post.comments.forEach(comment => {
-                document.getElementById("post-comments").innerHTML += `
+                $("#post-comments").append(`
                 <div class="border rounded p-2 mb-1">
                     <p><b>${comment.commentUsername}</b></p>
                     <p>${comment.commentText}</p>
                 </div>
-                `;
+                `);
             });
         }
     }
