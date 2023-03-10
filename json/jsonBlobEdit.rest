@@ -115,3 +115,51 @@ content-type: application/json
 
 ### DELETE REQUEST
 DELETE https://jsonblob.com/api/jsonBlob/1082748833116733440
+
+
+// USER BLOB
+
+### GET REQUEST
+GET https://jsonblob.com/api/1083854980754194432
+
+
+### POST REQUEST
+POST https://jsonblob.com/api/jsonBlob
+content-type: application/json
+
+[]
+
+
+### PUT REQUEST
+PUT https://jsonblob.com/api/jsonBlob/1083854980754194432
+content-type: application/json
+
+[
+    {
+        "username": "admin",
+        "email": "test@BBB.com",
+        "password": "password1",
+        "bio": "test bio",
+        "firstName": "Brooks",
+        "id": 0
+    },
+    {
+        "username": "admin2",
+        "email": "test2@BBB.com",
+        "password": "password2",
+        "bio": "test bio",
+        "firstName": "Brandon",
+        "id": 1
+    },
+    {
+        "username": "admin3",
+        "email": "test3@BBB.com",
+        "password": "password3",
+        "bio": "test bio",
+        "firstName": "Ben",
+        "id": 2
+    }
+]
+
+### DELETE REQUEST
+DELETE https://jsonblob.com/api/jsonBlob/1083854980754194432
