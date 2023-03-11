@@ -1,3 +1,6 @@
+body{
+    height: 1080px;
+}
 p {
     font-family: 'Courier New', Courier, monospace;
 }
@@ -24,4 +27,8 @@ p {
 .searchButton{
     height: 40px;
     border-radius: 0px 7px 7px 0px;
+}
+footer{
+    position: static;
+    background-color: lightgray;
 }

@@ -17,82 +17,96 @@
     <!--Font Awesome-->
     <script src="https://kit.fontawesome.com/7bf037d0fc.js" crossorigin="anonymous"></script>
 </head>
-<body>
-  <header>
-    <div class="row">
-      <div class="col-3 d-flex justify-content-center">
-        <img class="logo" src="assets/img/logo_large.PNG" height="110px">      
-      </div>
-      <div class="col-7 d-flex justify-content-center align-items-center">
-
-        <div class="d-flex">
-          <div class="searchSelection input-group">
-            <select class="custom-select" id="inputGroupSelect01">
-              <option value="0" selected disabled hidden>Post Type</option>
-              <option value="1">Songs</option>
-              <option value="2">Album</option>
-              <option value="3">Artist</option>
-            </select>
-          </div>
+  <body>
+    <header>
+      <div class="row">
+        <div class="col-3 d-flex justify-content-center">
+          <img class="logo" src="assets/img/logo_large.PNG" height="110px">      
         </div>
-          <div class="searchInput form-outline">
-            <input type="search" placeholder="Search" id="form1" class="form-control" />
+        <div class="col-7 d-flex justify-content-center align-items-center">
+
+          <div class="d-flex">
+            <div class="searchSelection input-group">
+              <select class="custom-select" id="inputGroupSelect01">
+                <option value="0" selected disabled hidden>Post Type</option>
+                <option value="1">Songs</option>
+                <option value="2">Album</option>
+                <option value="3">Artist</option>
+              </select>
+            </div>
           </div>
-          <button type="button" class="searchButton btn btn-primary">
-            <i class="fas fa-search"></i>
-          </button>
+            <div class="searchInput form-outline">
+              <input type="search" placeholder="Search" id="form1" class="form-control" />
+            </div>
+            <button type="button" class="searchButton btn btn-primary">
+              <i class="fas fa-search"></i>
+            </button>
+        </div>
+        <div class="col-2 d-flex justify-content-center align-items-center">
+          <a href="user.html"><img class="profileIMG" src="assets/img/account.png" height="65px"></a>      
+        </div>
       </div>
-      <div class="col-2 d-flex justify-content-center align-items-center">
-        <a href="user.html"><img class="profileIMG" src="assets/img/account.png" height="65px"></a>      
+    </header>
+    <div class="row">
+      <div class="col-10 offset-1">
+        <div class="d-grid gap-2" style="margin-top: 2em;">
+          <button id="create-user-button" class="btn btn-secondary d-block" type="button" onclick="location.href = 'user.html'">Create New User / View User Information</button>
+        </div>
+        <div class="d-grid gap-2" style="margin-top: 1em;">
+          <button id="create-post-button" class="btn btn-primary d-block" type="button" onclick="showCreatePostForm()">Create New Post</button>
+        </div>
+      
+        <div id="postForm" class="d-none">
+          <form style="background-color: lightgray; padding: 20px;  border-radius: 10px;">
+            <div class="mb-3">
+              <label for="username" class="form-label">Username *</label>
+              <input type="text" class="form-control" id="username" required>
+            </div>
+            <div class="mb-3">
+              <label for="artist" class="form-label">Artist</label>
+              <input type="text" class="form-control" id="artist">
+            </div>
+            <div class="mb-3">
+              <label for="album" class="form-label">Album</label>
+              <input type="text" class="form-control" id="album">
+            </div>
+            <div class="mb-3">
+              <label for="song" class="form-label">Song</label>
+              <input type="text" class="form-control" id="song">
+            </div>
+            <div class="mb-3">
+              <label for="rating" class="form-label">Rating (1-10)</label>
+              <input type="number" class="form-control" id="rating" min="1" max="10">
+            </div>
+            <div class="mb-3">
+              <label for="title" class="form-label">Title *</label>
+              <input type="text" class="form-control" id="title" required>
+            </div>
+            <div class="mb-3">
+              <label for="review" class="form-label">Review *</label>
+              <textarea class="form-control" id="review" rows="3" required></textarea>
+            </div>
+            <button class="btn btn-secondary" type="button" style="border-color: grey" onclick="cancelForm()">Cancel</button>
+            <button class="btn btn-primary" type="button" onclick="submitForm()">Submit</button>
+          </form>
+        </div>
       </div>
     </div>
-  </header>
-  <div class="row">
-    <div class="col-10 offset-1">
-      <div class="d-grid gap-2" style="margin-top: 2em;">
-        <button id="create-user-button" class="btn btn-secondary d-block" type="button" onclick="location.href = 'user.html'">Create New User / View User Information</button>
-      </div>
-      <div class="d-grid gap-2" style="margin-top: 1em;">
-        <button id="create-post-button" class="btn btn-primary d-block" type="button" onclick="showCreatePostForm()">Create New Post</button>
-      </div>
-    
-      <div id="postForm" class="d-none">
-        <form style="background-color: lightgray; padding: 20px;  border-radius: 10px;">
-          <div class="mb-3">
-            <label for="username" class="form-label">Username *</label>
-            <input type="text" class="form-control" id="username" required>
-          </div>
-          <div class="mb-3">
-            <label for="artist" class="form-label">Artist</label>
-            <input type="text" class="form-control" id="artist">
-          </div>
-          <div class="mb-3">
-            <label for="album" class="form-label">Album</label>
-            <input type="text" class="form-control" id="album">
-          </div>
-          <div class="mb-3">
-            <label for="song" class="form-label">Song</label>
-            <input type="text" class="form-control" id="song">
-          </div>
-          <div class="mb-3">
-            <label for="rating" class="form-label">Rating (1-10)</label>
-            <input type="number" class="form-control" id="rating" min="1" max="10">
-          </div>
-          <div class="mb-3">
-            <label for="title" class="form-label">Title *</label>
-            <input type="text" class="form-control" id="title" required>
-          </div>
-          <div class="mb-3">
-            <label for="review" class="form-label">Review *</label>
-            <textarea class="form-control" id="review" rows="3" required></textarea>
-          </div>
-          <button class="btn btn-secondary" type="button" style="border-color: grey" onclick="cancelForm()">Cancel</button>
-          <button class="btn btn-primary" type="button" onclick="submitForm()">Submit</button>
-        </form>
-      </div>
+    <div id="paginiationButtons">
     </div>
-  </div>
-  
+    <footer>
+      <div class="d-flex justify-content-center align-items-center sticky-bottom">
+        <div class="col-4">
+
+        </div>
+        <div class="col-4">
+
+        </div>
+        <div class="col-4">
+
+        </div>
+      </div>
+    </footer>
     <!--The ASSETS-->
     <script src="assets/api.js"></script>
     <script src="assets/database.js"></script>
