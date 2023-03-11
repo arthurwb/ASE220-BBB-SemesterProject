@@ -14,8 +14,39 @@
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <!--The Axios-->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!--Font Awesome-->
+    <script src="https://kit.fontawesome.com/7bf037d0fc.js" crossorigin="anonymous"></script>
 </head>
 <body>
+  <header>
+    <div class="row">
+      <div class="col-3 d-flex justify-content-center">
+        <img class="logo" src="assets/img/logo_large.PNG" height="110px">      
+      </div>
+      <div class="col-7 d-flex justify-content-center align-items-center">
+
+        <div class="d-flex">
+          <div class="searchSelection input-group">
+            <select class="custom-select" id="inputGroupSelect01">
+              <option value="0" selected disabled hidden>Post Type</option>
+              <option value="1">Songs</option>
+              <option value="2">Album</option>
+              <option value="3">Artist</option>
+            </select>
+          </div>
+        </div>
+          <div class="searchInput form-outline">
+            <input type="search" placeholder="Search" id="form1" class="form-control" />
+          </div>
+          <button type="button" class="searchButton btn btn-primary">
+            <i class="fas fa-search"></i>
+          </button>
+      </div>
+      <div class="col-2 d-flex justify-content-center align-items-center">
+        <a href="user.html"><img class="profileIMG" src="assets/img/account.png" height="65px"></a>      
+      </div>
+    </div>
+  </header>
   <div class="row">
     <div class="col-10 offset-1">
       <div class="d-grid gap-2" style="margin-top: 2em;">
