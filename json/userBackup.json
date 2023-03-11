@@ -1,26 +1,26 @@
 [
     {
-        "username": "admin",
-        "email": "test@BBB.com",
+        "username": "admin_brooks",
+        "email": "brooks@BBB.com",
         "password": "password1",
         "bio": "test bio",
         "firstName": "Brooks",
         "id": 0
     },
     {
-        "username": "admin2",
-        "email": "test2@BBB.com",
+        "username": "admin_ben",
+        "email": "ben@BBB.com",
         "password": "password2",
         "bio": "test bio",
-        "firstName": "Brandon",
+        "firstName": "Ben",
         "id": 1
     },
     {
-        "username": "admin3",
-        "email": "test3@BBB.com",
+        "username": "admin_brandon",
+        "email": "brandon@BBB.com",
         "password": "password3",
         "bio": "test bio",
-        "firstName": "Ben",
+        "firstName": "Brandon",
         "id": 2
     }
 ]

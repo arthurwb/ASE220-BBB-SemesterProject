@@ -81,6 +81,7 @@ async function deleteUser(index) {
 function login() {
     const loginUsername = $("#loginUsername").val();
     const loginPassword = $("#loginPassword").val();
+    let flag = false;
 
     api.GET(documentID, function(response) {
         for (let i = 0; i < response.data.length; i++) {
@@ -99,7 +100,12 @@ function login() {
                         <button class="btn btn-danger col-2" onclick="deleteUser(${i})">Delete User</button>
                     </div>
                 `);
+                flag = true
             }
+        }
+
+        if (!flag) {
+            alert("incorrect user login");
         }
     });
 }
