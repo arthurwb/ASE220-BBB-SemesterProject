@@ -1,5 +1,5 @@
 //id of the jsonBlob page
-const documentID = '120235456';
+const documentID = '1082748833116733440';
 // 1082748833116733440
 
 //function for getting formatted timestamp
@@ -147,7 +147,7 @@ api.GET(documentID, function(response) {
                 </div>
                 <div class="card-footer bg-transparent border-success">
                     ${response.data[index].timestamp}
-                    <a class="btn btn-primary" style="float: right;" onclick="location.href ='post.html?id=${response.data[index].id}';">View Post</a>
+                    <a class="btn btn-primary" style="float: right;" onclick="location.href ='post?id=${response.data[index].id}';">View Post</a>
                 </div>
             </div>
         </div>`;
@@ -170,15 +170,15 @@ api.GET(documentID, function(response) {
 
     //adds the back button as long as the page is not the first page
     if (back_page > 0) {
-        elements.innerHTML += `<button type="button" onclick="location.href = 'index.html?page=${back_page}';" class="btn btn-sm btn-outline-secondary" style="margin: 20px;">Previous</button>`
+        elements.innerHTML += `<button type="button" onclick="location.href = '/?page=${back_page}';" class="btn btn-sm btn-outline-secondary" style="margin: 20px;">Previous</button>`
     }
     // again below is mainly just for the formating of the buttons so that they always exist in one place and dont shift
     else{
-        elements.innerHTML += `<button type="button" onclick="location.href = 'index.html?page=${back_page}';" class="btn btn-sm btn-outline-secondary" style="margin: 20px; visibility:hidden;">Previous</button>`
+        elements.innerHTML += `<button type="button" onclick="location.href = '/?page=${back_page}';" class="btn btn-sm btn-outline-secondary" style="margin: 20px; visibility:hidden;">Previous</button>`
     }
 
     //adds the next button to the page
     if (numOfPosts > (page * postPerPage) - postPerPage){
-        elements.innerHTML += `<button type="button" onclick="location.href = 'index.html?page=${page}';" class="btn btn-sm btn-outline-secondary" style="margin: 20px;">Next</button>`
+        elements.innerHTML += `<button type="button" onclick="location.href = '/?page=${page}';" class="btn btn-sm btn-outline-secondary" style="margin: 20px;">Next</button>`
     }
 });
