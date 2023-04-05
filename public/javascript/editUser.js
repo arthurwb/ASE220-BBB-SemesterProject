@@ -5,12 +5,14 @@ function showCreateUserForm() {
     $("#userForm").addClass("d-block").removeClass("d-none");
     $("#create-user-button").addClass("d-none").removeClass("d-block");
     $("#login-button").addClass("d-none").removeClass("d-block");
+    $("#creationAlert").addClass("d-none").removeClass("d-block");
 }
 
 function showLoginForm() {
     $("#loginForm").addClass("d-block").removeClass("d-none");
     $("#create-user-button").addClass("d-none").removeClass("d-block");
     $("#login-button").addClass("d-none").removeClass("d-block");
+    $("#creationAlert").addClass("d-none").removeClass("d-block");
 }
 
 function cancelForm() {
@@ -34,6 +36,28 @@ function validation(username, password, email) {
     }
 
     return response;
+}
+
+function verification(flag) {
+    // flag: true = success; false = fail
+    let userCreationSuccess = `
+    <div class="bg-success text-white p-1 m-1 w-25 text-center rounded">
+        User Created!
+    </div>
+    `;
+    let userCreationError = `
+    <div class="bg-danger text-white p-1 m-1 w-25 text-center rounded">
+            Invalid Input
+    </div>
+    `;
+
+    if (flag) {
+        $("#creationAlert").addClass("d-block").removeClass("d-none");
+        $("#creationAlert").html(userCreationSuccess);
+    } else {
+        $("#creationAlert").addClass("d-block").removeClass("d-none");
+        $("#creationAlert").html(userCreationError);
+    }
 }
 
 function createNewUser() {
@@ -66,9 +90,10 @@ function createNewUser() {
 
             // Send an UPDATE request
             api.UPDATE(documentID, newData);
+            verification(true);
         });
     } else {
-        alert("Input not valid");
+        verification(false);
     }
 }
 

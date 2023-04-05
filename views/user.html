@@ -18,7 +18,7 @@
 <body>
     <div class="row">
         <div class="col-2 m-2">
-            <button class="btn btn-dark" onclick="document.location.href = 'index.html'">Back</button>
+            <button class="btn btn-dark" onclick="document.location.href = '/'">Back</button>
         </div>
     </div>
     <div class="row d-flex justify-content-center">
@@ -89,6 +89,13 @@
 
     <!-- Login Details -->
     <div id="loginDetails" class="row">
+    </div>
+
+    <!-- User Creation Alert -->
+    <div class="position-absolute top-50 start-50 translate-middle alert alert-danger d-block" id="creationAlert">
+        <div class="align-middle align-center p-9 rounded">
+            Invalid Input
+        </div>
     </div>
 
     <script src="assets/api.js"></script>
