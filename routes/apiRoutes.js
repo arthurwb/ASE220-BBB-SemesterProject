@@ -20,4 +20,4 @@ router.get('/api', (req, res) => {
     res.send("api data");
   });
 
-  module.exports = apiRouter;
+  module.exports = router;
