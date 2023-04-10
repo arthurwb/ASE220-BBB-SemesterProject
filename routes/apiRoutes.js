@@ -9,15 +9,29 @@ router.get('/api/:param', (req, res) => {
   res.writeHead(200,{'Content-Type':'application/json'});
   res.write(getResponse, 'utf8');
   res.end();
-}).post('/api', (req, res) => {
-  let params = req.params;
-  res.send("api data");
-}).put('/api', (req, res) => {
-  let params = req.params;
-  res.send("api data");
-}).delete('/api', (req, res) => {
-  let params = req.params;
-  res.send("api data");
+});
+
+router.post('/api', (req, res) => {
+  api.httpRequest.POST(req, (postResponse) => {
+    res.writeHead(200,{'Content-Type':'application/json'});
+    res.write(postResponse, 'utf8');
+    res.end();
+  });
+});
+
+router.put('/api/:param', (req, res) => {
+  api.httpRequest.PUT(req, req.params[param], (putResponse) => {
+    res.writeHead(200,{'Content-Type':'application/json'});
+    res.write(putResponse, 'utf8');
+    res.end();
+  });
+});
+
+router.delete('/api', (req, res) => {
+  let deleteResponse = api.httpRequest.DELETE(url_components);
+  res.writeHead(200,{'Content-Type':'application/json'});
+  res.write(deleteResponse, 'utf8');
+  res.end();
 });
 
 module.exports = router;

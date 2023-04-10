@@ -48,7 +48,6 @@ const httpRequest = {
             let response;
             try {
                 const data = JSON.parse(body);
-
                     
                 let newId = Math.floor(1000000 + Math.random() * 9000000);
                 while (fs.existsSync(path.join(__dirname, './data', `${newId}.json`))) {
