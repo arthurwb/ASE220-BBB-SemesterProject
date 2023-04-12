@@ -1,5 +1,5 @@
 // user api
-const documentID = 'postData';
+const documentID = 'userData';
 
 function showCreateUserForm() {
     $("#userForm").addClass("d-block").removeClass("d-none");

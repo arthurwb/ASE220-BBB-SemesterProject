@@ -1,5 +1,5 @@
 const api={
-	endpoint:'http://localhost:8080/api/api/',
+	endpoint:'http://localhost:8080/api/data/',
 	GET:function(documentID,callback){
 		axios.get(`${api.endpoint}${documentID}`,{}).then(function(response){
 			callback(response);

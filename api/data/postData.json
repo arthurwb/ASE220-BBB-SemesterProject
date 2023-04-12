@@ -1,163 +1,167 @@
 [
     {
-      "username": "Brooks",
-      "artist": "Weezer",
-      "album": "Weezer",
-      "song": "Say It Ain't So",
-      "rating": 6.5,
-      "title": "Weezer is just OK",
-      "review": "Say It Ain't So is one the finer tracks to be found on the record that launched a hundred emo bands, Weezer's stellar 1994 self-titled debut. The track has all the ingredients of a great song: crisp production, subtle verses, and head-smacking choruses that are both tuneful and poignant.",
-      "timestamp": "1:27 AM - 08 Mar 23",
-      "id": 735176,
-      "comments": [
-        {
-          "commentUsername": "Gamer457",
-          "commentText": "I like the where he talks about wrestling with Jimmy."
-        },
-        {
-          "commentUsername": "test",
-          "commentText": "test"
-        },
-        {
-          "commentUsername": "Tester",
-          "commentText": "Creating another test now that we are using JQuery."
-        },
-        {
-          "commentUsername": "JQueryMan",
-          "commentText": "Now were getting serious."
-        }
-      ]
+        "album": "Weezer",
+        "artist": "Weezer",
+        "comments": [
+            {
+                "commentText": "I like the where he talks about wrestling with Jimmy.",
+                "commentUsername": "Gamer457"
+            },
+            {
+                "commentText": "test",
+                "commentUsername": "test"
+            },
+            {
+                "commentText": "Creating another test now that we are using JQuery.",
+                "commentUsername": "Tester"
+            },
+            {
+                "commentText": "Now were getting serious.",
+                "commentUsername": "JQueryMan"
+            },
+            {
+                "commentText": "Testing the functionality",
+                "commentUsername": "Brooks"
+            }
+        ],
+        "id": 735176,
+        "rating": 6.5,
+        "review": "Say It Ain't So is one the finer tracks to be found on the record that launched a hundred emo bands, Weezer's stellar 1994 self-titled debut. The track has all the ingredients of a great song: crisp production, subtle verses, and head-smacking choruses that are both tuneful and poignant.",
+        "song": "Say It Ain't So",
+        "timestamp": "1:27 AM - 08 Mar 23",
+        "title": "Weezer is just OK",
+        "username": "Brooks"
     },
     {
-      "username": "Jimmathin",
-      "artist": "AJR",
-      "album": "",
-      "song": "",
-      "rating": 1,
-      "title": "AJR sucks so much I almost puked",
-      "review": "I have been recommended AJR by some friends. I know that Fantano has talked about how bad the music is, so I said sure. I will give it a listen to see if Fantano is exaggerating on how bad it is or if my friends have awful taste in music. So currently I am studying for finals and need something mindless to listen to while studying, so I decided to listen to “the Click”. I made it through 2 songs before I started to get a headache from the amount of autotune and awful production. I had eaten about 3 hours before I started to listen, but halfway through weak, my stomach started to feel weak. I made it to the song Drama and gave up, because I felt sick to my stomach from the music, I felt like I had to puke like 2 times during my listen. As soon as I stopped listening, I started to feel less nauseous and no issues with my stomach. How can people listen to AJR and not find the music repulsive? It is the most boring music I have ever listened to. Everything about the music is so nauseating, in my case, literally.",
-      "timestamp": "2:56 AM - 08 Mar 23",
-      "id": 435343,
-      "comments": [
-        {
-          "commentUsername": "BCoop123",
-          "commentText": "I agree AJR is pretty bad."
-        }
-      ]
+        "album": "",
+        "artist": "AJR",
+        "comments": [
+            {
+                "commentText": "I agree AJR is pretty bad.",
+                "commentUsername": "BCoop123"
+            }
+        ],
+        "id": 435343,
+        "rating": 1,
+        "review": "I have been recommended AJR by some friends. I know that Fantano has talked about how bad the music is, so I said sure. I will give it a listen to see if Fantano is exaggerating on how bad it is or if my friends have awful taste in music. So currently I am studying for finals and need something mindless to listen to while studying, so I decided to listen to “the Click”. I made it through 2 songs before I started to get a headache from the amount of autotune and awful production. I had eaten about 3 hours before I started to listen, but halfway through weak, my stomach started to feel weak. I made it to the song Drama and gave up, because I felt sick to my stomach from the music, I felt like I had to puke like 2 times during my listen. As soon as I stopped listening, I started to feel less nauseous and no issues with my stomach. How can people listen to AJR and not find the music repulsive? It is the most boring music I have ever listened to. Everything about the music is so nauseating, in my case, literally.",
+        "song": "",
+        "timestamp": "2:56 AM - 08 Mar 23",
+        "title": "AJR sucks so much I almost puked",
+        "username": "Jimmathin"
     },
     {
-      "username": "GarlicMango64",
-      "artist": "Jack Stauber",
-      "album": "Pop Food",
-      "song": "",
-      "rating": 8,
-      "title": "He's Pretty Great!",
-      "review": "I discovered Jack on a live, where someone sent one of his weird ass animations, which led me to his YouTube page, and eventually to his Apple Music page, and eventually here, with me listening to his albums. I've always had an affinity with his material, with \"Buttercup\" being one of my favorite songs oat, and I was just super excited to check out this album. And yeah, this was pretty great! I love the LoFi deep fried aesthetic, with the instrumentals being super compressed. Songs like \"Bothersome\" and \"Oh Klahoma\" perfectly encapsulate the LoFi feel of \"Buttercup\" without trying to blatantly copy it. And then songs like \"Safe Socks\" and \"I Love You Verne Troyer\" are just super cute and adorable songs in general. I don't know, this is just a great LoFi album, possibly one of my favorites.",
-      "timestamp": "2:37 AM - 08 Mar 23",
-      "id": 935384,
-      "comments": [
-        {
-          "commentUsername": "Brooks",
-          "commentText": "Most of these reviews are pulled from reddit"
-        }
-      ]
+        "album": "Pop Food",
+        "artist": "Jack Stauber",
+        "comments": [
+            {
+                "commentText": "Most of these reviews are pulled from reddit",
+                "commentUsername": "Brooks"
+            }
+        ],
+        "id": 935384,
+        "rating": 8,
+        "review": "I discovered Jack on a live, where someone sent one of his weird ass animations, which led me to his YouTube page, and eventually to his Apple Music page, and eventually here, with me listening to his albums. I've always had an affinity with his material, with \"Buttercup\" being one of my favorite songs oat, and I was just super excited to check out this album. And yeah, this was pretty great! I love the LoFi deep fried aesthetic, with the instrumentals being super compressed. Songs like \"Bothersome\" and \"Oh Klahoma\" perfectly encapsulate the LoFi feel of \"Buttercup\" without trying to blatantly copy it. And then songs like \"Safe Socks\" and \"I Love You Verne Troyer\" are just super cute and adorable songs in general. I don't know, this is just a great LoFi album, possibly one of my favorites.",
+        "song": "",
+        "timestamp": "2:37 AM - 08 Mar 23",
+        "title": "He's Pretty Great!",
+        "username": "GarlicMango64"
     },
     {
-      "username": "GarlicMango64",
-      "artist": "Jack Stauber",
-      "album": "Pop Food",
-      "song": "",
-      "rating": 8,
-      "title": "He's Pretty Great!",
-      "review": "I discovered Jack on a live, where someone sent one of his weird ass animations, which led me to his YouTube page, and eventually to his Apple Music page, and eventually here, with me listening to his albums. I've always had an affinity with his material, with \"Buttercup\" being one of my favorite songs oat, and I was just super excited to check out this album. And yeah, this was pretty great! I love the LoFi deep fried aesthetic, with the instrumentals being super compressed. Songs like \"Bothersome\" and \"Oh Klahoma\" perfectly encapsulate the LoFi feel of \"Buttercup\" without trying to blatantly copy it. And then songs like \"Safe Socks\" and \"I Love You Verne Troyer\" are just super cute and adorable songs in general. I don't know, this is just a great LoFi album, possibly one of my favorites.",
-      "timestamp": "2:37 AM - 08 Mar 23",
-      "id": 935384,
-      "comments": [
-        {
-          "commentUsername": "Brooks",
-          "commentText": "Most of these reviews are pulled from reddit"
-        }
-      ]
+        "album": "Pop Food",
+        "artist": "Jack Stauber",
+        "comments": [
+            {
+                "commentText": "Most of these reviews are pulled from reddit",
+                "commentUsername": "Brooks"
+            }
+        ],
+        "id": 935384,
+        "rating": 8,
+        "review": "I discovered Jack on a live, where someone sent one of his weird ass animations, which led me to his YouTube page, and eventually to his Apple Music page, and eventually here, with me listening to his albums. I've always had an affinity with his material, with \"Buttercup\" being one of my favorite songs oat, and I was just super excited to check out this album. And yeah, this was pretty great! I love the LoFi deep fried aesthetic, with the instrumentals being super compressed. Songs like \"Bothersome\" and \"Oh Klahoma\" perfectly encapsulate the LoFi feel of \"Buttercup\" without trying to blatantly copy it. And then songs like \"Safe Socks\" and \"I Love You Verne Troyer\" are just super cute and adorable songs in general. I don't know, this is just a great LoFi album, possibly one of my favorites.",
+        "song": "",
+        "timestamp": "2:37 AM - 08 Mar 23",
+        "title": "He's Pretty Great!",
+        "username": "GarlicMango64"
     },
     {
-      "username": "zsulli80",
-      "artist": "Dannii Minogue",
-      "album": "Girl",
-      "song": null,
-      "rating": "8",
-      "title": "Girl by Dannii Minogue | Album Review",
-      "review": "I had only heard about Dannii Minogue's cult status in the LGBTQ+ community a few years ago, but hadn't listen to anything she had released. After hearing the fantastic dance-pop single, \"All I Wanna Do\", I knew her 1997 release Girl deserved my attention. If you are a fan of dance pop music with an edge of trip-hop, ambience, and moody atmosphere, then I think you will enjoy what this younger Minogue sister has to offer.",
-      "timestamp": "9:29 PM - 10 Mar 23",
-      "id": 282571,
-      "comments": []
+        "album": "Girl",
+        "artist": "Dannii Minogue",
+        "comments": [],
+        "id": 282571,
+        "rating": "8",
+        "review": "I had only heard about Dannii Minogue's cult status in the LGBTQ+ community a few years ago, but hadn't listen to anything she had released. After hearing the fantastic dance-pop single, \"All I Wanna Do\", I knew her 1997 release Girl deserved my attention. If you are a fan of dance pop music with an edge of trip-hop, ambience, and moody atmosphere, then I think you will enjoy what this younger Minogue sister has to offer.",
+        "song": null,
+        "timestamp": "9:29 PM - 10 Mar 23",
+        "title": "Girl by Dannii Minogue | Album Review",
+        "username": "zsulli80"
     },
     {
-      "username": "NoFrillReviews",
-      "artist": "Black Sabbath",
-      "album": "Black Sabbath",
-      "song": null,
-      "rating": "7.5",
-      "title": "Album review - Black Sabbath (1970)",
-      "review": "Hey, I’m not really into metal, but I’ve been doing a bit of a look back through the history of metal on my blog. This week I’ve reviewed Black Sabbath’s debut album. It’s good, but I don’t think it stands up as a classic. Massively influential as well, but I don’t think that’s necessarily a good thing.",
-      "timestamp": "9:30 PM - 10 Mar 23",
-      "id": 109342,
-      "comments": []
+        "album": "Black Sabbath",
+        "artist": "Black Sabbath",
+        "comments": [],
+        "id": 109342,
+        "rating": "7.5",
+        "review": "Hey, I’m not really into metal, but I’ve been doing a bit of a look back through the history of metal on my blog. This week I’ve reviewed Black Sabbath’s debut album. It’s good, but I don’t think it stands up as a classic. Massively influential as well, but I don’t think that’s necessarily a good thing.",
+        "song": null,
+        "timestamp": "9:30 PM - 10 Mar 23",
+        "title": "Album review - Black Sabbath (1970)",
+        "username": "NoFrillReviews"
     },
     {
-      "username": "eastcoastfoliage",
-      "artist": "Taylor Swift",
-      "album": "Midnights",
-      "song": null,
-      "rating": "7",
-      "title": "Can someone please explain to me why Midnights by Taylor Swift is such a big deal?",
-      "review": "I’m not a hater by any means, and I actually do root for her because it’s nice to see other women be so successful. Especially women over 30 in a field that’s so youth-obsessed. So I don’t begrudge her being on top at all.\n\nBut the truth is, I can never quite get into the music, and this album is no exception. Yet it’s her most commercially successful project yet, and a lot of critics are praising it.\n\nI have this rule about dessert: I can’t get my favorite one that hits the spot 100%, because then I’ll overeat. I can only buy a dessert that’s maybe a 7/10. Because then I can eat a little, and then put it down without a struggle. But any less than that and it won’t serve it’s purpose; I won’t be satisfied. So 7/10 it is.\n\nThat’s what Taylor Swift is to me. She’s “good enough dessert.” Not one single song of hers ever hit the spot 100%. There’s always some corny ass lyric that ruins the song, or a melody that sounds like everything she’s written before. And I’m bored.\n\nIt’s just all so unremarkable. What’s the big deal?\n\nI will say that once in a while, she will deliver a damn good lyric that I think is really interesting. I loved “leaving like a father, running like water.” And Red (the album) had some goodies. But the goodies are always like a needle in a haystack of mediocrity. So it’s not that I necessarily think that she isn’t talented; it’s more that to me, she seldom chooses to challenge herself to really flex that talent. She works a lot, but creatively, she coasts.\n\nSometimes I think that sure, we love extraordinary artists. But one thing we love even more than actual talent is to have our own mediocrity mirrored back to us. I feel like Taylor Swift is so huge not because she’s extraordinary, but because she so perfectly encapsulates the voice of the lowest common denominator.\n\nAm I wrong? What’s so great about Midnights?",
-      "timestamp": "9:33 PM - 10 Mar 23",
-      "id": 789194,
-      "comments": []
+        "album": "Midnights",
+        "artist": "Taylor Swift",
+        "comments": [],
+        "id": 789194,
+        "rating": "7",
+        "review": "I’m not a hater by any means, and I actually do root for her because it’s nice to see other women be so successful. Especially women over 30 in a field that’s so youth-obsessed. So I don’t begrudge her being on top at all.\n\nBut the truth is, I can never quite get into the music, and this album is no exception. Yet it’s her most commercially successful project yet, and a lot of critics are praising it.\n\nI have this rule about dessert: I can’t get my favorite one that hits the spot 100%, because then I’ll overeat. I can only buy a dessert that’s maybe a 7/10. Because then I can eat a little, and then put it down without a struggle. But any less than that and it won’t serve it’s purpose; I won’t be satisfied. So 7/10 it is.\n\nThat’s what Taylor Swift is to me. She’s “good enough dessert.” Not one single song of hers ever hit the spot 100%. There’s always some corny ass lyric that ruins the song, or a melody that sounds like everything she’s written before. And I’m bored.\n\nIt’s just all so unremarkable. What’s the big deal?\n\nI will say that once in a while, she will deliver a damn good lyric that I think is really interesting. I loved “leaving like a father, running like water.” And Red (the album) had some goodies. But the goodies are always like a needle in a haystack of mediocrity. So it’s not that I necessarily think that she isn’t talented; it’s more that to me, she seldom chooses to challenge herself to really flex that talent. She works a lot, but creatively, she coasts.\n\nSometimes I think that sure, we love extraordinary artists. But one thing we love even more than actual talent is to have our own mediocrity mirrored back to us. I feel like Taylor Swift is so huge not because she’s extraordinary, but because she so perfectly encapsulates the voice of the lowest common denominator.\n\nAm I wrong? What’s so great about Midnights?",
+        "song": null,
+        "timestamp": "9:33 PM - 10 Mar 23",
+        "title": "Can someone please explain to me why Midnights by Taylor Swift is such a big deal?",
+        "username": "eastcoastfoliage"
     },
     {
-      "username": "PyroDZN",
-      "artist": "BROCKHAMPTON",
-      "album": "The Family",
-      "song": null,
-      "rating": "8",
-      "title": "[FIRST IMPRESSIONS] BROCKHAMPTON - The Family",
-      "review": "Just over a day since this dropped, how are you guys feeling about it?\n\nDo y’all mind that it was advertised as a BH album but essentially only featured Kevin?\n\nDo you think it’s a proper sendoff for the group?\n\nAlso, TF or TM?\n\nPersonally I really enjoyed the project and don’t mind the fact that it’s only Ian rapping. The production is great, the bars are there, and the group leader making an introspective feels right.",
-      "timestamp": "9:34 PM - 10 Mar 23",
-      "id": 183620,
-      "comments": [
-        {
-          "commentUsername": "bigstupid12345",
-          "commentText": "Really good and bitter sweet, i like it more than TM"
-        },
-        {
-          "commentUsername": "Minute-Carrot-2405",
-          "commentText": "level 1\nMinute-Carrot-2405\n·\n4 mo. ago\n\nI think its a great album of Kevin essentially crafting an early Kanye-esque album but instead reflecting specifically on his journey in BH, all the ups and downs and why exactly everythings fallen apart and im sad that he feels its mostly cause of him.\n\nbearface went absolutely nuts on the production here and its crazy it took this long for him to have a huge part in their production on an album because it makes you feel like you missed out on a lot in the past\n\nThat being said, I do think this albums weakness is it only thrives extremely well front to back to really get all of that cohesion, its achilles heel is that theres a handful of songs that outside of the album pretty much go nowhere and as much as people are saying that songs on TM sound like throwaways, in the grander scheme I feel like you could say just as much for some here especially when you have Kevin talking about how he only did this album to meet label requirements every other track\n\nAll That is an all timer for BH, that sample flip is nuts and we need the boys on a remix cut ASAP"
-        }
-      ]
+        "album": "The Family",
+        "artist": "BROCKHAMPTON",
+        "comments": [
+            {
+                "commentText": "Really good and bitter sweet, i like it more than TM",
+                "commentUsername": "bigstupid12345"
+            },
+            {
+                "commentText": "level 1\nMinute-Carrot-2405\n·\n4 mo. ago\n\nI think its a great album of Kevin essentially crafting an early Kanye-esque album but instead reflecting specifically on his journey in BH, all the ups and downs and why exactly everythings fallen apart and im sad that he feels its mostly cause of him.\n\nbearface went absolutely nuts on the production here and its crazy it took this long for him to have a huge part in their production on an album because it makes you feel like you missed out on a lot in the past\n\nThat being said, I do think this albums weakness is it only thrives extremely well front to back to really get all of that cohesion, its achilles heel is that theres a handful of songs that outside of the album pretty much go nowhere and as much as people are saying that songs on TM sound like throwaways, in the grander scheme I feel like you could say just as much for some here especially when you have Kevin talking about how he only did this album to meet label requirements every other track\n\nAll That is an all timer for BH, that sample flip is nuts and we need the boys on a remix cut ASAP",
+                "commentUsername": "Minute-Carrot-2405"
+            }
+        ],
+        "id": 183620,
+        "rating": "8",
+        "review": "Just over a day since this dropped, how are you guys feeling about it?\n\nDo y’all mind that it was advertised as a BH album but essentially only featured Kevin?\n\nDo you think it’s a proper sendoff for the group?\n\nAlso, TF or TM?\n\nPersonally I really enjoyed the project and don’t mind the fact that it’s only Ian rapping. The production is great, the bars are there, and the group leader making an introspective feels right.",
+        "song": null,
+        "timestamp": "9:34 PM - 10 Mar 23",
+        "title": "[FIRST IMPRESSIONS] BROCKHAMPTON - The Family",
+        "username": "PyroDZN"
     },
     {
-      "username": "alex_aint_cool",
-      "artist": "The Garden",
-      "album": "Mirror Might Steal Your Charm",
-      "song": null,
-      "rating": "8.5",
-      "title": "i just listened to my first garden album. review in the comments",
-      "review": "this album is the sound of a dead terrarium housed inside a bong, so in other words, i freak with this. i went into this record expecting something akin to death grips or 100 gecs. and while there is quite a bit of experimentation on this album, i made another comparison around the 3rd track. one of my favorite albums of all time is pure guava by ween for how fun, un-serious, yet sonically impressive it is. its comically lo-fi production and low budget make it seem like it would be easy to copy, yet i haven’t heard anything that gives me the same feeling. until now. this record finally scratched the itch i’ve been having for all these years, and it was very satisfying.\n\nthere’s so much i love about this album. i love the phone sounds and comically annunciated vocals on “good news”. i love the drums on “who am i going to share all of this wine with”. “:(“ infamously uses the sound effects mode on a cheap children’s yamaha keyboard, and it takes me right back to 3rd grade music class.\n\ni will say that this record could have done without a couple tracks imo. i don’t really freak with “make a wish” or “stylish spit”, but i also know that these tracks could grow on me with repeat listens.\n\ni’m excited to dig into the rest of their discography, as well as see how this music will inspire my own music making process\n\n8.3/10",
-      "timestamp": "9:38 PM - 10 Mar 23",
-      "id": 506968,
-      "comments": []
+        "album": "Mirror Might Steal Your Charm",
+        "artist": "The Garden",
+        "comments": [],
+        "id": 506968,
+        "rating": "8.5",
+        "review": "this album is the sound of a dead terrarium housed inside a bong, so in other words, i freak with this. i went into this record expecting something akin to death grips or 100 gecs. and while there is quite a bit of experimentation on this album, i made another comparison around the 3rd track. one of my favorite albums of all time is pure guava by ween for how fun, un-serious, yet sonically impressive it is. its comically lo-fi production and low budget make it seem like it would be easy to copy, yet i haven’t heard anything that gives me the same feeling. until now. this record finally scratched the itch i’ve been having for all these years, and it was very satisfying.\n\nthere’s so much i love about this album. i love the phone sounds and comically annunciated vocals on “good news”. i love the drums on “who am i going to share all of this wine with”. “:(“ infamously uses the sound effects mode on a cheap children’s yamaha keyboard, and it takes me right back to 3rd grade music class.\n\ni will say that this record could have done without a couple tracks imo. i don’t really freak with “make a wish” or “stylish spit”, but i also know that these tracks could grow on me with repeat listens.\n\ni’m excited to dig into the rest of their discography, as well as see how this music will inspire my own music making process\n\n8.3/10",
+        "song": null,
+        "timestamp": "9:38 PM - 10 Mar 23",
+        "title": "i just listened to my first garden album. review in the comments",
+        "username": "alex_aint_cool"
     },
     {
-      "username": "jonatan Leandoer",
-      "artist": "You know ;)",
-      "album": "Your Attitude",
-      "song": "Your Attitude",
-      "rating": "10",
-      "title": "An incredible song made by an incredible guy",
-      "review": "This song was really interesting, the vocal manipulation was very cool and I could feel all of the emotion and power in the vocals. The sax followed up by a killer guitar solo was also a really nice addition that really brought the feeling of the song together. All together, it is outside the type of music that I usually listen to but there is a lot of skill in the composition of the song and I cant help but respect it for its artistic and musical attributes. Great song!",
-      "timestamp": "9:43 PM - 10 Mar 23",
-      "id": 938073,
-      "comments": []
+        "album": "Your Attitude",
+        "artist": "You know ;)",
+        "comments": [],
+        "id": 938073,
+        "rating": "10",
+        "review": "This song was really interesting, the vocal manipulation was very cool and I could feel all of the emotion and power in the vocals. The sax followed up by a killer guitar solo was also a really nice addition that really brought the feeling of the song together. All together, it is outside the type of music that I usually listen to but there is a lot of skill in the composition of the song and I cant help but respect it for its artistic and musical attributes. Great song!",
+        "song": "Your Attitude",
+        "timestamp": "9:43 PM - 10 Mar 23",
+        "title": "An incredible song made by an incredible guy",
+        "username": "jonatan Leandoer"
     }
-  ]
+]

@@ -46,6 +46,7 @@ const httpRequest = {
         });
         req.on('end', () => {
             let response;
+            console.log(JSON.stringify(JSON.parse(body)));
             try {
                 const data = JSON.parse(body);
                     
