@@ -1,5 +1,5 @@
 //id of the jsonBlob page
-const documentID = '1082748833116733440';
+const documentID = 'postData';
 // 1082748833116733440
 
 //function for getting formatted timestamp

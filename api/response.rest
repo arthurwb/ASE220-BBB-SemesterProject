@@ -1,0 +1,25 @@
+
+
+//test file //120235456
+
+### GET REQUEST 
+GET http://localhost:8080/api/data/postData
+
+### POST REQUEST 
+POST http://localhost:8080/api/data/
+content-type: application/json
+
+{
+    "test": "test"
+}
+
+### PUT REQUEST 
+PUT http://localhost:8080/api/data/postData
+
+{
+    "test": "xxxxxxxxxxxxxxxxxxxxxxxxx"
+}
+
+### DELETE REQUEST
+    DELETE http://localhost:8080/api/data/postData
+

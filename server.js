@@ -6,10 +6,10 @@ const path = require('path');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Use routes
-app.use('/', routes);
 // Route API
 app.use('/api', apiRoutes);
+// Use routes
+app.use('/', routes);
 
 // Start server
 const PORT = process.env.PORT || 8080;
