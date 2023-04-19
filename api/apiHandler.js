@@ -2,15 +2,17 @@ var fs=require('fs');
 const path = require('path');
 
 const httpRequest = {
-    GET: function(URLpath) {
+    GET: function(URLpath, client) {
         console.log("<GET>");
-        if (fs.existsSync(path.join(__dirname, './data', `${URLpath}.json`))) {
-            jsonFile = fs.readFileSync(path.join(__dirname, './data', `${URLpath}.json`)).toString();
-            return jsonFile;
-        } else {
-            // Send a response to the client
-            return JSON.stringify({success: false, error: 'Resource not found'});
-        }
+        const collection = client.db("testDB").collection(URLpath);
+        return collection.find({}).toString();
+        // if (fs.existsSync(path.join(__dirname, './data', `${URLpath}.json`))) {
+        //     jsonFile = fs.readFileSync(path.join(__dirname, './data', `${URLpath}.json`)).toString();
+        //     return jsonFile;
+        // } else {
+        //     // Send a response to the client
+        //     return JSON.stringify({success: false, error: 'Resource not found'});
+        // }
     },
     PUT: function(req, URLpath, callback) {
         console.log("<PUT>");

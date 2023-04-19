@@ -2,12 +2,26 @@ const express = require('express');
 const app = express();
 const router = express.Router();
 const path = require('path');
+const bodyParser = require('body-parser')
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://admin:admin@qb3cluster.sknm95g.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+app.use(bodyParser.json())
+var db=null
 const api = require('../api/apiHandler');
+const databaseConnection = require('../api/databaseHandler');
 
-router.get('/data/:param', (req, res) => {
-  let getResponse = api.httpRequest.GET(req.params["param"]);
-  res.writeHead(200,{'Content-Type':'application/json'});
-  res.write(getResponse, 'utf8');
+router.get('/data/:params', async (req, res) => {
+  console.log("<DATABASE GET>")
+  db=await connect()
+  // let getResponse = api.httpRequest.GET(req.params["param"], client);
+  let dbo=db.db("TestDB")
+  let result=await dbo.collection("Posts").find({}).toArray()
+  // let getResponse = await find(db,'TestDB','Posts',{}).toString()
+  console.log(result);
+  // res.writeHead(200,{'Content-Type':'application/json'});
+  res.send(result);
+  console.log("end");
   res.end();
 });
 
@@ -33,5 +47,23 @@ router.delete('/data', (req, res) => {
   res.write(deleteResponse, 'utf8');
   res.end();
 });
+
+async function connect(){
+	let connection=await client.connect()
+	return connection
+}
+
+async function find(db,database,collection,criteria){
+  let dbo=db.db(database)
+  let result=await dbo.collection(collection).find(criteria).toArray()
+  console.log(result)
+  return result;
+}
+
+async function databaseConnect() {
+  db=await connect()
+  //console.log(db);
+	console.log('mongoDB connected')
+}
 
 module.exports = router;
