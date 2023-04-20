@@ -21,13 +21,23 @@ router.get('/data/:param', async (req, res) => {
   res.end();
 });
 
-router.post('/data', async (req, res) => {
+router.post('/data/:param', async (req, res) => {
   console.log("<DATABASE POST>");
-  api.httpRequest.POST(req, (postResponse) => {
-    res.writeHead(200,{'Content-Type':'application/json'});
-    res.write(postResponse, 'utf8');
-    res.end();
-  });
+  let result;
+
+  const db = await connect();
+  const dbo = db.db("TestDB");
+
+  let collectionName = req.params["param"];
+  let collectionExists = await dbo.listCollections({name: collectionName}).hasNext();
+
+  if (collectionExists) {
+    res.status(400).send("Collection " + collectionName + " already exists");
+  } else {
+    result = await dbo.createCollection(collectionName);
+    res.send(result);
+  }
+  res.end();
 });
 
 router.put('/data/:param', async (req, res) => {
