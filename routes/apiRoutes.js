@@ -50,12 +50,25 @@ router.put('/data/:param', async (req, res) => {
   });
 });
 
-router.delete('/data', (req, res) => {
-  let deleteResponse = api.httpRequest.DELETE(url_components);
-  res.writeHead(200,{'Content-Type':'application/json'});
-  res.write(deleteResponse, 'utf8');
-  res.end();
+router.delete('/data/:param', async (req, res) => {
+  const db = await connect();
+  const dbo = db.db("TestDB");
+  console.log(req.params["param"]);
+
+  let body = '';
+  req.on('data', (chunk) => {
+      body = chunk.toString();
+  });
+  req.on('end', async () => {
+    console.log(JSON.parse(body));
+    let result = await dbo.collection(req.params["param"]).deleteOne(JSON.parse(body),function(err,result){
+      if (err) throw err
+      console.log(result)
+    });
+    res.send(result);
+  });
 });
+
 
 async function connect(){
 	let connection=await client.connect()

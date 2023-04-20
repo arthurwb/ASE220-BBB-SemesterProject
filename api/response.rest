@@ -3,7 +3,7 @@
 //test file //120235456
 
 ### GET REQUEST 
-GET http://localhost:8080/api/data/postData
+GET http://localhost:8080/api/data/Posts
 
 ### POST REQUEST 
 POST http://localhost:8080/api/data/
@@ -14,12 +14,26 @@ content-type: application/json
 }
 
 ### PUT REQUEST 
-PUT http://localhost:8080/api/data/postData
+PUT http://localhost:8080/api/data/Posts
 
 {
-    "test": "xxxxxxxxxxxxxxxxxxxxxxxxx"
-}
+        "album": "Rest Test",
+        "artist": "Rest Test",
+        "comments": [],
+        "id": 847292,
+        "rating": "8",
+        "review": "Rest Test",
+        "song": null,
+        "timestamp": "9:29 PM - 10 Mar 23",
+        "title": "Rest Test",
+        "username": "restTest1"
+    }
 
 ### DELETE REQUEST
-    DELETE http://localhost:8080/api/data/postData
+DELETE http://localhost:8080/api/data/Posts
+content-type: application/json
+
+{
+    "id":847292
+}
 
