@@ -1,5 +1,5 @@
 //id of the jsonBlob page
-const documentID = 'postData';
+const documentID = 'Posts';
 // 1082748833116733440
 
 //gets id
