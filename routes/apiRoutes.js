@@ -11,21 +11,18 @@ var db=null
 const api = require('../api/apiHandler');
 const databaseConnection = require('../api/databaseHandler');
 
-router.get('/data/:params', async (req, res) => {
+router.get('/data/:param', async (req, res) => {
   console.log("<DATABASE GET>")
   db=await connect()
   // let getResponse = api.httpRequest.GET(req.params["param"], client);
-  let dbo=db.db("TestDB")
-  let result=await dbo.collection("Posts").find({}).toArray()
-  // let getResponse = await find(db,'TestDB','Posts',{}).toString()
-  console.log(result);
-  // res.writeHead(200,{'Content-Type':'application/json'});
+  let dbo=db.db("TestDB");
+  let result=await dbo.collection(req.params["param"]).find({}).toArray();
   res.send(result);
-  console.log("end");
   res.end();
 });
 
-router.post('/data', (req, res) => {
+router.post('/data', async (req, res) => {
+  console.log("<DATABASE POST>");
   api.httpRequest.POST(req, (postResponse) => {
     res.writeHead(200,{'Content-Type':'application/json'});
     res.write(postResponse, 'utf8');
@@ -33,11 +30,23 @@ router.post('/data', (req, res) => {
   });
 });
 
-router.put('/data/:param', (req, res) => {
-  api.httpRequest.PUT(req, req.params["param"], (putResponse) => {
-    res.writeHead(200,{'Content-Type':'application/json'});
-    res.write(putResponse, 'utf8');
-    res.end();
+router.put('/data/:param', async (req, res) => {
+  console.log("<DATABASE POST>");
+  // api.httpRequest.PUT(req, req.params["param"], (putResponse) => {
+  //   res.writeHead(200,{'Content-Type':'application/json'});
+  //   res.write(putResponse, 'utf8');
+  //   res.end();
+  // });
+  db=await connect()
+  let dbo=db.db("TestDB");
+  let body = '';
+  req.on('data', (chunk) => {
+      body += chunk.toString();
+  });
+  req.on('end', async () => {
+    console.log(JSON.parse(body));
+    let result = await dbo.collection(req.params["param"]).insertOne(JSON.parse(body));
+    res.send(result);
   });
 });
 
