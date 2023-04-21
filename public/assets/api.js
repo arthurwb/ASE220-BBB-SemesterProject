@@ -7,12 +7,22 @@ const api={
 			console.log(error);
 		});
 	},
-	PUT:function(documentID,data){
-		axios.put(`${api.endpoint}${documentID}`,data).then(function(response){
-			console.log(response);
-		}).catch(function(error){
-			console.log(error);
-		});
+	PUT:function(documentID, data, id, type){
+		if (id) {
+			console.log("comment");
+			axios.put(`${api.endpoint}${documentID}/${id}/${type}`,data).then(function(response){
+				console.log(response);
+			}).catch(function(error){
+				console.log("comment put error: "+error);
+			});
+		} else {
+			console.log("post");
+			axios.put(`${api.endpoint}${documentID}/-1/post`,data).then(function(response){
+				console.log(response);
+			}).catch(function(error){
+				console.log("post put error: "+error);
+			});
+		}
 	},
 	UPDATE: function (documentID, newData) {
 //   axios.get(`${api.endpoint}${documentID}`)
