@@ -11,6 +11,7 @@ Contributions:
   Added database delete functionality for posts and collections.
   Added database post functionality for collections.
 
-  - Ben:
+  - Ben: 
+  Worked on Get as well as Delete functions and also worked on organizing code.
 
   - Quay:
