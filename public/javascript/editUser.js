@@ -1,5 +1,5 @@
 // user api
-const documentID = 'userData';
+const documentID = 'Users';
 
 function showCreateUserForm() {
     $("#userForm").addClass("d-block").removeClass("d-none");
@@ -89,7 +89,7 @@ function createNewUser() {
             };
 
             // Send an UPDATE request
-            api.UPDATE(documentID, newData);
+            api.PUT(documentID, newData, -1, "user");
             verification(true);
         });
     } else {

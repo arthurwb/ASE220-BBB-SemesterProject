@@ -8,20 +8,29 @@ const api={
 		});
 	},
 	PUT:function(documentID, data, id, type){
-		if (id) {
-			console.log("comment");
+		if (type == "comment") {
+			console.log("PUT: comment");
 			axios.put(`${api.endpoint}${documentID}/${id}/${type}`,data).then(function(response){
 				console.log(response);
 			}).catch(function(error){
-				console.log("comment put error: "+error);
+				console.log("axios: comment put error: "+error);
 			});
-		} else {
-			console.log("post");
-			axios.put(`${api.endpoint}${documentID}/-1/post`,data).then(function(response){
+		} else if (type == "post") {
+			console.log("PUT: post");
+			axios.put(`${api.endpoint}${documentID}/${id}/${type}`,data).then(function(response){
 				console.log(response);
 			}).catch(function(error){
-				console.log("post put error: "+error);
+				console.log("axios: post put error: "+error);
 			});
+		} else if (type == "user") {
+			console.log("PUT: user");
+			axios.put(`${api.endpoint}${documentID}/${id}/${type}`,data).then(function(response){
+				console.log(response);
+			}).catch(function(error) {
+				console.log("axios: user put error: "+error);
+			});
+		} else {
+			console.log("put type error");
 		}
 	},
 	UPDATE: function (documentID, newData) {

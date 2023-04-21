@@ -57,6 +57,8 @@ router.put('/data/:param/:post/:type', async (req, res) => {
       );
     } else if (req.params["type"] == "post") {
       result = await dbo.collection(req.params["param"]).insertOne(jsonBody);
+    } else if (req.params["type"] == "user") {
+      result = await dbo.collection(req.params["param"]).insertOne(jsonBody);
     } else {
     }
     res.send(result);
