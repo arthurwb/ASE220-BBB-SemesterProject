@@ -60,23 +60,11 @@ async function createComment() {
     }
 
     if (validation(commentUsername, commentText)) {
-        // collectes data from api
-        api.GET(documentID, function(response) {
-            for (let i = 0; i < response.data.length; i++) {
-                if (id == response.data[i].id) {
-                    var post = response.data[i];
-                    // puts new comment after all existing comments
-                    post.comments.push(newComment);
-
-                    // pushes all data including new comment to the api
-                    api.PUT(documentID,response.data,function(putRes){
-                        console.log(putRes);
-                        displaySuccessMessage();
-                        // reloads the page so that you can see the new comment
-                        document.location.reload();
-                    });
-                };
-            }
+        api.PUT(documentID,newComment,id,"comment",function(putRes){
+            console.log(putRes);
+            displaySuccessMessage();
+            // reloads the page so that you can see the new comment
+            document.location.reload();
         });
     } else {
         alert("Username or comment text left empty");

@@ -97,7 +97,7 @@ function createPost() {
             };
 
             // Send an UPDATE request
-            api.PUT(documentID, newData);
+            api.PUT(documentID, newData, -1, "post");
         });
     } else {
         alert("Input not valid")

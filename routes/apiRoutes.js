@@ -39,8 +39,8 @@ router.post('/data/collection/:param', async (req, res) => {
   res.end();
 });
 
-router.put('/data/:param', async (req, res) => {
-  console.log("<DATABASE POST>");
+router.put('/data/:param/:id/:type', async (req, res) => {
+  console.log("<DATABASE PUT>");
   db=await connect()
   let dbo=db.db("TestDB");
   let body = '';
@@ -48,8 +48,19 @@ router.put('/data/:param', async (req, res) => {
       body += chunk.toString();
   });
   req.on('end', async () => {
-    console.log(JSON.parse(body));
-    let result = await dbo.collection(req.params["param"]).insertOne(JSON.parse(body));
+    let jsonBody = JSON.parse(body)
+    let result;
+    if (req.params["type"] == "comment") {
+      result = await dbo.collection(req.params["param"]).updateOne(
+        { id: parseInt(req.params["id"]) },
+        { $push: { comments: JSON.parse(body) } }
+      );
+    } else if (req.params["type"] == "post") {
+      result = await dbo.collection(req.params["param"]).insertOne(jsonBody);
+    } else if (req.params["type"] == "user") {
+      result = await dbo.collection(req.params["param"]).insertOne(jsonBody);
+    } else {
+    }
     res.send(result);
   });
 });

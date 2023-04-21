@@ -7,12 +7,31 @@ const api={
 			console.log(error);
 		});
 	},
-	PUT:function(documentID,data){
-		axios.put(`${api.endpoint}${documentID}`,data).then(function(response){
-			console.log(response);
-		}).catch(function(error){
-			console.log(error);
-		});
+	PUT:function(documentID, data, id, type){
+		if (type == "comment") {
+			console.log("PUT: comment");
+			axios.put(`${api.endpoint}${documentID}/${id}/${type}`,data).then(function(response){
+				console.log(response);
+			}).catch(function(error){
+				console.log("axios: comment put error: "+error);
+			});
+		} else if (type == "post") {
+			console.log("PUT: post");
+			axios.put(`${api.endpoint}${documentID}/${id}/${type}`,data).then(function(response){
+				console.log(response);
+			}).catch(function(error){
+				console.log("axios: post put error: "+error);
+			});
+		} else if (type == "user") {
+			console.log("PUT: user");
+			axios.put(`${api.endpoint}${documentID}/${id}/${type}`,data).then(function(response){
+				console.log(response);
+			}).catch(function(error) {
+				console.log("axios: user put error: "+error);
+			});
+		} else {
+			console.log("put type error");
+		}
 	},
 	UPDATE: function (documentID, newData) {
 //   axios.get(`${api.endpoint}${documentID}`)
