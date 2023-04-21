@@ -5,6 +5,7 @@ Group Members: Brooks Arthur, Brandon Cooper, Ben Molloy, Quay Robinson
 Contributions:
 
   - Brooks:
+  Added database get and set up basis for database integration.
 
   - Brandon:
   Added database delete functionality for posts and collections.
