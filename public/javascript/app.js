@@ -20,6 +20,11 @@ function getCurrentDateTime() {
 function showCreatePostForm() {
     // Hide the original "Create New Post" button
     $("#create-post-button").addClass("d-none").removeClass("d-block");
+    if (document.cookie.split("=")[1]) {
+        $("#username").text(document.cookie.split("=")[1]);
+    } else {
+        $("#username").text("Not signed in");
+    }
 
     // Show the form
     $("#postForm").addClass("d-block").removeClass("d-none");
@@ -62,7 +67,7 @@ function validation(username, title, review, rating) {
 
 function createPost() {
     // Get the form input values
-    const username = $("#username").val();
+    const username = document.cookie.split("=")[1] ?? "";
     const artist = $("#artist").val() || null;
     const album = $("#album").val() || null;
     const song = $("#song").val() || null;

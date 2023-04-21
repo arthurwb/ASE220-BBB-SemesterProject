@@ -125,6 +125,32 @@ function login() {
                         <button class="btn btn-danger col-2" onclick="deleteUser(${i})">Delete User</button>
                     </div>
                 `);
+
+                document.cookie = `username=${loginUsername}`;
+                console.log(document.cookie);
+
+                // axios({
+                //     method: 'post',
+                //     url: 'http://localhost:8080/api/data/auth/login',
+                //     config: {
+                //         headers: {
+                //             'Authorization': 'Bearer ' + ''
+                //         }
+                //     },
+                //     data: {
+                //         username: loginUsername,
+                //         password: loginPassword
+                //     },
+                //     validationStatus:()=>true
+                // })
+                //     .then(function(response) {
+                //         cookies.set('jwt', response.headers.authorization.replace('Bearer ',''));
+                //         console.log(response.headers.authorization.replace('Bearer ',''));
+                //     })
+                //     .catch(function(error) {
+                //         console.log(error);
+                //     });
+
                 flag = true
             }
         }

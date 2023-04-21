@@ -21,6 +21,16 @@ router.get('/data/:param', async (req, res) => {
   res.end();
 });
 
+// router.post("/data/auth/login", async (req, res) => {
+//   console.log("<AUTH POST>");
+//   db=await connect()
+//   let dbo=db.db("TestDB");
+//   // check find
+//   dbo.collection('Users').find({username: req.body.username, password: req.body.password}, {
+
+//   })
+// })
+
 router.post('/data/collection/:param', async (req, res) => {
   console.log("<DATABASE POST>");
 
