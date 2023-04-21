@@ -7,8 +7,8 @@ Contributions:
   - Brooks:
 
   - Brandon:
-  Added database delete functionality for posts and collections
-  Added database post functionality for collections
+  Added database delete functionality for posts and collections.
+  Added database post functionality for collections.
 
   - Ben:
 
