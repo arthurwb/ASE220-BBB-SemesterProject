@@ -21,9 +21,8 @@ router.get('/data/:param', async (req, res) => {
   res.end();
 });
 
-router.post('/data/:param', async (req, res) => {
+router.post('/data/collection/:param', async (req, res) => {
   console.log("<DATABASE POST>");
-  let result;
 
   const db = await connect();
   const dbo = db.db("TestDB");
@@ -32,21 +31,16 @@ router.post('/data/:param', async (req, res) => {
   let collectionExists = await dbo.listCollections({name: collectionName}).hasNext();
 
   if (collectionExists) {
-    res.status(400).send("Collection " + collectionName + " already exists");
+    res.status(400).send(`Collection ${collectionName} already exists`);
   } else {
-    result = await dbo.createCollection(collectionName);
-    res.send(result);
+    await dbo.createCollection(collectionName);
+    res.status(200).send(`Collection ${collectionName} created successfully`);
   }
   res.end();
 });
 
 router.put('/data/:param', async (req, res) => {
   console.log("<DATABASE POST>");
-  // api.httpRequest.PUT(req, req.params["param"], (putResponse) => {
-  //   res.writeHead(200,{'Content-Type':'application/json'});
-  //   res.write(putResponse, 'utf8');
-  //   res.end();
-  // });
   db=await connect()
   let dbo=db.db("TestDB");
   let body = '';
@@ -79,6 +73,23 @@ router.delete('/data/:param', async (req, res) => {
   });
 });
 
+router.delete('/data/collection/:param', async (req, res) => {
+  console.log("<DATABASE POST>");
+
+  const db = await connect();
+  const dbo = db.db("TestDB");
+
+  let collectionName = req.params["param"];
+  let collectionExists = await dbo.listCollections({name: collectionName}).hasNext();
+  
+  if (collectionExists) {
+    await dbo.dropCollection(collectionName);
+    res.status(200).send(`Collection ${collectionName} successfully deleted`);
+  } else {
+    res.status(400).send(`Collection ${collectionName} does not exists`);
+  }
+  res.end();
+});
 
 async function connect(){
 	let connection=await client.connect()
