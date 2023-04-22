@@ -80,12 +80,13 @@ router.delete('/data/:param', async (req, res) => {
   const dbo = db.db("TestDB");
   console.log(req.params["param"]);
 
+  console.log(req.body);
   let body = '';
   req.on('data', (chunk) => {
       body = chunk.toString();
   });
   req.on('end', async () => {
-    console.log(JSON.parse(body));
+    console.log(body);
     let result = await dbo.collection(req.params["param"]).deleteOne(JSON.parse(body),function(err,result){
       if (err) throw err
       console.log(result)

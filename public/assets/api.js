@@ -33,6 +33,13 @@ const api={
 			console.log("put type error");
 		}
 	},
+	DELETE: function(documentID, data) {
+		axios.delete(`${api.endpoint}${documentID}`, data).then(function(response) {
+			console.log(response);
+		}).catch(function(error){
+			console.log("axios: post delete error: "+error);
+		});
+	},
 	UPDATE: function (documentID, newData) {
 //   axios.get(`${api.endpoint}${documentID}`)
 //     .then(function (response) {
