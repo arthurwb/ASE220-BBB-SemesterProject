@@ -43,10 +43,11 @@ api.GET(documentID, function(response) {
 // todo: authenticate 
 function deletePost() {
     console.log(id);
-    const postDelete = { id: id }
+    const postDelete = { id: parseInt(id) };
     api.DELETE(documentID, postDelete, function(response) {
         console.log(response);
         alert("Post Deleted");
+        document.location.href = "/";
     });
 }
 

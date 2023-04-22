@@ -103,6 +103,8 @@ function createPost() {
 
             // Send an UPDATE request
             api.PUT(documentID, newData, -1, "post");
+            alert("Post Created");
+            document.location.reload();
         });
     } else {
         alert("Input not valid")
