@@ -50,7 +50,7 @@ function validation(commentUsername, commentText) {
 }
 
 async function createComment() {
-    const commentUsername = $("#username").val();
+    const commentUsername = document.cookie.split("=")[1] ?? "";
     // const commentUsername = document.getElementById("username").value;
     const commentText = $("#comment-text").val();
     // const commentText = document.getElementById("comment-text").value;
@@ -75,6 +75,11 @@ async function createComment() {
 function showCreateCommentForm() {
     // Hide the original "Create New Comment" button
     $("#post-comment-button").addClass("d-none").removeClass("d-block");
+    if (document.cookie.split("=")[1]) {
+        $("#username").text(document.cookie.split("=")[1]);
+    } else {
+        $("#username").text("Not signed in");
+    }
 
     // Show the form
     $("#comment-form").addClass("d-block").removeClass("d-none");
