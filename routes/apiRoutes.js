@@ -6,8 +6,9 @@ const bodyParser = require('body-parser')
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = "mongodb+srv://admin:admin@qb3cluster.sknm95g.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-app.use(bodyParser.json())
-var db=null
+app.use(bodyParser.json());
+app.use(express.json);
+var db=null;
 const api = require('../api/apiHandler');
 const databaseConnection = require('../api/databaseHandler');
 
@@ -75,23 +76,18 @@ router.put('/data/:param/:id/:type', async (req, res) => {
   });
 });
 
-router.delete('/data/:param', async (req, res) => {
+router.delete('/data/:param', express.json(), async (req, res) => {
   const db = await connect();
   const dbo = db.db("TestDB");
   console.log(req.params["param"]);
 
-  let body = '';
-  req.on('data', (chunk) => {
-      body = chunk.toString();
+  console.log("before delete"+ JSON.stringify(req.body));
+
+  let result = await dbo.collection(req.params["param"]).deleteOne(req.body, function(err, result) {
+    if (err) throw err
+    console.log("after delete"+result)
   });
-  req.on('end', async () => {
-    console.log(JSON.parse(body));
-    let result = await dbo.collection(req.params["param"]).deleteOne(JSON.parse(body),function(err,result){
-      if (err) throw err
-      console.log(result)
-    });
-    res.send(result);
-  });
+  res.send(result);
 });
 
 router.delete('/data/collection/:param', async (req, res) => {

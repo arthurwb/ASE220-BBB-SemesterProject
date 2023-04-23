@@ -26,9 +26,30 @@ api.GET(documentID, function(response) {
                 </div>
                 `);
             });
+            if (document.cookie.split("=")[1] == post.username) {
+                console.log("display delete button");
+                console.log(document.cookie.split("=")[1]);
+                console.log(post.username);
+                $("#deleteHolder").html(`<button id="post-delete-button" type="button" class="btn btn-error d-block" onclick="deletePost()">Delete Post</button>`);
+            } else {
+                console.log("else");
+                console.log(document.cookie.split("=")[1]);
+                console.log(post.username);
+            }
         }
     }
 });
+
+// todo: authenticate 
+function deletePost() {
+    console.log(id);
+    const postDelete = { id: parseInt(id) };
+    api.DELETE(documentID, postDelete, function(response) {
+        console.log(response);
+        alert("Post Deleted");
+        document.location.href = "/";
+    });
+}
 
 function displaySuccessMessage() {
     console.log('Post successfully added!');
