@@ -1,4 +1,4 @@
-# ASE220-BBB-SemesterProject
+# ASE220-BBB-SemesterProject - Assignment 6 Part 1
 
 Group Members: Brooks Arthur, Brandon Cooper, Ben Molloy, Quay Robinson
 
