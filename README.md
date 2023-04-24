@@ -21,6 +21,7 @@ Contributions:
 Contributions:
 
   - Brooks:
+  Initial cookie configuation for posts and comments.
 
   - Brandon:
 
