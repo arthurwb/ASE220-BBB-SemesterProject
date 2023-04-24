@@ -3,9 +3,9 @@ const bodyParser = require('body-parser')
 const cookieParser=require('cookie-parser');
 const router=express()
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const {MongoClient}=require('mongodb')
 const uri = "mongodb+srv://admin:admin@qb3cluster.sknm95g.mongodb.net/?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+const client= new MongoClient(uri)
 const ObjectId = require('mongodb').ObjectId
 
 const bcrypt=require('bcrypt')
@@ -17,45 +17,71 @@ const jwtsalt='privatekey'
 const salt='$2b$10$Imnq7Q2r0RS7DqaKV0rpPe'
 
 var database=null;
+var db = null;
 
 /* Middleware */
 router.use(express.static('public'))
 router.use(bodyParser.json())
 router.use(cookieParser())
 
-router.post('/data/auth/signup',(req,res)=>{
-	console.log(req.body)
-	database.collection('Users').find({username:req.body.username},{username:1}).toArray(function(err, result){
-		if (err) throw err
-		if(result.length>0) res.status(406).json({message:'User already exists'})
-		else{
-			req.body.password=bcrypt.hashSync(req.body.password,salt).replace(`${salt}.`,'')
-			database.collection('Users').insertOne(req.body,function(err,result){
-				if (err) throw err
-				res.status(201).json({message:'User created'})
-			})
-		}
-	})
+router.post('/data/auth/signup', async (req,res)=>{
+  db = await connect();
+  database = db.db("TestDB");
+  console.log(req.body)
+
+  // await database.collection('Users').insertOne(req.body, function(err,result){
+  //   if (err) throw err
+  //   res.status(201).json({message:'User created'})
+  // })
+
+	let test = await database.collection('Users').find({username:req.body.username},{username:1}).toArray()
+
+  if (test.length > 0) {
+    console.log("User exists")
+    res.status(406).json({message:'User already exists'})
+  }
+
+  else {
+    req.body.password=bcrypt.hashSync(req.body.password,salt).replace(`${salt}.`,'')
+
+    await database.collection('Users').insertOne(req.body,function(err,result){
+      if (err) throw err
+      res.status(201).json({message:'User created'})
+    })
+  }
 })
 
-router.post('/data/auth/signin',(req,res)=>{
-	database.collection('Users').find({username:req.body.username},{_id:1,username:1,password:1}).toArray(function(err, result){
-		console.log(result)
-		if (err) throw err
-		if(result.length==0) res.status(406).json({message:'User is not registered'})
-		else{
-			if(result[0].password!=bcrypt.hashSync(req.body.password,salt).replace(`${salt}.`,'')) return res.status(406).json({message:'Wrong password'})
-			else{
-				userId=result[0]._id.toString().replace('New ObjectId("','').replace('")','')
+router.post('/data/auth/signin', async (req,res)=>{
+  db = await connect();
+  database = db.db("TestDB");
+  //console.log(database)
+
+  console.log(req.body)
+
+	let test2 = await database.collection('Users').find({username:req.body.username},{_id:1,username:1,password:1}).toArray()
+
+  if (test2.length == 0) {
+    console.log('User is not registered');
+    res.status(406).json({message:'User is not registered'})
+  }
+
+  else {
+    if (test2[0].password!=bcrypt.hashSync(req.body.password,salt).replace(`${salt}.`,'')) {
+      console.log("Wrong password");
+      res.status(406).json({message:'Wrong password'})
+    }
+
+    else {
+      userId=test2[0]._id.toString().replace('New ObjectId("','').replace('")','')
 				console.log(userId)
 				let token=jwt.sign({id:userId},jwtsalt,{expiresIn:jwt_expiration})
-				database.collection('Users').updateOne({_id:ObjectId(userId)},{$set:{jwt:token}},function(err,result){
-					if (err) throw err
+        
+				await database.collection('Users').updateOne({_id:new ObjectId(userId)},{$set:{jwt:token}})
+
+          console.log("User Signed In");
 					res.status(200).setHeader('Authorization', `Bearer ${token}`).json({message:'User authenticated'})
-				})
-			}
-		}
-	})
+    }
+  }
 })
 
 router.get('/data/:param', async (req, res) => {
@@ -71,8 +97,8 @@ router.get('/data/:param', async (req, res) => {
 router.post('/data/collection/:param', async (req, res) => {
   console.log("<DATABASE POST>");
 
-  const db = await connect();
-  const dbo = db.db("TestDB");
+  db = await connect();
+  let dbo = db.db("TestDB");
 
   let collectionName = req.params["param"];
   let collectionExists = await dbo.listCollections({name: collectionName}).hasNext();
@@ -90,31 +116,27 @@ router.put('/data/:param/:id/:type', async (req, res) => {
   console.log("<DATABASE PUT>");
   db=await connect()
   let dbo=db.db("TestDB");
-  let body = '';
-  req.on('data', (chunk) => {
-      body += chunk.toString();
-  });
-  req.on('end', async () => {
-    let jsonBody = JSON.parse(body)
-    let result;
-    if (req.params["type"] == "comment") {
-      result = await dbo.collection(req.params["param"]).updateOne(
-        { id: parseInt(req.params["id"]) },
-        { $push: { comments: JSON.parse(body) } }
-      );
-    } else if (req.params["type"] == "post") {
-      result = await dbo.collection(req.params["param"]).insertOne(jsonBody);
-    } else if (req.params["type"] == "user") {
-      result = await dbo.collection(req.params["param"]).insertOne(jsonBody);
-    } else {
-    }
-    res.send(result);
-  });
+
+  //console.log("outside if" + JSON.stringify(req.body));
+
+  if (req.params["type"] == "comment") {
+    result = await dbo.collection(req.params["param"]).updateOne(
+      { id: parseInt(req.params["id"]) },
+      { $push: { comments: req.body } }
+    );
+  } else if (req.params["type"] == "post") {
+    //console.log("inside if" + JSON.stringify(req.body));
+    result = await dbo.collection(req.params["param"]).insertOne(req.body);
+  } else if (req.params["type"] == "user") {
+    result = await dbo.collection(req.params["param"]).insertOne(req.body);
+  } else {
+  } 
+res.send(result);
 });
 
 router.delete('/data/:param', express.json(), async (req, res) => {
-  const db = await connect();
-  const dbo = db.db("TestDB");
+  db = await connect();
+  let dbo = db.db("TestDB");
   console.log(req.params["param"]);
 
   console.log("before delete"+ JSON.stringify(req.body));
@@ -129,8 +151,8 @@ router.delete('/data/:param', express.json(), async (req, res) => {
 router.delete('/data/collection/:param', async (req, res) => {
   console.log("<DATABASE POST>");
 
-  const db = await connect();
-  const dbo = db.db("TestDB");
+  db = await connect();
+  let dbo = db.db("TestDB");
 
   let collectionName = req.params["param"];
   let collectionExists = await dbo.listCollections({name: collectionName}).hasNext();

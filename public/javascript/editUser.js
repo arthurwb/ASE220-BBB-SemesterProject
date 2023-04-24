@@ -62,8 +62,8 @@ function verification(flag) {
 
 function createNewUser() {
     // Get the form input values
-    let username=document.querySelectorAll('[for="username"]')[0]
-    let password=document.querySelectorAll('[for="password"]')[0]
+    const username = $("#username").val() || null;
+    const password = $("#password").val() || null;
     const email = $("#email").val() || null;
     const firstName = $("#firstName").val() || null;
     const bio = $("#bio").val() || null;
@@ -72,8 +72,8 @@ function createNewUser() {
         method: 'post',
         url: '/api/data/auth/signup',
         data: {
-            username:username.value,
-            password:password.value,
+            username:username,
+            password:password,
             email:email,
             firstName:firstName,
             bio:bio
@@ -95,8 +95,8 @@ async function deleteUser(index) {
 }
 
 function login() {
-    let username=document.querySelectorAll('[for="loginUsername"]')[0]
-    let password=document.querySelectorAll('[for="loginPassword"]')[0]
+    const username = $("#loginUsername").val() || null;
+    const password = $("#loginPassword").val() || null;
     console.log()
     axios({
         method: 'post',
@@ -107,8 +107,8 @@ function login() {
         }
         },
         data: {
-            username:username.value,
-            password:password.value
+            username:username,
+            password:password
         },
             validateStatus:()=>true
     })

@@ -16,7 +16,7 @@ const api={
 				console.log("axios: comment put error: "+error);
 			});
 		} else if (type == "post") {
-			console.log("PUT: post");
+			console.log("PUT: post" + JSON.stringify(data));
 			axios.put(`${api.endpoint}${documentID}/${id}/${type}`,data).then(function(response){
 				console.log(response);
 			}).catch(function(error){
