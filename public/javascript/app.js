@@ -20,8 +20,12 @@ function getCurrentDateTime() {
 function showCreatePostForm() {
     // Hide the original "Create New Post" button
     $("#create-post-button").addClass("d-none").removeClass("d-block");
-    if (document.cookie.split("=")[1]) {
-        $("#username").text(document.cookie.split("=")[1]);
+    let cookie = document.cookie.split("=")[1]
+    let username = "no username";
+    if (cookie) {
+        api.GET_USER(cookie, function(response) {
+            $("#username").text(response.username);
+        })
     } else {
         $("#username").text("Not signed in");
     }
