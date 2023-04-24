@@ -1,16 +1,62 @@
-const express = require('express');
-const app = express();
-const router = express.Router();
-const path = require('path');
+const express=require('express')
 const bodyParser = require('body-parser')
+const cookieParser=require('cookie-parser');
+const router=express()
+
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = "mongodb+srv://admin:admin@qb3cluster.sknm95g.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-app.use(bodyParser.json());
-app.use(express.json);
-var db=null;
-const api = require('../api/apiHandler');
-const databaseConnection = require('../api/databaseHandler');
+const ObjectId = require('mongodb').ObjectId
+
+const bcrypt=require('bcrypt')
+
+const jwt=require('jsonwebtoken')
+const jwt_expiration=86400000
+const jwtsalt='privatekey'
+
+const salt='$2b$10$Imnq7Q2r0RS7DqaKV0rpPe'
+
+var database=null;
+
+/* Middleware */
+router.use(express.static('public'))
+router.use(bodyParser.json())
+router.use(cookieParser())
+
+router.post('/data/auth/signup',(req,res)=>{
+	console.log(req.body)
+	database.collection('Users').find({username:req.body.username},{username:1}).toArray(function(err, result){
+		if (err) throw err
+		if(result.length>0) res.status(406).json({message:'User already exists'})
+		else{
+			req.body.password=bcrypt.hashSync(req.body.password,salt).replace(`${salt}.`,'')
+			database.collection('Users').insertOne(req.body,function(err,result){
+				if (err) throw err
+				res.status(201).json({message:'User created'})
+			})
+		}
+	})
+})
+
+router.post('/data/auth/signin',(req,res)=>{
+	database.collection('Users').find({username:req.body.username},{_id:1,username:1,password:1}).toArray(function(err, result){
+		console.log(result)
+		if (err) throw err
+		if(result.length==0) res.status(406).json({message:'User is not registered'})
+		else{
+			if(result[0].password!=bcrypt.hashSync(req.body.password,salt).replace(`${salt}.`,'')) return res.status(406).json({message:'Wrong password'})
+			else{
+				userId=result[0]._id.toString().replace('New ObjectId("','').replace('")','')
+				console.log(userId)
+				let token=jwt.sign({id:userId},jwtsalt,{expiresIn:jwt_expiration})
+				database.collection('Users').updateOne({_id:ObjectId(userId)},{$set:{jwt:token}},function(err,result){
+					if (err) throw err
+					res.status(200).setHeader('Authorization', `Bearer ${token}`).json({message:'User authenticated'})
+				})
+			}
+		}
+	})
+})
 
 router.get('/data/:param', async (req, res) => {
   console.log("<DATABASE GET>")
@@ -21,16 +67,6 @@ router.get('/data/:param', async (req, res) => {
   res.send(result);
   res.end();
 });
-
-// router.post("/data/auth/login", async (req, res) => {
-//   console.log("<AUTH POST>");
-//   db=await connect()
-//   let dbo=db.db("TestDB");
-//   // check find
-//   dbo.collection('Users').find({username: req.body.username, password: req.body.password}, {
-
-//   })
-// })
 
 router.post('/data/collection/:param', async (req, res) => {
   console.log("<DATABASE POST>");

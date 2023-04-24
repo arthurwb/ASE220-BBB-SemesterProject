@@ -62,39 +62,30 @@ function verification(flag) {
 
 function createNewUser() {
     // Get the form input values
-    const username = $("#username").val();
-    const password = $("#password").val() || null;
+    let username=document.querySelectorAll('[for="username"]')[0]
+    let password=document.querySelectorAll('[for="password"]')[0]
     const email = $("#email").val() || null;
     const firstName = $("#firstName").val() || null;
     const bio = $("#bio").val() || null;
-    let isValid = validation(username, password, email);
-
-    if (isValid) {
-        // Get the current data from the JSON blob
-        api.GET(documentID, function(response) {
-            // Generate a random 6 digit number that is not already in use
-            let id = Math.floor(Math.random() * 900000) + 100000;
-            while (response.data.some(post => post.id === id)) {
-            id = Math.floor(Math.random() * 900000) + 100000;
-            }
-
-            // Create a data object with the form input values and assigned ID
-            const newData = {
-            username,
-            email,
-            password,
-            bio,
-            firstName,
-            id
-            };
-
-            // Send an UPDATE request
-            api.PUT(documentID, newData, -1, "user");
-            verification(true);
+    console.log()
+    axios({
+        method: 'post',
+        url: '/api/data/auth/signup',
+        data: {
+            username:username.value,
+            password:password.value,
+            email:email,
+            firstName:firstName,
+            bio:bio
+        },
+            validateStatus:()=>true
+    })
+        .then(function (response) {
+        console.log(response);
+        })
+        .catch(function (error) {
+        console.log(error);
         });
-    } else {
-        verification(false);
-    }
 }
 
 async function deleteUser(index) {
@@ -104,61 +95,30 @@ async function deleteUser(index) {
 }
 
 function login() {
-    const loginUsername = $("#loginUsername").val();
-    const loginPassword = $("#loginPassword").val();
-    let flag = false;
-
-    api.GET(documentID, function(response) {
-        for (let i = 0; i < response.data.length; i++) {
-            const element = response.data[i];
-            
-            if (loginUsername == element.username && loginPassword == element.password) {
-                $("#loginDetails").html(`
-                    <div class="col-10 offset-1">
-                        <h1 class="text-center">${element.username}</h1>
-                        <h3>Email</h3>
-                        <p class="offset-1">${element.email}</p>
-                        <h3>First Name</h3>
-                        <p class="offset-1">${element.firstName}</p>
-                        <h3>Biography</h3>
-                        <p class="offset-1">${element.bio}</p>
-                        <button class="btn btn-danger col-2" onclick="deleteUser(${i})">Delete User</button>
-                    </div>
-                `);
-
-                document.cookie = `username=${loginUsername}`;
-                console.log(document.cookie);
-
-                // axios({
-                //     method: 'post',
-                //     url: 'http://localhost:8080/api/data/auth/login',
-                //     config: {
-                //         headers: {
-                //             'Authorization': 'Bearer ' + ''
-                //         }
-                //     },
-                //     data: {
-                //         username: loginUsername,
-                //         password: loginPassword
-                //     },
-                //     validationStatus:()=>true
-                // })
-                //     .then(function(response) {
-                //         cookies.set('jwt', response.headers.authorization.replace('Bearer ',''));
-                //         console.log(response.headers.authorization.replace('Bearer ',''));
-                //     })
-                //     .catch(function(error) {
-                //         console.log(error);
-                //     });
-
-                flag = true
-            }
+    let username=document.querySelectorAll('[for="loginUsername"]')[0]
+    let password=document.querySelectorAll('[for="loginPassword"]')[0]
+    console.log()
+    axios({
+        method: 'post',
+        url: '/api/data/auth/signin',
+        config:{
+        headers: {
+            'Authorization': 'Bearer ' + ''
         }
-
-        if (!flag) {
-            alert("incorrect user login");
-        }
-    });
+        },
+        data: {
+            username:username.value,
+            password:password.value
+        },
+            validateStatus:()=>true
+    })
+        .then(function (response){
+        cookies.set('jwt',response.headers.authorization.replace('Bearer ',''))
+        console.log(response.headers.authorization.replace('Bearer ',''));
+        })
+        .catch(function (error) {
+        console.log(error);
+        });
 }
 
 function submitForm(isNewUser) {
