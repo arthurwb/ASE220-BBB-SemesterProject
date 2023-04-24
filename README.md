@@ -23,7 +23,7 @@ Contributions:
   - Brooks:
   Initial cookie configuation for posts and comments.
 
-  - Brandon:
+  - Brandon: Updated cookies to use jws.
 
   - Ben: 
 
