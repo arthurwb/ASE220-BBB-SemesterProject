@@ -42,6 +42,19 @@
             </button>
         </div>
         <div class="col-2 d-flex justify-content-center align-items-center pt-4">
+          <button id="menu-button">Menu</button>
+          <div id="menu-container">
+            <img class="col-2.5 mx-auto d-block p-3" src="images/account.png" height="65px">
+            <h1>Username</h1>
+            <ul>
+              <li>Create Post</li>
+              <li>Previous Posts</li>
+              <li>Comments</li>
+              <li>Account Details</li>
+              <li>Sign Out</li>
+              
+            </ul>
+          </div>
           <a href="user"><img class="profileIMG" src="images/account.png" height="65px"></a>      
         </div>
         <div class="col-7 offset-3 d-flex justify-content-center align-items-center">
@@ -89,7 +102,9 @@
         </div>
       </div>
     </div>
-    <div id="paginiationButtons">
+    <div class="col-7 offset-3 d-flex justify-content-center align-items-center">
+      <div id="paginiationButtons">
+      </div>
     </div>
     <footer class="bg-dark bg-gradient text-light">
       <div class="container">
@@ -111,5 +126,13 @@
     <script src="assets/getAllURLParams.js"></script>
     <script src="assets/cookies.js"></script>
     <script src="javascript/app.js"></script>
+    <script>
+      var menuButton = document.getElementById('menu-button');
+      var menuContainer = document.getElementById('menu-container');
+
+      menuButton.addEventListener('click', function() {
+        menuContainer.classList.toggle('open');
+});
+    </script>
   </body>  
 </html>

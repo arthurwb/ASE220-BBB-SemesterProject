@@ -146,13 +146,13 @@ api.GET(documentID, function(response) {
         //template for creating a new post
         var newPost = `
         <div class="row">
-            <div class="card col-12 border-success mb-3" style="margin-top: 2em; margin-bottom: 2em;">
-                <div class="card-header bg-transparent border-success">${response.data[index].username}</div>
-                <div class="card-body text-success">
+            <div class="card col-12 border-dark mb-3" style="margin-top: 2em; margin-bottom: 2em;">
+                <div class="card-header bg-transparent border-dark">${response.data[index].username}</div>
+                <div class="card-body text-dark">
                     <h5 class="card-title">${response.data[index].title}</h5>
                     <p class="card-text">${response.data[index].rating} out of 10</p>
                 </div>
-                <div class="card-footer bg-transparent border-success">
+                <div class="card-footer bg-transparent border-dark">
                     ${response.data[index].timestamp}
                     <a class="btn btn-primary" style="float: right;" onclick="location.href ='post?id=${response.data[index].id}';">View Post</a>
                 </div>
