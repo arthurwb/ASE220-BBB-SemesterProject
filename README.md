@@ -25,6 +25,6 @@ Contributions:
 
   - Brandon: Updated cookies to use jws.
 
-  - Ben: 
+  - Ben: Assisted in coding of authentication
 
   - Quay:
