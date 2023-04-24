@@ -12,26 +12,27 @@ POST http://localhost:8080/api/data/collection/test
 DELETE http://localhost:8080/api/data/collection/test
 
 ### PUT REQUEST 
-PUT http://localhost:8080/api/data/Posts
-
-{
-        "album": "Rest Test",
-        "artist": "Rest Test",
-        "comments": [],
-        "id": 847292,
-        "rating": "8",
-        "review": "Rest Test",
-        "song": null,
-        "timestamp": "9:29 PM - 10 Mar 23",
-        "title": "Rest Test",
-        "username": "restTest1"
-    }
-
-### DELETE REQUEST
-DELETE http://localhost:8080/api/data/Posts
+PUT http://localhost:8080/api/data/Posts/-1/post
 content-type: application/json
 
 {
-    "id":847292
+    "username":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NDVmMTY1YzA3ZmUwZDVlYTQ2ZjNkZiIsImlhdCI6MTY4MjMwNTM4NCwiZXhwIjoxNzY4NzA1Mzg0fQ._gH6C--DIbzmkfhEfgevGqxAF_NeUktcoFSpyTaQD_M",
+    "artist":"f",
+    "album":"fd",
+    "song":"d",
+    "rating":"2",
+    "title":"3",
+    "review":"2",
+    "timestamp":"11:44 PM - 23 Apr 23",
+    "id":662080,
+    "comments":[]
+}
+
+### DELETE REQUEST
+DELETE http://localhost:8080/api/data/Posts/
+content-type: application/json
+
+{
+    "id":662080
 }
 
