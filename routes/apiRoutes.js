@@ -24,15 +24,21 @@ router.use(express.static('public'))
 router.use(bodyParser.json())
 router.use(cookieParser())
 
+router.get('/data/search/', async (req,res)=>{
+  db = await connect();
+  database = db.db("TestDB");
+  //console.log(req.query)
+
+  let search = await database.collection('Posts').find(req.query).toArray()
+
+  res.send(search);
+
+})
+
 router.post('/data/auth/signup', async (req,res)=>{
   db = await connect();
   database = db.db("TestDB");
   console.log(req.body)
-
-  // await database.collection('Users').insertOne(req.body, function(err,result){
-  //   if (err) throw err
-  //   res.status(201).json({message:'User created'})
-  // })
 
 	let test = await database.collection('Users').find({username:req.body.username},{username:1}).toArray()
 
