@@ -15,3 +15,15 @@ Contributions:
   Worked on Get as well as Delete functions and also worked on organizing code.
 
   - Quay:
+  
+# ASE220-BBB-SemesterProject - Assignment 6 Part 2
+
+Contributions:
+
+  - Brooks:
+
+  - Brandon:
+
+  - Ben: 
+
+  - Quay:
