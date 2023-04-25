@@ -15,3 +15,16 @@ Contributions:
   Worked on Get as well as Delete functions and also worked on organizing code.
 
   - Quay:
+  
+# ASE220-BBB-SemesterProject - Assignment 6 Part 2
+
+Contributions:
+
+  - Brooks:
+  Initial cookie configuation for posts and comments.
+
+  - Brandon: Updated cookies to use jws.
+
+  - Ben: Assisted in coding of authentication
+
+  - Quay:

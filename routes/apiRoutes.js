@@ -1,29 +1,34 @@
-const express=require('express')
-const bodyParser = require('body-parser')
+/* EXPRESS */
+const express=require('express');
 const cookieParser=require('cookie-parser');
-const router=express()
+const router=express();
 
+/* BODY PARSER */
+const bodyParser = require('body-parser');
+
+/* MONGODB */
 const {MongoClient}=require('mongodb')
 const uri = "mongodb+srv://admin:admin@qb3cluster.sknm95g.mongodb.net/?retryWrites=true&w=majority";
 const client= new MongoClient(uri)
 const ObjectId = require('mongodb').ObjectId
+var database=null;
+var db = null;
 
+/* BCRYPT ENCRYPTION */
 const bcrypt=require('bcrypt')
 
+/* JWT AUTH */
 const jwt=require('jsonwebtoken')
 const jwt_expiration=86400000
 const jwtsalt='privatekey'
-
 const salt='$2b$10$Imnq7Q2r0RS7DqaKV0rpPe'
-
-var database=null;
-var db = null;
 
 /* Middleware */
 router.use(express.static('public'))
 router.use(bodyParser.json())
 router.use(cookieParser())
 
+/* SEARCH BAR */
 router.get('/data/search/', async (req,res)=>{
   db = await connect();
   database = db.db("TestDB");
@@ -35,16 +40,39 @@ router.get('/data/search/', async (req,res)=>{
 
 })
 
+/* API GET ROUTES */
+router.get("/data/unAuth/:param", async (req, res) => {
+  console.log("<API DECRYPT>");
+  db=await connect()
+  let dbo=db.db("TestDB");
+
+  let cookie = req.params["param"];
+  let username = await dbo.collection("Users").find({jwt: cookie},{username: 1}).toArray();
+  console.log(username[0]);
+  res.send(username[0]);
+  res.end();
+})
+
+router.get('/data/:param', async (req, res) => {
+  console.log("<API GET>");
+  db=await connect();
+  let dbo=db.db("TestDB");
+  let result=await dbo.collection(req.params["param"]).find({}).toArray();
+  res.send(result);
+  res.end();
+});
+
+/* API POST ROUTES */
+
 router.post('/data/auth/signup', async (req,res)=>{
+  console.log("<API AUTH SIGNUP POST>");
   db = await connect();
   database = db.db("TestDB");
-  console.log(req.body)
 
-	let test = await database.collection('Users').find({username:req.body.username},{username:1}).toArray()
+	let test = await database.collection('Users').find({username:req.body.username},{username:1}).toArray();
 
   if (test.length > 0) {
-    console.log("User exists")
-    res.status(406).json({message:'User already exists'})
+    res.status(406).json({message:'User already exists'});
   }
 
   else {
@@ -58,50 +86,34 @@ router.post('/data/auth/signup', async (req,res)=>{
 })
 
 router.post('/data/auth/signin', async (req,res)=>{
+  console.log("<API AUTH SIGNIN POST>");
   db = await connect();
   database = db.db("TestDB");
-  //console.log(database)
 
-  console.log(req.body)
+	let user = await database.collection('Users').find({username:req.body.username},{_id:1,username:1,password:1}).toArray();
 
-	let test2 = await database.collection('Users').find({username:req.body.username},{_id:1,username:1,password:1}).toArray()
-
-  if (test2.length == 0) {
-    console.log('User is not registered');
+  if (user.length == 0) {
     res.status(406).json({message:'User is not registered'})
   }
 
   else {
-    if (test2[0].password!=bcrypt.hashSync(req.body.password,salt).replace(`${salt}.`,'')) {
-      console.log("Wrong password");
+    if (user[0].password!=bcrypt.hashSync(req.body.password,salt).replace(`${salt}.`,'')) {
       res.status(406).json({message:'Wrong password'})
     }
 
     else {
-      userId=test2[0]._id.toString().replace('New ObjectId("','').replace('")','')
-				console.log(userId)
-				let token=jwt.sign({id:userId},jwtsalt,{expiresIn:jwt_expiration})
-        
-				await database.collection('Users').updateOne({_id:new ObjectId(userId)},{$set:{jwt:token}})
+      userId=user[0]._id.toString().replace('New ObjectId("','').replace('")','');
+      let token=jwt.sign({id:userId},jwtsalt,{expiresIn:jwt_expiration});
+      
+      await database.collection('Users').updateOne({_id:new ObjectId(userId)},{$set:{jwt:token}});
 
-          console.log("User Signed In");
-					res.status(200).setHeader('Authorization', `Bearer ${token}`).json({message:'User authenticated'})
+      res.status(200).setHeader('Authorization', `Bearer ${token}`).json({message:'User authenticated'});
     }
   }
 })
 
-router.get('/data/:param', async (req, res) => {
-  console.log("<DATABASE GET>")
-  db=await connect()
-  // let getResponse = api.httpRequest.GET(req.params["param"], client);
-  let dbo=db.db("TestDB");
-  let result=await dbo.collection(req.params["param"]).find({}).toArray();
-  res.send(result);
-  res.end();
-});
-
 router.post('/data/collection/:param', async (req, res) => {
-  console.log("<DATABASE POST>");
+  console.log("<API COLLECTION POST>");
 
   db = await connect();
   let dbo = db.db("TestDB");
@@ -118,12 +130,11 @@ router.post('/data/collection/:param', async (req, res) => {
   res.end();
 });
 
+/* API PUT ROUTES */
 router.put('/data/:param/:id/:type', async (req, res) => {
-  console.log("<DATABASE PUT>");
-  db=await connect()
+  console.log("<API POST/COMMENT PUT>");
+  db=await connect();
   let dbo=db.db("TestDB");
-
-  //console.log("outside if" + JSON.stringify(req.body));
 
   if (req.params["type"] == "comment") {
     result = await dbo.collection(req.params["param"]).updateOne(
@@ -131,31 +142,27 @@ router.put('/data/:param/:id/:type', async (req, res) => {
       { $push: { comments: req.body } }
     );
   } else if (req.params["type"] == "post") {
-    //console.log("inside if" + JSON.stringify(req.body));
-    result = await dbo.collection(req.params["param"]).insertOne(req.body);
-  } else if (req.params["type"] == "user") {
     result = await dbo.collection(req.params["param"]).insertOne(req.body);
   } else {
+    console.log("incorrect type entered");
   } 
 res.send(result);
 });
 
+/* API DELETE ROUTES */
 router.delete('/data/:param', express.json(), async (req, res) => {
+  console.log("<API DELETE>")
   db = await connect();
   let dbo = db.db("TestDB");
-  console.log(req.params["param"]);
-
-  console.log("before delete"+ JSON.stringify(req.body));
 
   let result = await dbo.collection(req.params["param"]).deleteOne(req.body, function(err, result) {
     if (err) throw err
-    console.log("after delete"+result)
   });
   res.send(result);
 });
 
 router.delete('/data/collection/:param', async (req, res) => {
-  console.log("<DATABASE POST>");
+  console.log("<API COLELCTION DELETE>");
 
   db = await connect();
   let dbo = db.db("TestDB");
@@ -172,22 +179,17 @@ router.delete('/data/collection/:param', async (req, res) => {
   res.end();
 });
 
-async function connect(){
-	let connection=await client.connect()
-	return connection
-}
-
+/* ROUTE FUNCTIONS */
 async function find(db,database,collection,criteria){
-  let dbo=db.db(database)
-  let result=await dbo.collection(collection).find(criteria).toArray()
-  console.log(result)
+  let dbo=db.db(database);
+  let result=await dbo.collection(collection).find(criteria).toArray();
   return result;
 }
 
-async function databaseConnect() {
-  db=await connect()
-  //console.log(db);
-	console.log('mongoDB connected')
+/* CONNECT TO DATABASE */
+async function connect(){
+	let connection=await client.connect();
+	return connection;
 }
 
 module.exports = router;
