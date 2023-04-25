@@ -28,7 +28,17 @@ router.use(express.static('public'))
 router.use(bodyParser.json())
 router.use(cookieParser())
 
-/* ----------------====================------------------ */
+/* SEARCH BAR */
+router.get('/data/search/', async (req,res)=>{
+  db = await connect();
+  database = db.db("TestDB");
+  //console.log(req.query)
+
+  let search = await database.collection('Posts').find(req.query).toArray()
+
+  res.send(search);
+
+})
 
 /* API GET ROUTES */
 router.get("/data/unAuth/:param", async (req, res) => {
@@ -53,6 +63,7 @@ router.get('/data/:param', async (req, res) => {
 });
 
 /* API POST ROUTES */
+
 router.post('/data/auth/signup', async (req,res)=>{
   console.log("<API AUTH SIGNUP POST>");
   db = await connect();
