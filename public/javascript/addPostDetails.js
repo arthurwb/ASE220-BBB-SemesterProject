@@ -14,7 +14,6 @@ api.GET(documentID, function(response) {
             $("#title").text(post.title);
 
             axios.get(`${api.endpoint}getuserid/Users/${post.username}`,{}).then(function(response){
-                console.log(response.data);
                 $("#user").html(`
                 <button style="display: inline-block;" onclick="location.href='profile?id=${response.data}';">
                     <img src="images/account.png" height="20px" width="20px" style="vertical-align: middle;">
@@ -44,10 +43,6 @@ api.GET(documentID, function(response) {
                 console.log(document.cookie.split("=")[1]);
                 console.log(post.username);
                 $("#deleteHolder").html(`<button id="post-delete-button" type="button" class="btn btn-error d-block" onclick="deletePost()">Delete Post</button>`);
-            } else {
-                console.log("else");
-                console.log(document.cookie.split("=")[1]);
-                console.log(post.username);
             }
         }
     }

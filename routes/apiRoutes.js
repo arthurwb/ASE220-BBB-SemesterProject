@@ -86,7 +86,6 @@ router.get('/data/getuserid/:collection/:username', async (req, res) => {
   db = await connect();
   let dbo = db.db("TestDB");
   let result = await dbo.collection(req.params["collection"]).find({username: req.params.username},).toArray();
-  console.log(result);
   result = result[0]._id
   res.send(result);
   res.end();
