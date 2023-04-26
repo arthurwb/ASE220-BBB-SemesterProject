@@ -21,4 +21,10 @@ router.get('/user', (req,res) => {
   res.sendFile(path.join(__dirname, '../views', 'user.html'));
 });
 
+//Serve profile.html
+router.get('/profile', (req,res) => {
+  console.log("<PROFILE PAGE>");
+  res.sendFile(path.join(__dirname, '../views', 'profile.html'));
+});
+
 module.exports = router;

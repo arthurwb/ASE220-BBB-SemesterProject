@@ -12,7 +12,13 @@ api.GET(documentID, function(response) {
             var post = response.data[i];
 
             $("#title").text(post.title);
-            $("#posted").text(`Posted by ${post.username} at ${post.timestamp}`);
+            $("#user").html(`
+            <button style="display: inline-block;" onclick="location.href='profile?username=${post.username}';">
+                <img src="images/account.png" height="20px" width="20px" style="vertical-align: middle;">
+                <span style="display: inline-block; margin-left: 10px; vertical-align: middle;">${post.username}</span>
+            </button>
+            `)
+            $("#posted").text(`Posted on ${post.timestamp}`);
             $("#song").text(`Song - ${post.song}`);
             $("#artist").text(`Artist - ${post.artist}`);
             $("#album").text(`Album - ${post.album}`);
