@@ -9,7 +9,13 @@ const api={
 	},
 	GET_USER: function(cookie, callback) {
 		axios.get(`${api.endpoint}unAuth/${cookie}`,{}).then(function(response){
-            console.log(response.data);
+			callback(response.data);
+		}).catch(function(error){
+			console.log("axios error" + error);
+		});
+	},
+	GET_ITEM: function(collection, id, callback) {
+		axios.get(`${api.endpoint}getitem/${collection}/${id}`,{}).then(function(response){
 			callback(response.data);
 		}).catch(function(error){
 			console.log("axios error" + error);

@@ -32,17 +32,24 @@ router.use(cookieParser())
 router.get('/data/search/', async (req,res)=>{
   db = await connect();
   database = db.db("TestDB");
-  //console.log(req.query)
+  for (let key in req.query) {
+    if (req.query.hasOwnProperty(key)) {
+      if (req.query[key] === 'null') {
+        req.query = {};
+      }
+    }
+  }
+  // console.log(req.query);
 
   let search = await database.collection('Posts').find(req.query).toArray()
 
   res.send(search);
-
 })
 
 /* API GET ROUTES */
 router.get("/data/unAuth/:param", async (req, res) => {
   console.log("<API DECRYPT>");
+  console.log(req.params["param"]);
   db=await connect()
   let dbo=db.db("TestDB");
 
@@ -61,6 +68,28 @@ router.get('/data/:param', async (req, res) => {
   res.send(result);
   res.end();
 });
+
+router.get('/data/getitem/:collection/:id', async (req, res) => {
+  console.log("<API ITEM GET>");
+  let id = req.params["id"].toString();
+  console.log(id);
+  db = await connect();
+  let dbo = db.db("TestDB");
+  let result = await dbo.collection(req.params["collection"]).find({_id:new ObjectId(id)}).toArray();
+  console.log(result);
+  res.json(result);
+  res.end();
+})
+
+router.get('/data/getuserid/:collection/:username', async (req, res) => {
+  console.log("<API ITEM USER ID>");
+  db = await connect();
+  let dbo = db.db("TestDB");
+  let result = await dbo.collection(req.params["collection"]).find({username: req.params.username},).toArray();
+  result = result[0]._id
+  res.send(result);
+  res.end();
+})
 
 /* API POST ROUTES */
 
@@ -102,7 +131,7 @@ router.post('/data/auth/signin', async (req,res)=>{
     }
 
     else {
-      userId=user[0]._id.toString().replace('New ObjectId("','').replace('")','');
+      let userId=user[0]._id.toString().replace('New ObjectId("','').replace('")','');
       let token=jwt.sign({id:userId},jwtsalt,{expiresIn:jwt_expiration});
       
       await database.collection('Users').updateOne({_id:new ObjectId(userId)},{$set:{jwt:token}});

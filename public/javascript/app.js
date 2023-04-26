@@ -25,7 +25,7 @@ function showCreatePostForm() {
     if (cookie) {
         api.GET_USER(cookie, function(response) {
             $("#username").text(response.username);
-        })
+        });
     } else {
         $("#username").text("Not signed in");
     }
@@ -177,7 +177,10 @@ function validation(username, title, review, rating) {
 
 function createPost() {
     // Get the form input values
-    const username = document.cookie.split("=")[1] ?? "";
+    let username = "username error";
+    api.GET_USER(document.cookie.split("=")[1], function(response) {
+        username = response.username;
+    });
     const artist = $("#artist").val() || null;
     const album = $("#album").val() || null;
     const song = $("#song").val() || null;
@@ -214,7 +217,7 @@ function createPost() {
             // Send an UPDATE request
             api.PUT(documentID, newData, -1, "post");
             alert("Post Created");
-            //document.location.reload();
+            document.location.reload();
         });
     } else {
         alert("Input not valid")

@@ -12,7 +12,19 @@ api.GET(documentID, function(response) {
             var post = response.data[i];
 
             $("#title").text(post.title);
-            $("#posted").text(`Posted by ${post.username} at ${post.timestamp}`);
+
+            axios.get(`${api.endpoint}getuserid/Users/${post.username}`,{}).then(function(response){
+                $("#user").html(`
+                <button style="display: inline-block;" onclick="location.href='profile?id=${response.data}';">
+                    <img src="images/account.png" height="20px" width="20px" style="vertical-align: middle;">
+                    <span style="display: inline-block; margin-left: 10px; vertical-align: middle;">${post.username}</span>
+                </button>
+                `)
+            }).catch(function(error){
+                console.log("axios error" + error);
+            });
+
+            $("#posted").text(`Posted on ${post.timestamp}`);
             $("#song").text(`Song - ${post.song}`);
             $("#artist").text(`Artist - ${post.artist}`);
             $("#album").text(`Album - ${post.album}`);
@@ -31,10 +43,6 @@ api.GET(documentID, function(response) {
                 console.log(document.cookie.split("=")[1]);
                 console.log(post.username);
                 $("#deleteHolder").html(`<button id="post-delete-button" type="button" class="btn btn-error d-block" onclick="deletePost()">Delete Post</button>`);
-            } else {
-                console.log("else");
-                console.log(document.cookie.split("=")[1]);
-                console.log(post.username);
             }
         }
     }
