@@ -7,6 +7,14 @@ const api={
 			console.log(error);
 		});
 	},
+	GET_USER: function(cookie, callback) {
+		axios.get(`${api.endpoint}unAuth/${cookie}`,{}).then(function(response){
+            console.log(response.data);
+			callback(response.data);
+		}).catch(function(error){
+			console.log("axios error" + error);
+		});
+	},
 	PUT:function(documentID, data, id, type){
 		if (type == "comment") {
 			console.log("PUT: comment");

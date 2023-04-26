@@ -29,16 +29,16 @@
             <div class="searchSelection input-group">
               <select class="custom-select" id="inputGroupSelect01">
                 <option value="0" selected disabled hidden>Post Type</option>
-                <option value="1">Songs</option>
-                <option value="2">Album</option>
-                <option value="3">Artist</option>
+                <option id="songSelect" value="1">Songs</option>
+                <option id="albumSelect" value="2">Album</option>
+                <option id="artistSelect" value="3">Artist</option>
               </select>
             </div>
           </div>
             <div class="searchInput form-outline">
               <input type="search" placeholder="Search" id="form1" class="form-control" />
             </div>
-            <button type="button" class="searchButton btn btn-primary">
+            <button type="button" class="searchButton btn btn-primary" onclick="search()">
               <i class="fas fa-search"></i>
             </button>
         </div>
