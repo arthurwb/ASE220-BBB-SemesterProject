@@ -148,7 +148,7 @@ function search() {
                             </div>
                             <div class="card-footer bg-transparent border-success">
                                 ${response.timestamp}
-                                <a class="btn btn-primary" style="float: right;" onclick="location.href ='post?id=${response.id}';">View Post</a>
+                                <a class="btn btn-primary" style="float: right; background-color: #fd9f57;" onclick="location.href ='post?id=${response.id}';">View Post</a>
                             </div>
                         </div>
                     </div>`;
