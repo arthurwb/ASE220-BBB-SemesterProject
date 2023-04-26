@@ -6,30 +6,25 @@ const documentID = 'Posts';
 const id = getAllUrlParams().id;
 
 //appends data to post page
-
-let userId;
-
-function getuserid(post) {
-    axios.get(`${api.endpoint}getitem/Users/${post.username}`,{}).then(function(response){
-        console.log(response.data);
-        userId = response.data;
-    }).catch(function(error){
-        console.log("axios error" + error);
-    });
-}
-
-api.GET(documentID, function(response) {
+api.GET(documentID, function(response) {  
     for (i = 0; i < response.data.length; i++) {
         if (id == response.data[i].id) {
             var post = response.data[i];
-            getuserid(post);
+
             $("#title").text(post.title);
-            $("#user").html(`
-            <button style="display: inline-block;" onclick="location.href='profile?id=${userId}';">
-                <img src="images/account.png" height="20px" width="20px" style="vertical-align: middle;">
-                <span style="display: inline-block; margin-left: 10px; vertical-align: middle;">${post.username}</span>
-            </button>
-            `)
+
+            axios.get(`${api.endpoint}getuserid/Users/${post.username}`,{}).then(function(response){
+                console.log(response.data);
+                $("#user").html(`
+                <button style="display: inline-block;" onclick="location.href='profile?id=${response.data[0]._id}';">
+                    <img src="images/account.png" height="20px" width="20px" style="vertical-align: middle;">
+                    <span style="display: inline-block; margin-left: 10px; vertical-align: middle;">${post.username}</span>
+                </button>
+                `)
+            }).catch(function(error){
+                console.log("axios error" + error);
+            });
+
             $("#posted").text(`Posted on ${post.timestamp}`);
             $("#song").text(`Song - ${post.song}`);
             $("#artist").text(`Artist - ${post.artist}`);
