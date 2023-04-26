@@ -69,6 +69,28 @@ router.get('/data/:param', async (req, res) => {
   res.end();
 });
 
+router.get('/data/getitem/:collection/:id', async (req, res) => {
+  console.log("<API ITEM GET>");
+  let id = req.params["id"].toString();
+  console.log(id);
+  db = await connect();
+  let dbo = db.db("TestDB");
+  let result = await dbo.collection(req.params["collection"]).find({_id:new ObjectId(id)}).toArray();
+  console.log(result);
+  res.json(result);
+  res.end();
+})
+
+router.get('/data/getuserid/:collection/:username', async (req, res) => {
+  console.log("<API ITEM USER ID>");
+  db = await connect();
+  let dbo = db.db("TestDB");
+  let result = await dbo.collection(req.params["collection"]).find({username: req.params.username}, {_id:1}).toArray();
+  console.log(result);
+  res.send(result);
+  res.end();
+})
+
 /* API POST ROUTES */
 
 router.post('/data/auth/signup', async (req,res)=>{

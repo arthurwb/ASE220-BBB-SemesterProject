@@ -1,3 +1,7 @@
-const username = getAllUrlParams().username;
+const id = getAllUrlParams().id;
+//console.log(id);
 
-console.log(username);
+api.GET_ITEM("Users", id, function(res) {
+    $("#username").text(res.username);
+    $("#bio").text(res.bio);
+})

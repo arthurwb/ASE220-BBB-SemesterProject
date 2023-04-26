@@ -15,6 +15,14 @@ const api={
 			console.log("axios error" + error);
 		});
 	},
+	GET_ITEM: function(collection, id, callback) {
+		axios.get(`${api.endpoint}getitem/${collection}/${id}`,{}).then(function(response){
+            console.log(response.data);
+			callback(response.data);
+		}).catch(function(error){
+			console.log("axios error" + error);
+		});
+	},
 	PUT:function(documentID, data, id, type){
 		if (type == "comment") {
 			console.log("PUT: comment");
