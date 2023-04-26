@@ -71,10 +71,11 @@ function validation(commentUsername, commentText) {
 }
 
 async function createComment() {
-    const commentUsername = document.cookie.split("=")[1] ?? "";
+    let commentUsername = $("#username").text();
     // const commentUsername = document.getElementById("username").value;
     const commentText = $("#comment-text").val();
     // const commentText = document.getElementById("comment-text").value;
+    console.log(commentUsername);
     const newComment = {
         commentUsername: commentUsername,
         commentText: commentText
@@ -83,10 +84,9 @@ async function createComment() {
     if (validation(commentUsername, commentText)) {
         api.PUT(documentID,newComment,id,"comment",function(putRes){
             console.log(putRes);
-            displaySuccessMessage();
-            // reloads the page so that you can see the new comment
-            document.location.reload();
         });
+        alert("Comment created");
+        document.location.reload();
     } else {
         alert("Username or comment text left empty");
     }
@@ -97,7 +97,9 @@ function showCreateCommentForm() {
     // Hide the original "Create New Comment" button
     $("#post-comment-button").addClass("d-none").removeClass("d-block");
     if (document.cookie.split("=")[1]) {
-        $("#username").text(document.cookie.split("=")[1]);
+        api.GET_USER(document.cookie.split("=")[1], function(response) {
+            $("#username").text(response.username);
+        });
     } else {
         $("#username").text("Not signed in");
     }
@@ -106,7 +108,7 @@ function showCreateCommentForm() {
     $("#comment-form").addClass("d-block").removeClass("d-none");
 }
 
-async function commentSubmitForm() {
+function commentSubmitForm() {
     createComment();
     console.log('Comment submitted!');
     $("#post-comment-button").addClass("d-block").removeClass("d-none");
