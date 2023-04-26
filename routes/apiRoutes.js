@@ -64,7 +64,16 @@ router.get('/data/:param', async (req, res) => {
   console.log("<API GET>");
   db=await connect();
   let dbo=db.db("TestDB");
-  let result=await dbo.collection(req.params["param"]).find({}).toArray();
+  let result = await dbo.collection(req.params["param"]).find({}).toArray();
+  res.send(result);
+  res.end();
+});
+
+router.get('/data/:collection/:id', async (req, res) => {
+  console.log("<API ITEM GET>");
+  db=await connect();
+  let dbo=db.db("TestDB");
+  let result = await dbo.collection(req.params["collection"]).find({ _id: ObjectId(id)}).toArray();
   res.send(result);
   res.end();
 });
