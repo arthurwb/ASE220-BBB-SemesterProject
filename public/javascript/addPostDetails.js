@@ -16,7 +16,7 @@ api.GET(documentID, function(response) {
             axios.get(`${api.endpoint}getuserid/Users/${post.username}`,{}).then(function(response){
                 console.log(response.data);
                 $("#user").html(`
-                <button style="display: inline-block;" onclick="location.href='profile?id=${response.data[0]._id}';">
+                <button style="display: inline-block;" onclick="location.href='profile?id=${response.data}';">
                     <img src="images/account.png" height="20px" width="20px" style="vertical-align: middle;">
                     <span style="display: inline-block; margin-left: 10px; vertical-align: middle;">${post.username}</span>
                 </button>
