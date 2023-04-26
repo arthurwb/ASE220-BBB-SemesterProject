@@ -55,6 +55,11 @@ function search() {
     let type = parseInt($("#inputGroupSelect01").val()) || null;
     const item = $("#form1").val() || null;
 
+    $("#backbutton").addClass("d-none");
+    $("#nextbutton").addClass("d-none");
+
+    $("#paginiationButtons").html(`<button type="button" id="backbutton" onclick="location.href = '/';" class="btn btn-sm btn-outline-secondary" style="margin: 20px;">Back</button>`);
+
     console.log(item)
 
     switch(type) {
@@ -65,7 +70,7 @@ function search() {
                     validateStatus:()=>true
             })
                 .then(function (response) {
-                    $('.col-10').empty();
+                    $('#postContainer').empty();
 
                     // loop through each post in the response and create an HTML element to display it
                     response.data.forEach(function(response) {
@@ -83,7 +88,7 @@ function search() {
                                 </div>
                             </div>
                         </div>`;
-                        $('.col-10').append(postHTML);
+                        $('#postContainer').append(postHTML);
                     });
                 })
                 .catch(function (error) {
@@ -97,7 +102,7 @@ function search() {
                     validateStatus:()=>true
             })
             .then(function (response) {
-                $('.col-10').empty();
+                $('#postContainer').empty();
 
                 // loop through each post in the response and create an HTML element to display it
                 response.data.forEach(function(response) {
@@ -115,7 +120,7 @@ function search() {
                             </div>
                         </div>
                     </div>`;
-                    $('.col-10').append(postHTML);
+                    $('#postContainer').append(postHTML);
                 });
             })
                 .catch(function (error) {
@@ -129,7 +134,7 @@ function search() {
                     validateStatus:()=>true
             })
             .then(function (response) {
-                $('.col-10').empty();
+                $('#postContainer').empty();
 
                 // loop through each post in the response and create an HTML element to display it
                 response.data.forEach(function(response) {
@@ -147,7 +152,7 @@ function search() {
                             </div>
                         </div>
                     </div>`;
-                    $('.col-10').append(postHTML);
+                    $('#postContainer').append(postHTML);
                 });
             })
                 .catch(function (error) {
@@ -273,7 +278,7 @@ api.GET(documentID, function(response) {
         </div>`;
 
         //adds new post to page
-        document.querySelector(".col-10").innerHTML += newPost;
+        document.querySelector("#postContainer").innerHTML += newPost;
         counter++;
         index++
     }
@@ -290,15 +295,15 @@ api.GET(documentID, function(response) {
 
     //adds the back button as long as the page is not the first page
     if (back_page > 0) {
-        elements.innerHTML += `<button type="button" onclick="location.href = '/?page=${back_page}';" class="btn btn-sm btn-outline-secondary" style="margin: 20px;">Previous</button>`
+        elements.innerHTML += `<button type="button" id="backbutton" onclick="location.href = '/?page=${back_page}';" class="btn btn-sm btn-outline-secondary" style="margin: 20px;">Previous</button>`
     }
     // again below is mainly just for the formating of the buttons so that they always exist in one place and dont shift
     else{
-        elements.innerHTML += `<button type="button" onclick="location.href = '/?page=${back_page}';" class="btn btn-sm btn-outline-secondary" style="margin: 20px; visibility:hidden;">Previous</button>`
+        elements.innerHTML += `<button type="button" id="backbutton" onclick="location.href = '/?page=${back_page}';" class="btn btn-sm btn-outline-secondary" style="margin: 20px; visibility:hidden;">Previous</button>`
     }
 
     //adds the next button to the page
     if (numOfPosts > (page * postPerPage) - postPerPage){
-        elements.innerHTML += `<button type="button" onclick="location.href = '/?page=${page}';" class="btn btn-sm btn-outline-secondary" style="margin: 20px;">Next</button>`
+        elements.innerHTML += `<button type="button" id="nextbutton" onclick="location.href = '/?page=${page}';" class="btn btn-sm btn-outline-secondary" style="margin: 20px;">Next</button>`
     }
 });
