@@ -42,12 +42,6 @@ header {
     height: 40px;
     border-radius: 0px 7px 7px 0px;
 }
-footer{
-    position: static;
-    background-color: lightgray;
-    width: 110%;
-
-}
 .container-fluid {
     padding-right: 0 !important;
   }
@@ -89,4 +83,17 @@ footer{
   top: 20px;
   right: 20px;
   z-index: 10000;
+}
+
+
+footer{
+  position: static;
+  background-color: lightgray;
+  width: 100%;
+  padding-top: 20px;
+}
+
+.footer-left{
+  border-right: 2px solid #ffffff;
+
 }
