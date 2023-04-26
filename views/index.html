@@ -19,22 +19,23 @@
     <script src="https://kit.fontawesome.com/7bf037d0fc.js" crossorigin="anonymous"></script>
 </head>
   <body>
-    <header>
-      <div class="row">
-        <div class="col-3 d-flex justify-content-center pt-2">
-          <img class="logo" src="images/logo_large.PNG" height="110px">      
-        </div>
-        <div class="col-7 d-flex justify-content-center align-items-center">
-          <div class="d-flex">
-            <div class="searchSelection input-group">
-              <select class="custom-select" id="inputGroupSelect01">
-                <option value="0" selected disabled hidden>Post Type</option>
-                <option id="songSelect" value="1">Songs</option>
-                <option id="albumSelect" value="2">Album</option>
-                <option id="artistSelect" value="3">Artist</option>
-              </select>
-            </div>
+    <div id="grid-container">
+      <header>
+        <div class="row">
+          <div class="col-3 d-flex justify-content-center pt-2">
+            <img class="logo" src="images/logo_large.PNG" height="110px">      
           </div>
+          <div class="col-7 d-flex justify-content-center align-items-center">
+            <div class="d-flex">
+              <div class="searchSelection input-group">
+                <select class="custom-select" id="inputGroupSelect01">
+                  <option value="0" selected disabled hidden>Post Type</option>
+                  <option id="songSelect" value="1">Songs</option>
+                  <option id="albumSelect" value="2">Album</option>
+                  <option id="artistSelect" value="3">Artist</option>
+                </select>
+              </div>
+            </div>
             <div class="searchInput form-outline">
               <input type="search" placeholder="Search" id="form1" class="form-control" />
             </div>
@@ -65,7 +66,9 @@
         </div>
       </div>
     </header>
-    <div class="row">
+    <main>
+
+      <div class="row">
       <div class="col-10 offset-1">
         
         <div id="postForm" class="d-none">
@@ -102,12 +105,12 @@
           </form>
         </div>
       </div>
-    </div>
-    <div class="col-7 offset-3 d-flex justify-content-center align-items-center">
+      </div>
+      <div class="col-7 offset-3 d-flex justify-content-center align-items-center">
       <div id="paginiationButtons">
       </div>
-    </div>
-
+      </div>
+    </main>
 
     <footer class="bg-dark bg-gradient text-light">
         <div class="row">
@@ -136,5 +139,23 @@
         menuContainer.classList.toggle('open');
 });
     </script>
-  </body>  
+    <script>
+      function footerAlign() {
+      $('footer').css('height', 'auto');
+      var footerHeight = $('footer').outerHeight();
+      $('body').css('padding-bottom', footerHeight);
+      $('footer').css('height', footerHeight);
+    }
+
+
+    $(document).ready(function(){
+      footerAlign();
+    });
+
+    $( window ).resize(function() {
+      footerAlign();
+    });
+    </script>
+  </body> 
+</div> 
 </html>
