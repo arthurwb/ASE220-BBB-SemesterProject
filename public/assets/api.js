@@ -16,6 +16,7 @@ const api={
 	},
 	GET_ITEM: function(collection, id, callback) {
 		axios.get(`${api.endpoint}getitem/${collection}/${id}`,{}).then(function(response){
+			console.log(response.data);
 			callback(response.data);
 		}).catch(function(error){
 			console.log("axios error" + error);

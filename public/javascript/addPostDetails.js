@@ -8,14 +8,14 @@ const id = getAllUrlParams().id;
 //appends data to post page
 api.GET(documentID, function(response) {  
     for (i = 0; i < response.data.length; i++) {
-        if (id == response.data[i].id) {
+        if (id == response.data[i].id && id != 0) {
             var post = response.data[i];
 
             $("#title").text(post.title);
 
             axios.get(`${api.endpoint}getuserid/Users/${post.username}`,{}).then(function(response){
                 $("#user").html(`
-                <button style="display: inline-block;" onclick="location.href='profile?id=${response.data}';">
+                <button style="display: inline-block;" onclick="location.href='profile?id=${response.data[0]._id}';">
                     <img src="images/account.png" height="20px" width="20px" style="vertical-align: middle;">
                     <span style="display: inline-block; margin-left: 10px; vertical-align: middle;">${post.username}</span>
                 </button>
@@ -38,12 +38,16 @@ api.GET(documentID, function(response) {
                 </div>
                 `);
             });
-            if (document.cookie.split("=")[1] == post.username) {
-                console.log("display delete button");
-                console.log(document.cookie.split("=")[1]);
-                console.log(post.username);
-                $("#deleteHolder").html(`<button id="post-delete-button" type="button" class="btn btn-error d-block" onclick="deletePost()">Delete Post</button>`);
-            }
+            api.GET_USER(document.cookie.split("=")[1], function(response) {
+                if (response.username == post.username) {
+                    console.log("display delete button");
+                    console.log(document.cookie.split("=")[1]);
+                    console.log(post.username);
+                    $("#deleteHolder").html(`<button id="post-delete-button" type="button" class="btn btn-error d-block" onclick="deletePost()">Delete Post</button>`);
+                } else {
+                    console.log("error");
+                }
+            });
         }
     }
 });
@@ -79,7 +83,7 @@ function validation(commentUsername, commentText) {
 }
 
 async function createComment() {
-    const commentUsername = document.cookie.split("=")[1] ?? "";
+    let commentUsername = $("#username").text();
     // const commentUsername = document.getElementById("username").value;
     const commentText = $("#comment-text").val();
     // const commentText = document.getElementById("comment-text").value;
@@ -105,7 +109,9 @@ function showCreateCommentForm() {
     // Hide the original "Create New Comment" button
     $("#post-comment-button").addClass("d-none").removeClass("d-block");
     if (document.cookie.split("=")[1]) {
-        $("#username").text(document.cookie.split("=")[1]);
+        api.GET_USER(document.cookie.split("=")[1], function(response) {
+            $("#username").text(response.username);
+        });
     } else {
         $("#username").text("Not signed in");
     }

@@ -257,28 +257,40 @@ if (validPage == true) {
 }
 
 //appends cards to index page
-api.GET(documentID, function(response) {  
+api.GET(documentID, async function(response) {  
     numOfPosts = response.data.length;
     var counter = 0;
     while (counter < postPerPage && response.data[index] + 1) {
-        //template for creating a new post
-        var newPost = `
-        <div class="row">
-            <div class="card col-12 border-dark mb-3" style="margin-top: 2em; margin-bottom: 2em;">
-                <div class="card-header bg-transparent border-dark">${response.data[index].username}</div>
-                <div class="card-body text-dark">
-                    <h5 class="card-title">${response.data[index].title}</h5>
-                    <p class="card-text">${response.data[index].rating} out of 10</p>
-                </div>
-                <div class="card-footer bg-transparent border-dark">
-                    ${response.data[index].timestamp}
-                    <a class="btn btn-primary" style="float: right;" onclick="location.href ='post?id=${response.data[index].id}';">View Post</a>
-                </div>
-            </div>
-        </div>`;
 
-        //adds new post to page
-        document.querySelector("#postContainer").innerHTML += newPost;
+        //axios request to set id
+        await axios.get(`${api.endpoint}getuserid/Users/${response.data[index].username}`,{}).then(function(res){
+            //template for creating a new post
+            let userData;
+            console.log(typeof res.data[0]._id)
+            if (typeof res.data[0]._id === "undefined") { 
+                userData = 0 
+            } else { 
+                userData = res.data[0]._id 
+            }
+            var newPost = `
+            <div class="row">
+                <div class="card col-12 border-dark mb-3" style="margin-top: 2em; margin-bottom: 2em;">
+                <button class="card-header bg-transparent border-dark" onclick="location.href = 'profile?id=${userData}'">${response.data[index].username}</button>
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">${response.data[index].title}</h5>
+                        <p class="card-text">${response.data[index].rating} out of 10</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-dark">
+                        ${response.data[index].timestamp}
+                        <a class="btn btn-primary" style="float: right;" onclick="location.href ='post?id=${response.data[index].id}';">View Post</a>
+                    </div>
+                </div>
+            </div>`;
+            //adds new post to page
+            document.querySelector("#postContainer").innerHTML += newPost;
+        }).catch(function(error){
+            console.log("axios error" + error);
+        });
         counter++;
         index++
     }

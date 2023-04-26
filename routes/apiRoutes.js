@@ -75,7 +75,22 @@ router.get('/data/getitem/:collection/:id', async (req, res) => {
   console.log(id);
   db = await connect();
   let dbo = db.db("TestDB");
-  let result = await dbo.collection(req.params["collection"]).find({_id:new ObjectId(id)}).toArray();
+  let result;
+  try {
+    result = await dbo.collection(req.params["collection"]).find({_id:new ObjectId(id)}).toArray();
+  } catch (error) {
+    result = [
+      {
+        _id: '0',
+        username: 'null',
+        password: '',
+        email: 'null',
+        firstName: 'null',
+        bio: 'null',
+        jwt: ''
+      }
+    ]
+  }
   console.log(result);
   res.json(result);
   res.end();
@@ -86,7 +101,10 @@ router.get('/data/getuserid/:collection/:username', async (req, res) => {
   db = await connect();
   let dbo = db.db("TestDB");
   let result = await dbo.collection(req.params["collection"]).find({username: req.params.username},).toArray();
-  result = result[0]._id
+  if (result.length == 0) {
+    result = [ -1 ];
+  }
+  console.log(result);
   res.send(result);
   res.end();
 })
