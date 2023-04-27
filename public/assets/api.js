@@ -22,6 +22,13 @@ const api={
 			console.log("axios error" + error);
 		});
 	},
+	GET_USER_ID: function(collection, username, callback) {
+        axios.get(`${api.endpoint}getuserid/${collection}/${username}`,{}).then(function(response){
+            callback(response.data);
+        }).catch(function(error){
+            console.log("axios error" + error);
+        });
+    },
 	PUT:function(documentID, data, id, type){
 		if (type == "comment") {
 			console.log("PUT: comment");
