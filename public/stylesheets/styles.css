@@ -112,7 +112,12 @@ footer{
   width: 100%;
   padding-top: 20px;
 }
-
+footer a {
+    color: #fd9f57;
+    text-decoration: none;
+    font-size: 17px;
+    padding: 5px;
+  }
 .footer-left{
   border-right: 1px solid #ffffff;
 
