@@ -56,11 +56,6 @@ function search() {
     const item = $("#form1").val() || null;
     let url;
 
-    $("#backbutton").addClass("d-none");
-    $("#nextbutton").addClass("d-none");
-
-    $("#paginiationButtons").html(`<button type="button" id="backbutton" onclick="location.href = '/';" class="btn btn-sm btn-outline-secondary" style="margin: 20px;">Back</button>`);
-
     if (type == 1) {
         url = '/api/data/search?song='
     }
@@ -71,7 +66,12 @@ function search() {
         url = '/api/data/search?artist='
     }
 
-    if (type != null && item != null) {
+    if (type != null && item != null && item != "null") {
+
+        $("#backbutton").addClass("d-none");
+        $("#nextbutton").addClass("d-none");
+        $("#paginiationButtons").html(`<button type="button" id="backbutton" onclick="location.href = '/';" class="btn btn-sm btn-outline-secondary" style="margin: 20px;">Back</button>`);
+        
         var index = 0;
         axios ({
             method: 'get',
