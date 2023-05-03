@@ -3,6 +3,8 @@ body{
     overflow-x: hidden;
     padding-right: 0;
     margin-right: 0;
+    margin: 0;
+
 }
 p {
     font-family: 'Courier New', Courier, monospace;
@@ -30,10 +32,12 @@ main{
   background-color: #ff8222;
   border-color: #ff8222;
 }
+
 #paginiationButtons button{
   background-color: #fd9f57;
   border-color: #fd9f57;
   color: #fff;
+  width: 7em;
 }
 #paginiationButtons button:hover{
   background-color: #ff8222;
@@ -50,8 +54,6 @@ main{
     border-radius: 1px;
     height: 40px;
     z-index: 10;
-    
-
 }
 .searchInput input:focus{
     background-color: lightgrey;
@@ -71,46 +73,235 @@ main{
 #menu-container {
   position: fixed;
   top: 0;
-  right: -275px;
-  width: 275px;
-  height: 100%;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease-in-out;
   z-index: 9999;
-  opacity: .5;
 }
-#menu-container ul h1{
-    transition: 3s;
-        opacity: 1;
-}
+.menu {
+    font-size:1em;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+  }
 
-#menu-container.open {
-  right: 0;
-  opacity: 1;
-}
+  .menu-div-header{
+   padding-left: 10%;
+   height: 8em;
+   text-align: center;
+   margin-top: 2em;
+   border-bottom: solid gray 2px;
 
-#menu-container ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
+  }
+  .menu-div-header h1{
+    margin-left: -1.5em;
+  }
 
-#menu-container li {
-  padding: 10px;
-}
+  .profileIMG{
+    margin: auto;
+    display: block;
+    margin-left: 5em;
+  }
 
-#menu-button {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 10000;
-}
+  .menu div {
+    color: #fd9f57;
+
+  }
+  .menu div:hover a {
+    color: #FFFFFF;
+    transition: 0.4s;
+
+  }
+  .menu a {
+    color: #fd9f57;
+    text-decoration: none;
+  }
+  
+  .menu div:last-child {
+    border: 0;
+  }
+  .menuDivider{
+    margin-top: 0em;
+    margin-bottom: 0em;
+  }
+
+  .menu--off {
+    position: absolute;
+    right: -270%;
+    width: 175%;
+    display: block;
+    background: #eee;
+    min-height: 600px;
+    height: 125%;
+    margin-top: 1em;
+    transition: all 300ms;
+  }
+  
+  .menu--on {
+    right: -5em;
+    box-shadow: 8px 8px 20px 0 rgba(0, 0, 0, 0.2);
+    transition: all 300ms;
+
+  }
+  .material-design-hamburger{
+    margin-left: 5em;
+    margin-top: 1em;
+  }
+  .material-design-hamburger button {
+    display: block;
+    border: none;
+    background: none;
+    outline: 0;
+
+
+  }
+  
+  .material-design-hamburger__icon {
+    padding: 3rem 1rem;
+    cursor: pointer;
+
+  
+  }
+
+  
+  .material-design-hamburger__layer {
+    display: block;
+    width: 70px;
+    height: 5px;
+    border-radius: 5em;
+    background: #fd9f57;
+    position: relative;
+    animation-duration: 300ms;
+    animation-timing-function: ease-in-out;
+
+  }
+  
+  .material-design-hamburger__layer:before, .material-design-hamburger__layer:after {
+    display: block;
+    width: inherit;
+    height: inherit;
+    position: absolute;
+    background: inherit;
+    border-radius: inherit;
+    left: 0;
+    content: '';
+    animation-duration: 300ms;
+    animation-timing-function: ease-in-out;
+
+  }
+  
+  .material-design-hamburger__layer:before {
+    bottom: 300%;
+  }
+  
+  .material-design-hamburger__layer:after {
+    top: 300%;
+  }
+  
+  .material-design-hamburger__icon--to-arrow {
+    animation-name: material-design-hamburger__icon--slide;
+    animation-fill-mode: forwards;
+  }
+  
+  .material-design-hamburger__icon--to-arrow:before {
+    animation-name: material-design-hamburger__icon--slide-before;
+    animation-fill-mode: forwards;
+  }
+  
+  .material-design-hamburger__icon--to-arrow:after {
+    animation-name: material-design-hamburger__icon--slide-after;
+    animation-fill-mode: forwards;
+  }
+  
+  .material-design-hamburger__icon--from-arrow {
+    animation-name: material-design-hamburger__icon--slide-from;
+  }
+  
+  .material-design-hamburger__icon--from-arrow:before {
+    animation-name: material-design-hamburger__icon--slide-before-from;
+  }
+  
+  .material-design-hamburger__icon--from-arrow:after {
+    animation-name: material-design-hamburger__icon--slide-after-from;
+  }
+  
+  @keyframes material-design-hamburger__icon--slide {
+    0% {
+    }
+    100% {
+      transform: rotate(180deg);
+    }
+  }
+  
+  @keyframes material-design-hamburger__icon--slide-before {
+    0% {
+    }
+    100% {
+      transform: rotate(45deg);
+      margin: 3% 37%;
+      width: 75%;
+    }
+  }
+  
+  @keyframes material-design-hamburger__icon--slide-after {
+    0% {
+    }
+    100% {
+      transform: rotate(-45deg);
+      margin: 3% 37%;
+      width: 75%;
+    }
+  }
+  
+  @keyframes material-design-hamburger__icon--slide-from {
+    0% {
+      transform: rotate(-180deg);
+    }
+    100% {
+    }
+  }
+  
+  @keyframes material-design-hamburger__icon--slide-before-from {
+    0% {
+      transform: rotate(45deg);
+      margin: 3% 37%;
+      width: 75%;
+    }
+    100% {
+    }
+  }
+  
+  @keyframes material-design-hamburger__icon--slide-after-from {
+    0% {
+      transform: rotate(-45deg);
+      margin: 3% 37%;
+      width: 75%;
+    }
+    100% {
+    }
+  }
+  
+   .custom-btn{
+    text-align: left;
+    padding: 1em;
+    background: #EEEEEE;
+    transition: all 0.3s ease;
+    background: linear-gradient(to right, #EEEEEE 50%, #fd9f57 50%) left;
+    background-size: 200% 100%;
+    text-decoration: none;
+    transition: .3s ease-out;
+    color: #000;
+  } 
+
+  .custom-btn:hover{
+    background-position: right;
+    color: #FFFFFF;
+
+  }
 
 footer{
   position: static;
   width: 100%;
   padding-top: 20px;
+}
+.footer-whole{
+  padding-bottom: 1.5em;
 }
 footer a {
     color: #fd9f57;
@@ -120,5 +311,32 @@ footer a {
   }
 .footer-left{
   border-right: 1px solid #ffffff;
+  text-align: center;
 
+}
+.footer-left h1{
+  text-align: center;
+  font-size: 100%;
+  margin-bottom: 1.5em;
+
+}
+.footer-left a{
+  font-size: 100%;
+
+}
+.footer-right{
+  text-align: center;
+  width: 40%;
+}
+.footer-right h1{
+  margin-bottom: 1.3em;
+  font-size: 100%;
+}
+.footer-right a{
+  padding: 20px;
+  margin-bottom: 1em;
+}
+.footer-left a:hover{
+  color:#ffc395;
+  transition: 0.3s;
 }
