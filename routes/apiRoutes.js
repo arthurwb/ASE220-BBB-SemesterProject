@@ -178,21 +178,31 @@ router.post('/data/collection/:param', async (req, res) => {
 });
 
 /* API PUT ROUTES */
-router.put('/data/:param/:id/:type', async (req, res) => {
+router.put('/data/:collection/:id/:type', async (req, res) => {
   console.log("<API POST/COMMENT PUT>");
   db=await connect();
   let dbo=db.db("TestDB");
 
-  if (req.params["type"] == "comment") {
-    result = await dbo.collection(req.params["param"]).updateOne(
-      { id: parseInt(req.params["id"]) },
-      { $push: { comments: req.body } }
-    );
-  } else if (req.params["type"] == "post") {
-    result = await dbo.collection(req.params["param"]).insertOne(req.body);
-  } else {
-    console.log("incorrect type entered");
-  } 
+  switch (req.params["type"]) {
+    case "comment":
+      result = await dbo.collection(req.params["collection"]).updateOne(
+        { id: parseInt(req.params["id"]) },
+        { $push: { comments: req.body } }
+      );
+      break;
+    case "post":
+      result = await dbo.collection(req.params["collection"]).insertOne(req.body);
+      break;
+    case "postEdit":
+      result = await dbo.collection(req.params["collection"]).updateOne(
+        { id: parseInt(req.params["id"]) },
+        { $set: { review: req.body } }
+      )
+      break;
+    default:
+      console.log("incorrect type entered");
+      break;
+  }
 res.send(result);
 });
 
