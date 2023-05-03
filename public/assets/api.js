@@ -30,30 +30,67 @@ const api={
         });
     },
 	PUT:function(documentID, data, id, type){
-		if (type == "comment") {
-			console.log("PUT: comment");
-			axios.put(`${api.endpoint}${documentID}/${id}/${type}`,data).then(function(response){
-				console.log(response);
-			}).catch(function(error){
-				console.log("axios: comment put error: "+error);
-			});
-		} else if (type == "post") {
-			console.log("PUT: post" + JSON.stringify(data));
-			axios.put(`${api.endpoint}${documentID}/${id}/${type}`,data).then(function(response){
-				console.log(response);
-			}).catch(function(error){
-				console.log("axios: post put error: "+error);
-			});
-		} else if (type == "user") {
-			console.log("PUT: user");
-			axios.put(`${api.endpoint}${documentID}/${id}/${type}`,data).then(function(response){
-				console.log(response);
-			}).catch(function(error) {
-				console.log("axios: user put error: "+error);
-			});
-		} else {
-			console.log("put type error");
+		switch (type) {
+			case "comment":
+				console.log("PUT: comment");
+				axios.put(`${api.endpoint}${documentID}/${id}/${type}`,data).then(function(response){
+					console.log(response);
+				}).catch(function(error){
+					console.log("axios: comment put comment error: "+error);
+				});
+				break;
+			case "post":
+				console.log("PUT: post" + JSON.stringify(data));
+				axios.put(`${api.endpoint}${documentID}/${id}/${type}`,data).then(function(response){
+					console.log(response);
+				}).catch(function(error){
+					console.log("axios: post put post error: "+error);
+				});
+				break;
+			case "user":
+				console.log("PUT: user");
+				axios.put(`${api.endpoint}${documentID}/${id}/${type}`,data).then(function(response){
+					console.log(response);
+				}).catch(function(error) {
+					console.log("axios: user put user error: "+error);
+				});
+				break;
+			case "editPost":
+				console.log("PUT: post edit");
+				console.log(data)
+				axios.put(`${api.endpoint}${documentID}/${id}/${type}`,data).then(function(response){
+					console.log(response);
+				}).catch(function(error) {
+					console.log("axios: user put post edit error: "+error);
+				});
+				break;
+			default:
+				console.log("PUT type error");
 		}
+		// if (type == "comment") {
+		// 	console.log("PUT: comment");
+		// 	axios.put(`${api.endpoint}${documentID}/${id}/${type}`,data).then(function(response){
+		// 		console.log(response);
+		// 	}).catch(function(error){
+		// 		console.log("axios: comment put error: "+error);
+		// 	});
+		// } else if (type == "post") {
+		// 	console.log("PUT: post" + JSON.stringify(data));
+		// 	axios.put(`${api.endpoint}${documentID}/${id}/${type}`,data).then(function(response){
+		// 		console.log(response);
+		// 	}).catch(function(error){
+		// 		console.log("axios: post put error: "+error);
+		// 	});
+		// } else if (type == "user") {
+		// 	console.log("PUT: user");
+		// 	axios.put(`${api.endpoint}${documentID}/${id}/${type}`,data).then(function(response){
+		// 		console.log(response);
+		// 	}).catch(function(error) {
+		// 		console.log("axios: user put error: "+error);
+		// 	});
+		// } else {
+		// 	console.log("put type error");
+		// }
 	},
 	DELETE: function(documentID, data, callback) {
 		axios.delete(`${api.endpoint}${documentID}`, { data: data }).then(function(response) {
