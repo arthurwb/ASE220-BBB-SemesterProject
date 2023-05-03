@@ -40,11 +40,16 @@ main{
   align-items: center;
   justify-content: space-between;
   margin-top: 12px;
-  padding: 5px;
+  margin-left: 16px;
+  padding: 5px 0px 5px 0px;
   border: none;
   cursor: pointer;
   background-color: transparent;
   width:fit-content;
+}
+
+.card-button img {
+  margin-right: 10px;
 }
 
 #paginiationButtons button{
@@ -79,6 +84,22 @@ main{
 .searchButton{
     height: 40px;
     border-radius: 0px 7px 7px 0px;
+}
+
+.user-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding: 5px 0px 5px 0px;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  width:fit-content;
+}
+
+.user-button img {
+  margin-right: 10px;
 }
 
 .container-fluid {

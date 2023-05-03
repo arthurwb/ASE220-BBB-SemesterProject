@@ -54,53 +54,29 @@ function displaySuccessMessage() {
 function search() {
     let type = parseInt($("#inputGroupSelect01").val()) || null;
     const item = $("#form1").val() || null;
+    let url;
 
     $("#backbutton").addClass("d-none");
     $("#nextbutton").addClass("d-none");
 
     $("#paginiationButtons").html(`<button type="button" id="backbutton" onclick="location.href = '/';" class="btn btn-sm btn-outline-secondary" style="margin: 20px;">Back</button>`);
 
-    console.log(item)
+    if (type == 1) {
+        url = '/api/data/search?song='
+    }
+    if (type == 2) {
+        url = '/api/data/search?album='
+    }
+    if (type == 3) {
+        url = '/api/data/search?artist='
+    }
 
-    switch(type) {
-        case 1:
-            axios({
-                method: 'get',
-                url: '/api/data/search?song='+item,
-                    validateStatus:()=>true
-            })
-                .then(function (response) {
-                    $('#postContainer').empty();
-
-                    // loop through each post in the response and create an HTML element to display it
-                    response.data.forEach(function(response) {
-                        const postHTML = `
-                        <div class="row">
-                            <div class="card col-12 border-success mb-3" style="margin-top: 2em; margin-bottom: 2em;">
-                                <div class="card-header bg-transparent border-success">${response.username}</div>
-                                <div class="card-body text-success">
-                                    <h5 class="card-title">${response.title}</h5>
-                                    <p class="card-text">${response.rating} out of 10</p>
-                                </div>
-                                <div class="card-footer bg-transparent border-success">
-                                    ${response.timestamp}
-                                    <a class="btn btn-primary" style="float: right;" onclick="location.href ='post?id=${response.id}';">View Post</a>
-                                </div>
-                            </div>
-                        </div>`;
-                        $('#postContainer').append(postHTML);
-                    });
-                })
-                .catch(function (error) {
-                console.log(error);
-            });
-            break;
-        case 2:
-            axios({
-                method: 'get',
-                url: '/api/data/search?album='+item,
-                    validateStatus:()=>true
-            })
+    if (type != null && item != null) {
+        axios({
+            method: 'get',
+            url: url+item,
+                validateStatus:()=>true
+        })
             .then(function (response) {
                 $('#postContainer').empty();
 
@@ -123,42 +99,9 @@ function search() {
                     $('#postContainer').append(postHTML);
                 });
             })
-                .catch(function (error) {
-                console.log(error);
-            });
-            break;
-        case 3:
-            axios({
-                method: 'get',
-                url: '/api/data/search?artist='+item,
-                    validateStatus:()=>true
-            })
-            .then(function (response) {
-                $('#postContainer').empty();
-
-                // loop through each post in the response and create an HTML element to display it
-                response.data.forEach(function(response) {
-                    const postHTML = `
-                    <div class="row">
-                        <div class="card col-12 border-success mb-3" style="margin-top: 2em; margin-bottom: 2em;">
-                            <div class="card-header bg-transparent border-success">${response.username}</div>
-                            <div class="card-body text-success">
-                                <h5 class="card-title">${response.title}</h5>
-                                <p class="card-text">${response.rating} out of 10</p>
-                            </div>
-                            <div class="card-footer bg-transparent border-success">
-                                ${response.timestamp}
-                                <a class="btn btn-primary" style="float: right; background-color: #fd9f57;" onclick="location.href ='post?id=${response.id}';">View Post</a>
-                            </div>
-                        </div>
-                    </div>`;
-                    $('#postContainer').append(postHTML);
-                });
-            })
-                .catch(function (error) {
-                console.log(error);
-            });
-            break;
+            .catch(function (error) {
+            console.log(error);
+        });
     }
 }
 
