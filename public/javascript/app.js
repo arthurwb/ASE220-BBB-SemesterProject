@@ -274,9 +274,9 @@ api.GET(documentID, async function(response) {
             }
             var newPost = `
             <div class="row">
-                <div class="card col-12 border-dark mb-3" style="margin-top: 2em; margin-bottom: 2em;">
+                <div class="card col-12 border-dark mb-3" style="margin-top: 2em; margin-bottom: 2em; margin-right: 0; background: #dddddd; right: 0;">
                 <button class="card-header bg-transparent border-dark" onclick="location.href = 'profile?id=${userData}'">${response.data[index].username}</button>
-                    <div class="card-body text-dark">
+                    <div class="card-body text-dark" ">
                         <h5 class="card-title">${response.data[index].title}</h5>
                         <p class="card-text">${response.data[index].rating} out of 10</p>
                     </div>
