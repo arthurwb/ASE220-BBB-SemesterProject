@@ -72,32 +72,51 @@ function search() {
     }
 
     if (type != null && item != null) {
-        axios({
+        var index = 0;
+        axios ({
             method: 'get',
             url: url+item,
                 validateStatus:()=>true
         })
-            .then(function (response) {
-                $('#postContainer').empty();
+        .then(async function (response) {
+            $('#postContainer').empty();
 
-                // loop through each post in the response and create an HTML element to display it
-                response.data.forEach(function(response) {
-                    const postHTML = `
+            while (response.data[index] + 1) {
+
+                //axios request to set id
+                await axios.get(`${api.endpoint}getuserid/Users/${response.data[index].username}`,{}).then(function(res){
+                    //template for creating a new post
+                    let userData;
+                    console.log(typeof res.data[0]._id)
+                    if (typeof res.data[0]._id === "undefined") { 
+                        userData = 0 
+                    } else { 
+                        userData = res.data[0]._id 
+                    }
+                    var newPost = `
                     <div class="row">
-                        <div class="card col-12 border-success mb-3" style="margin-top: 2em; margin-bottom: 2em;">
-                            <div class="card-header bg-transparent border-success">${response.username}</div>
-                            <div class="card-body text-success">
-                                <h5 class="card-title">${response.title}</h5>
-                                <p class="card-text">${response.rating} out of 10</p>
+                        <div class="card col-12 border-dark mb-3" style="margin-top: 2em; margin-bottom: 2em; margin-right: 0; background: #dddddd; right: 0;">
+                            <button class="card-button" onclick="location.href='profile?id=${userData}'">
+                                <img src="images/account.png" height="20px" width="20px" style="vertical-align: middle;">
+                                <div>${response.data[index].username}</div>
+                            </button>
+                            <div class="card-body text-dark" ">
+                                <h5 class="card-title">${response.data[index].title}</h5>
+                                <p class="card-text">${response.data[index].rating} out of 10</p>
                             </div>
-                            <div class="card-footer bg-transparent border-success">
-                                ${response.timestamp}
-                                <a class="btn btn-primary" style="float: right;" onclick="location.href ='post?id=${response.id}';">View Post</a>
+                            <div class="card-footer bg-transparent border-dark">
+                                ${response.data[index].timestamp}
+                                <a class="btn btn-primary" style="float: right;" onclick="location.href ='post?id=${response.data[index].id}';">View Post</a>
                             </div>
                         </div>
                     </div>`;
-                    $('#postContainer').append(postHTML);
+                    //adds new post to page
+                    document.querySelector("#postContainer").innerHTML += newPost;
+                }).catch(function(error){
+                    console.log("axios error" + error);
                 });
+                index++
+            }
             })
             .catch(function (error) {
             console.log(error);
