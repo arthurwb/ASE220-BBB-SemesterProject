@@ -4,13 +4,13 @@ body{
     padding-right: 0;
     margin-right: 0;
     margin: 0;
+    width: 100%;
 
 }
 p {
     font-family: 'Courier New', Courier, monospace;
 }
 header{
-    box-shadow: 0px 15px 10px -15px #111;    
     width: 100%;
     background-color: #ffffff;
 }
@@ -20,9 +20,15 @@ header ul{
 body,
 header {
   margin-right: 0;
+  
+}
+header .row{
+  box-shadow: 0px 15px 10px -15px red;    
+
 }
 main{
-  background-color: #495769;
+  /* background-color: #495769; */
+  background-color: #373b3f;
 }
 .btn-primary{
   background-color: #fd9f57;
