@@ -193,17 +193,18 @@ router.put('/data/:collection/:id/:type', async (req, res) => {
     case "post":
       result = await dbo.collection(req.params["collection"]).insertOne(req.body);
       break;
-    case "postEdit":
+    case "editPost":
+      console.log(req.body);
       result = await dbo.collection(req.params["collection"]).updateOne(
         { id: parseInt(req.params["id"]) },
-        { $set: { review: req.body } }
+        { $set: { review: req.body.review } }
       )
       break;
     default:
       console.log("incorrect type entered");
       break;
   }
-res.send(result);
+  res.send(result);
 });
 
 /* API DELETE ROUTES */
