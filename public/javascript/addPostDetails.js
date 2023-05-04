@@ -15,9 +15,9 @@ api.GET(documentID, function(response) {
 
             axios.get(`${api.endpoint}getuserid/Users/${post.username}`,{}).then(function(response){
                 $("#user").html(`
-                <button class="user-button" onclick="location.href='profile?id=${response.data[0]._id}'">
-                        <img src="images/account.png" height="20px" width="20px" style="vertical-align: middle;">
-                        <div>${post.username}</div>
+                <button style="display: inline-block;" onclick="location.href='profile?id=${response.data[0]._id}';">
+                    <img src="images/account.png" height="20px" width="20px" style="vertical-align: middle;">
+                    <span style="display: inline-block; margin-left: 10px; vertical-align: middle;">${post.username}</span>
                 </button>
                 `)
             }).catch(function(error){
@@ -39,12 +39,11 @@ api.GET(documentID, function(response) {
                 `);
             });
             api.GET_USER(document.cookie.split("=")[1], function(response) {
-                if (response.username == post.username || response.admin == true) {
+                if (response.username == post.username) {
                     console.log("display delete button");
                     console.log(document.cookie.split("=")[1]);
                     console.log(post.username);
                     $("#deleteHolder").html(`<button id="post-delete-button" type="button" class="btn btn-error d-block" onclick="deletePost()">Delete Post</button>`);
-                    $("#editHolder").html(`<button id="post-edit-button" type="button" class="btn btn-warning d-block" onclick="showEditPostForm()">Edit Post</button>`)
                 } else {
                     console.log("error");
                 }
@@ -62,16 +61,6 @@ function deletePost() {
         alert("Post Deleted");
         document.location.href = "/";
     });
-}
-
-function editPost() {
-    const data = $("#newReview").val();
-    console.log("editPost: " + data);
-    api.PUT(documentID, { review: data }, id, "editPost", function(putRes) {
-        console.log(putRes);
-    });
-    alert("Post Updated");
-    document.location.reload();
 }
 
 function displaySuccessMessage() {
@@ -113,16 +102,6 @@ async function createComment() {
     } else {
         alert("Username or comment text left empty");
     }
-}
-
-function showEditPostForm() {
-    const prefix = "Review - ";
-    const prefixIndex = $("#review").text().indexOf(prefix);
-    const reviewText = $("#review").text().slice(prefixIndex + prefix.length);
-    $("#editHolder").html(`
-        <input type="text" class="form-control" id="newReview" value="${reviewText}"></input>
-        <button id="editPostButton" type="button" onclick="editPost()">Submit</button>
-    `)
 }
 
 // most of this code has been taken from app.js and slightly altered
