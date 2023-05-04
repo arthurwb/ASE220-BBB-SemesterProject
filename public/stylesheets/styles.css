@@ -53,7 +53,7 @@ main{
 }
 
 .card-button img {
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 #paginiationButtons button{
@@ -103,7 +103,7 @@ main{
 }
 
 .user-button img {
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 .container-fluid {
@@ -379,4 +379,28 @@ footer a {
 .footer-left a:hover{
   color:#ffc395;
   transition: 0.3s;
+}
+
+
+/*profile.html CSS*/
+
+.profileHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding: 5px 0px 5px 0px;
+  width:fit-content;
+}
+
+.profileHeader img {
+  margin-right: 5px;
+}
+
+.profile-img-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width:fit-content;
+  align-items: center;
 }

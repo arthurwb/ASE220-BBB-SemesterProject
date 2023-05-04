@@ -97,7 +97,7 @@ function search() {
                     <div class="row">
                         <div class="card col-12 border-dark mb-3" style="margin-top: 2em; margin-bottom: 2em; margin-right: 0; background: #dddddd; right: 0;">
                             <button class="card-button" onclick="location.href='profile?id=${userData}'">
-                                <img src="images/account.png" height="20px" width="20px" style="vertical-align: middle;">
+                                <img src="images/${res.data[0].profileImg}" height="45px" width="45px" style="vertical-align: middle;">
                                 <div>${response.data[index].username}</div>
                             </button>
                             <div class="card-body text-dark" ">
@@ -238,7 +238,7 @@ api.GET(documentID, async function(response) {
             <div class="row">
                 <div class="card col-12 border-dark mb-3" style="margin-top: 2em; margin-bottom: 2em; margin-right: 0; background: #dddddd; right: 0;">
                     <button class="card-button" onclick="location.href='profile?id=${userData}'">
-                        <img src="images/account.png" height="20px" width="20px" style="vertical-align: middle;">
+                        <img src="images/${res.data[0].profileImg}" height="45px" width="45px" style="vertical-align: middle;">
                         <div>${response.data[index].username}</div>
                     </button>
                     <div class="card-body text-dark" ">

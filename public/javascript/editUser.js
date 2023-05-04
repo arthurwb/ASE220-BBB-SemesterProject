@@ -67,6 +67,7 @@ function createNewUser() {
     const email = $("#email").val() || null;
     const firstName = $("#firstName").val() || null;
     const bio = $("#bio").val() || null;
+    const profileImg = "profile_img_8.png"
     console.log()
     axios({
         method: 'post',
@@ -76,7 +77,8 @@ function createNewUser() {
             password:password,
             email:email,
             firstName:firstName,
-            bio:bio
+            bio:bio,
+            profileImg:profileImg
         },
             validateStatus:()=>true
     })
