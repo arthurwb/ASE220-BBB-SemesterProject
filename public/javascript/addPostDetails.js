@@ -10,14 +10,13 @@ api.GET(documentID, function(response) {
     for (i = 0; i < response.data.length; i++) {
         if (id == response.data[i].id && id != 0) {
             var post = response.data[i];
-
             $("#title").text(post.title);
 
-            axios.get(`${api.endpoint}getuserid/Users/${post.username}`,{}).then(function(response){
+            axios.get(`${api.endpoint}getuserid/Users/${post.username}`,{}).then(function(res){
                 $("#user").html(`
-                <button style="display: inline-block;" onclick="location.href='profile?id=${response.data[0]._id}';">
-                    <img src="images/account.png" height="20px" width="20px" style="vertical-align: middle;">
-                    <span style="display: inline-block; margin-left: 10px; vertical-align: middle;">${post.username}</span>
+                <button class="user-button" onclick="location.href='profile?id=${res.data[0]._id}'">
+                        <img src="/images/${res.data[0].profileImg}" height="50px" width="50px" style="vertical-align: middle;">
+                        <div>${post.username}</div>
                 </button>
                 `)
             }).catch(function(error){
