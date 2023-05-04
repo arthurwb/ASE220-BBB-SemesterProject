@@ -284,3 +284,15 @@ api.GET(documentID, async function(response) {
         elements.innerHTML += `<button type="button" id="nextbutton" onclick="location.href = '/?page=${page}';" class="btn btn-sm btn-outline-secondary" style="margin: 20px;">Next</button>`
     }
 });
+
+window.onload = function showSignInStatus(){
+    const element = document.getElementById('signInStatus');
+
+
+    if (document.cookie.split("=")[1]) {
+        element.innerHTML = 'Sign Out';
+    } 
+    else {
+        element.innerHTML = 'Sign In';
+    }
+}
