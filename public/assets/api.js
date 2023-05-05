@@ -64,6 +64,15 @@ const api={
 					console.log("axios: user put post edit error: "+error);
 				});
 				break;
+			case "editUser":
+				console.log("PUT: user edit");
+				console.log(`${api.endpoint}${documentID}/${id}/${type}`)
+				axios.put(`${api.endpoint}${documentID}/${id}/${type}`,data).then(function(response){
+					console.log(response);
+				}).catch(function(error) {
+					console.log("axios: user edit user error: "+error);
+				});
+				break;
 			default:
 				console.log("PUT type error");
 		}

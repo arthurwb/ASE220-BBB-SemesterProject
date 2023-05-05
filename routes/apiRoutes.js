@@ -200,6 +200,14 @@ router.put('/data/:collection/:id/:type', async (req, res) => {
         { $set: { review: req.body.review } }
       )
       break;
+    case "editUser":
+      console.log(req.body.profileImg);
+      console.log(req.params["id"])
+      result = await dbo.collection(req.params["collection"]).updateOne(
+        {_id:new ObjectId(req.params["id"])},
+        {$set: {profileImg: req.body.profileImg}}
+      )
+      break;
     default:
       console.log("incorrect type entered");
       break;
