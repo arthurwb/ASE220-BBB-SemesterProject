@@ -18,20 +18,25 @@ function getCurrentDateTime() {
 }
 
 function showCreatePostForm() {
-    // Hide the original "Create New Post" button
-    $("#create-post-button").addClass("d-none").removeClass("d-block");
-    let cookie = document.cookie.split("=")[1]
-    let username = "no username";
-    if (cookie) {
-        api.GET_USER(cookie, function(response) {
-            $("#username").text(response.username);
-        });
-    } else {
-        $("#username").text("Not signed in");
-    }
+    if(document.cookie.split("=")[1]){
+        // Hide the original "Create New Post" button
+        $("#create-post-button").addClass("d-none").removeClass("d-block");
+        let cookie = document.cookie.split("=")[1]
+        let username = "no username";
+        if (cookie) {
+            api.GET_USER(cookie, function(response) {
+                $("#username").text(response.username);
+            });
+        } else {
+            $("#username").text("Not signed in");
+        }
 
-    // Show the form
-    $("#postForm").addClass("d-block").removeClass("d-none");
+        // Show the form
+        $("#postForm").addClass("d-block").removeClass("d-none");
+    }
+    else{
+        window.location.href = document.location.href + "user";
+    }
 }
 
 function submitForm() {
@@ -327,7 +332,7 @@ function secondaryCreateFunction(){
 
 
     if(document.cookie.split("=")[1]){
-
+        showCreatePostForm();
     }
     else{
         if (current.includes("/")){
@@ -341,8 +346,6 @@ function secondaryCreateFunction(){
 
 };
 
-}
-
 //check if a user is signed in
 function checkSignedIn() {
     if (document.cookie.split("=")[1]) {
@@ -355,3 +358,20 @@ function checkSignedIn() {
         })
     }
 }
+
+//Go to Own Profile Function
+function goToSelfProfile(){
+    let selfID
+    let cookie = document.cookie.split("=")[1]
+    if(cookie){
+        api.GET_USER(cookie, function(response) {
+            selfID = response._id;
+            document.location.href = `profile?id=${selfID}`;
+        });
+    }
+    else{
+        window.location.href = 'user';
+    }
+
+}
+
