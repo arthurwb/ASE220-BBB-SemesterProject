@@ -27,7 +27,7 @@
         </header>
         <main>
             <div class="offset-2 col-8 align-items-center" style="color: white;">
-                <h2>User Conduct</h2>
+                <h2 style="padding-top: 0.5em;">User Conduct</h2>
                 <p>a. You agree to use BBB Music for lawful purposes only.</p>
                 <p>b. You agree not to post any content that is unlawful, threatening, abusive, defamatory, obscene, or otherwise objectionable.</p>
                 <p>c. You agree not to harass or harm other users of BBB Music.</p>
@@ -72,10 +72,10 @@
                 <p>These terms and conditions constitute the entire agreement between you and BBB Music regarding the use of BBB Music.</p>
                 <p>If any provision of these terms and conditions is found to be invalid or unenforceable, the remaining provisions shall remain in full force and effect.</p>
                 <p>The failure of BBB Music to enforce any right or provision of these terms and conditions shall not be deemed a waiver of such right or provision.</p>
-                <p>You may not assign these terms and conditions without the prior written consent of BBB Music.</p>
+                <p style="margin-bottom: 0; padding-bottom: 2em;";>You may not assign these terms and conditions without the prior written consent of BBB Music.</p>
             </div>
         </main>
-        <footer id="footer">   
+        <footer id="footer" style="margin: 0; padding: 0;">   
         </footer>
         <!--The ASSETS-->
         <script src="assets/api.js"></script>
@@ -84,19 +84,18 @@
         <script src="assets/cookies.js"></script>
         <script src="javascript/app.js"></script>
         <script>
-            $(async function(){ 
-              $("#header").load("/header");
-              $("#footer").load("/footer");
-            });
-            window.addEventListener('load', function() {
+            $(async function() {
+                await Promise.all([
+                    new Promise((resolve, reject) => {
+                        $("#header").load("/header", resolve);
+                    }),
+                    new Promise((resolve, reject) => {
+                        $("#footer").load("/footer", resolve);
+                    })
+                ]);
+
                 $(".pageTitle").text("Terms and Conditions");
-            
-            })
-            // await function(){$(".pageTitle").text("Terms and Conditions");
-            // } 
+            });
         </script>
-        <script>
-           
-        </script> 
     </body> 
 </html>
