@@ -40,8 +40,6 @@ api.GET_USER(document.cookie.split("=")[1], function(response) {
                 </div>
             </div>
         `);
-    } else {
-        console.log("error");
     }
 });
 
