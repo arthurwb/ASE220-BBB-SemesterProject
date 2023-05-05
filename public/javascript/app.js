@@ -147,6 +147,7 @@ function createPost() {
     let username = "username error";
     api.GET_USER(document.cookie.split("=")[1], function(response) {
         username = response.username;
+        console.log(username)
     });
     const artist = $("#artist").val() || null;
     const album = $("#album").val() || null;
@@ -339,3 +340,18 @@ function secondaryCreateFunction(){
     }
 
 };
+
+}
+
+//check if a user is signed in
+function checkSignedIn() {
+    if (document.cookie.split("=")[1]) {
+        api.GET_USER(document.cookie.split("=")[1], function(response) {
+            axios.get(`${api.endpoint}getuserid/Users/${response.username}`,{}).then(function(res){
+                $(".profileIMG").attr("src", `images/${res.data[0].profileImg}`);
+                $(".profileIMG").attr("onclick", `location.href='profile?id=${res.data[0]._id}'`)
+                $(".profileUsername").text(response.username)
+            })
+        })
+    }
+}
