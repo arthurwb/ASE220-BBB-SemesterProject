@@ -376,9 +376,9 @@ function goToSelfProfile(){
 }
 
 function goHome(){
-   // ET GO HOME
+    document.location.href = '/'
 }
 
 function goTermsConditions(){
-    document.location.href = 'Terms&Conditions';
+    document.location.href = '/Terms&Conditions';
 }
