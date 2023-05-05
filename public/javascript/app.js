@@ -18,6 +18,7 @@ function getCurrentDateTime() {
 }
 
 function showCreatePostForm() {
+    alert("Test")
     if(document.cookie.split("=")[1]){
         // Hide the original "Create New Post" button
         $("#create-post-button").addClass("d-none").removeClass("d-block");
@@ -292,16 +293,6 @@ api.GET(documentID, async function(response) {
 });
 
 
-//Check for sign in status button
-window.onload = function showSignInStatus(){
-
-    if (document.cookie.split("=")[1]) {
-        $('.signStatus').text('Sign Out');
-    } 
-    else {
-        $('.signStatus').text('Sign In');
-    }
-}
 function signEvent(){
     const element = $('.signStatus').text();
     if (element.includes('Sign Out')) {
@@ -326,13 +317,21 @@ function deleteCookies() {
 
 
 //Create Post Actions Button
-function secondaryCreateFunction(){
+async function secondaryCreateFunction(){
 
     let current = window.location.href;
 
 
     if(document.cookie.split("=")[1]){
-        showCreatePostForm();
+        if (window.location.href == document.location.origin || window.location.href == document.location.origin + '/'){
+            showCreatePostForm();
+        }
+        else{
+            window.location.href = document.location.origin;
+            document.addEventListener('DOMContentLoaded', function(){
+                showCreatePostForm();
+            });
+        }
     }
     else{
         if (current.includes("/")){

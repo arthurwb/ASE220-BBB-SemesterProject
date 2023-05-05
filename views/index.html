@@ -204,6 +204,18 @@
 
       })();
     </script>
+    <script>
+      //Check for sign in status button
+      window.onload = function showSignInStatus(){
+
+      if (document.cookie.split("=")[1]) {
+          $('.signStatus').text('Sign Out');
+      } 
+      else {
+          $('.signStatus').text('Sign In');
+      }
+      }
+    </script>
   </body> 
 </div> 
 </html>
