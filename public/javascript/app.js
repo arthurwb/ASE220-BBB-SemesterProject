@@ -375,3 +375,10 @@ function goToSelfProfile(){
 
 }
 
+function goHome(){
+    document.location.href = '/'
+}
+
+function goTermsConditions(){
+    document.location.href = '/Terms&Conditions';
+}
