@@ -157,4 +157,3 @@ function submitForm(isNewUser) {
     $("#create-user-button").addClass("d-block").removeClass("d-none");
     $("#login-button").addClass("d-block").removeClass("d-none");
 }
-// document.location.href = document.location.origin;
