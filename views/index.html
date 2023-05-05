@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,14 +21,13 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!--Font Awesome-->
     <script src="https://kit.fontawesome.com/7bf037d0fc.js" crossorigin="anonymous"></script>
- 
-    </head>
+  </head>
   <body class="bg-dark">
-    <div id="grid-container">
+    <!-- <div id="grid-container"> -->
       <header>
         <div class="row bg-dark text-light">
           <div class="col-3 d-flex justify-content-center pt-2">
-            <img class="logo" src="images/logo_large.PNG" height="110px">      
+            <a href="/"><img class="logo" src="images/logo_large.PNG" height="110px"></a>      
           </div>
           <div class="col-7 d-flex justify-content-center align-items-center">
             <div class="d-flex">
@@ -60,19 +58,21 @@
             </section>
             <section class="menu menu--off">
               <div class="menu-div-header">
-                <a href="user"><img class="profileIMG" src="images/account.png" height="65px"></a>      
-                <h1>Username</h1>
+                <img class="profileIMG" src="images/account.png" height="65px" onclick="location.href='user'" style="cursor: pointer;">
+                <h2 style="text-align: center;" class="profileUsername">Sign In / Sign Up</h2>
               </div>
-              <a href=""><div class="custom-btn userName">Create Post</div></a>
+              <a href="#"><div class="custom-btn" onclick="goHome()">Home</div></a>
+              <hr class="menuDivider">
+              <a class="secondaryCreatePost" onclick="secondaryCreateFunction()" href="#"><div class="custom-btn userName">Create Post</div></a>
               <hr class="menuDivider">
               <a href=""><div class="custom-btn">Previous Posts</div></a>
               <hr class="menuDivider">
-              <a href="user"><div class="custom-btn">About Us</div></a>
+              <a href=""><div class="custom-btn">About Us</div></a>
               <hr class="menuDivider">
-              <a href="user"><div class="custom-btn">Account Details</div></a>
+              <a href="#"><div class="custom-btn" onclick="goToSelfProfile()">Account Details</div></a>
               <hr class="menuDivider">
-              <a href="user"><div class="custom-btn" id="signInStatus"></div></a>
-
+              <a href="#"><div class="custom-btn signStatus" onclick="signEvent()"></div></a>
+    
             </section>
           </div>
         </div>
@@ -129,16 +129,16 @@
       </div>
       </div>
     </main>
-
     <footer class="bg-dark bg-gradient text-light">
       <div class="footer-whole">
         <div class="row">
           <div class="col-6 justify-content-center align-items-center footer-left">
             <h1>Quick Links:</h1>
-            <a href="">Sign In</a>
-            <a href="">Create Post</a>
+            <a href="#" onclick="goHome()">Home</a>
             <a href="">About Us</a>
-            <a href="">Terms and Conditions</a>
+            <a href="#" onclick="goToSelfProfile()">Account Details</a>
+            <a href="#" class="signStatus" onclick="signEvent()"></a>
+            <a href="#" onclick="goTermsConditions()">Terms and Conditions</a>
           </div>
           <div class="col-6 justify-content-center align-items-center footer-right">
             <h1>Connect with us:</h1>
@@ -199,9 +199,22 @@
               child.add('material-design-hamburger__icon--to-arrow');
             }
 
+            checkSignedIn();
         });
 
       })();
+    </script>
+    <script>
+      //Check for sign in status button
+      window.onload = function showSignInStatus(){
+
+      if (document.cookie.split("=")[1]) {
+          $('.signStatus').text('Sign Out');
+      } 
+      else {
+          $('.signStatus').text('Sign In');
+      }
+      }
     </script>
   </body> 
 </div> 

@@ -18,20 +18,26 @@ function getCurrentDateTime() {
 }
 
 function showCreatePostForm() {
-    // Hide the original "Create New Post" button
-    $("#create-post-button").addClass("d-none").removeClass("d-block");
-    let cookie = document.cookie.split("=")[1]
-    let username = "no username";
-    if (cookie) {
-        api.GET_USER(cookie, function(response) {
-            $("#username").text(response.username);
-        });
-    } else {
-        $("#username").text("Not signed in");
-    }
+    alert("Test")
+    if(document.cookie.split("=")[1]){
+        // Hide the original "Create New Post" button
+        $("#create-post-button").addClass("d-none").removeClass("d-block");
+        let cookie = document.cookie.split("=")[1]
+        let username = "no username";
+        if (cookie) {
+            api.GET_USER(cookie, function(response) {
+                $("#username").text(response.username);
+            });
+        } else {
+            $("#username").text("Not signed in");
+        }
 
-    // Show the form
-    $("#postForm").addClass("d-block").removeClass("d-none");
+        // Show the form
+        $("#postForm").addClass("d-block").removeClass("d-none");
+    }
+    else{
+        window.location.href = document.location.href + "user";
+    }
 }
 
 function submitForm() {
@@ -147,6 +153,7 @@ function createPost() {
     let username = "username error";
     api.GET_USER(document.cookie.split("=")[1], function(response) {
         username = response.username;
+        console.log(username)
     });
     const artist = $("#artist").val() || null;
     const album = $("#album").val() || null;
@@ -285,14 +292,92 @@ api.GET(documentID, async function(response) {
     }
 });
 
-window.onload = function showSignInStatus(){
-    const element = document.getElementById('signInStatus');
 
-
-    if (document.cookie.split("=")[1]) {
-        element.innerHTML = 'Sign Out';
-    } 
-    else {
-        element.innerHTML = 'Sign In';
+function signEvent(){
+    const element = $('.signStatus').text();
+    if (element.includes('Sign Out')) {
+        deleteCookies();
+         document.location.reload();
     }
+    if (element.includes('Sign In')) {
+        document.location.href = 'user'
+    }
+}
+
+//Function for clearing cookies
+function deleteCookies() {
+    var allCookies = document.cookie.split(';');
+    
+    // The "expire" attribute of every cookie is 
+    // Set to "Thu, 01 Jan 1970 00:00:00 GMT"
+    for (var i = 0; i < allCookies.length; i++)
+        document.cookie = allCookies[i] + "=;expires="
+        + new Date(0).toUTCString();
+}
+
+
+//Create Post Actions Button
+async function secondaryCreateFunction(){
+
+    let current = window.location.href;
+
+
+    if(document.cookie.split("=")[1]){
+        if (window.location.href == document.location.origin || window.location.href == document.location.origin + '/'){
+            showCreatePostForm();
+        }
+        else{
+            window.location.href = document.location.origin;
+            document.addEventListener('DOMContentLoaded', function(){
+                showCreatePostForm();
+            });
+        }
+    }
+    else{
+        if (current.includes("/")){
+            current = (current.split("/"))[0] + '/user';
+        }
+        else{
+            current = current + '/user';
+        }
+        window.location.href = current;
+    }
+
+};
+
+//check if a user is signed in
+function checkSignedIn() {
+    if (document.cookie.split("=")[1]) {
+        api.GET_USER(document.cookie.split("=")[1], function(response) {
+            axios.get(`${api.endpoint}getuserid/Users/${response.username}`,{}).then(function(res){
+                $(".profileIMG").attr("src", `images/${res.data[0].profileImg}`);
+                $(".profileIMG").attr("onclick", `location.href='profile?id=${res.data[0]._id}'`)
+                $(".profileUsername").text(response.username)
+            })
+        })
+    }
+}
+
+//Go to Own Profile Function
+function goToSelfProfile(){
+    let selfID
+    let cookie = document.cookie.split("=")[1]
+    if(cookie){
+        api.GET_USER(cookie, function(response) {
+            selfID = response._id;
+            document.location.href = `profile?id=${selfID}`;
+        });
+    }
+    else{
+        window.location.href = 'user';
+    }
+
+}
+
+function goHome(){
+    document.location.href = '/'
+}
+
+function goTermsConditions(){
+    document.location.href = '/Terms&Conditions';
 }

@@ -23,25 +23,20 @@ api.GET_USER(document.cookie.split("=")[1], function(response) {
             </p>
             <div class="collapse" id="collapseExample">
                 <div class="card card-body">
-                    <div class="profile-img-container profileImgCard">
-                        <img src="images/profile_img_1.png" height="50px" width="50px" style="vertical-align: middle;" class="profile-img">
-                        <img src="images/profile_img_2.png" height="50px" width="50px" style="vertical-align: middle;" class="profile-img">
-                        <img src="images/profile_img_3.png" height="50px" width="50px" style="vertical-align: middle;" class="profile-img">
-                        <img src="images/profile_img_4.png" height="50px" width="50px" style="vertical-align: middle;" class="profile-img">
-                        <img src="images/profile_img_5.png" height="50px" width="50px" style="vertical-align: middle;" class="profile-img">
-                        <img src="images/profile_img_6.png" height="50px" width="50px" style="vertical-align: middle;" class="profile-img">
-                        <img src="images/profile_img_7.png" height="50px" width="50px" style="vertical-align: middle;" class="profile-img">
-                        <img src="images/profile_img_8.png" height="50px" width="50px" style="vertical-align: middle;" class="profile-img">
-                        <a class="btn btn-primary" onclick="">Save Changes</a>
-                    </div>
-                    <div class="profile-button-container">
-                        
+                    <div class="profile-img-container profileImgCard" profileImg="0">
+                        <img src="images/profile_img_1.png" height="50px" width="50px" style="vertical-align: middle; cursor: pointer;" id="profile-img_1" onclick="selectItem(1)">
+                        <img src="images/profile_img_2.png" height="50px" width="50px" style="vertical-align: middle; cursor: pointer;" id="profile-img_2" onclick="selectItem(2)">
+                        <img src="images/profile_img_3.png" height="50px" width="50px" style="vertical-align: middle; cursor: pointer;" id="profile-img_3" onclick="selectItem(3)">
+                        <img src="images/profile_img_4.png" height="50px" width="50px" style="vertical-align: middle; cursor: pointer;" id="profile-img_4" onclick="selectItem(4)">
+                        <img src="images/profile_img_5.png" height="50px" width="50px" style="vertical-align: middle; cursor: pointer;" id="profile-img_5" onclick="selectItem(5)">
+                        <img src="images/profile_img_6.png" height="50px" width="50px" style="vertical-align: middle; cursor: pointer;" id="profile-img_6" onclick="selectItem(6)">
+                        <img src="images/profile_img_7.png" height="50px" width="50px" style="vertical-align: middle; cursor: pointer;" id="profile-img_7" onclick="selectItem(7)">
+                        <img src="images/profile_img_8.png" height="50px" width="50px" style="vertical-align: middle; cursor: pointer;" id="profile-img_8" onclick="selectItem(8)">
+                        <a class="btn btn-primary" onclick="updateProfilePicture()">Save Changes</a>
                     </div>
                 </div>
             </div>
         `);
-    } else {
-        console.log("error");
     }
 });
 
@@ -68,4 +63,28 @@ function fillProfilePosts() {
             }
         })
     })
+}
+
+function selectItem(item) {
+    $(".profileImgCard").attr("profileImg", item)
+    let counter = 1;
+    while(counter <= 8) {
+        $(`#profile-img_${counter}`).attr("style", "vertical-align: middle; cursor: pointer;");
+        counter++;
+    }
+    $(`#profile-img_${item}`).attr("style", "background: #fd9f57; width: 65px; height: 65px; border-radius: 50%; vertical-align: middle; cursor: pointer;")
+    console.log($(".profileImgCard").attr("profileImg"))
+}
+
+function updateProfilePicture() {
+    let img = ($(".profileImgCard").attr("profileImg"))
+    img = `profile_img_${img}.png`
+    let newImg = {
+        profileImg: img
+    }
+
+    api.PUT("Users",newImg,id,"editUser",function(response){
+    })
+
+    document.location.reload();
 }
