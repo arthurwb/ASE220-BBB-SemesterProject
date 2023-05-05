@@ -1,0 +1,68 @@
+<header>
+    <div class="row bg-dark text-light">
+      <div class="col-3 d-flex justify-content-center pt-2">
+        <a href="/"><img class="logo" src="images/logo_large.PNG" height="110px"></a>      
+      </div>
+      <div class="col-7 d-flex justify-content-center align-items-center">
+        <h1 style="z-index: 10;" class="pageTitle"></h1>
+    </div>
+    <div class="col-2 d-flex justify-content-center align-items-center pt-4">
+      
+      <div id="menu-container">
+        <!--<button id="menu-button">Menu</button>-->
+        <section class="material-design-hamburger">
+          <button class="material-design-hamburger__icon">
+            <span class="material-design-hamburger__layer"></span>
+          </button>
+        </section>
+        <section class="menu menu--off">
+          <div class="menu-div-header">
+            <img class="profileIMG" src="images/account.png" height="65px" onclick="location.href='user'" style="cursor: pointer;">
+            <h2 style="text-align: center;" class="profileUsername">Sign In / Sign Up</h2>
+          </div>
+          <a href=""><div class="custom-btn" onclick="goHome()">Home</div></a>
+          <hr class="menuDivider">
+          <a class="secondaryCreatePost" onclick="secondaryCreateFunction()" href="#"><div class="custom-btn userName">Create Post</div></a>
+          <hr class="menuDivider">
+          <a href=""><div class="custom-btn">Previous Posts</div></a>
+          <hr class="menuDivider">
+          <a href=""><div class="custom-btn">About Us</div></a>
+          <hr class="menuDivider">
+          <a href="#"><div class="custom-btn" onclick="goToSelfProfile()">Account Details</div></a>
+          <hr class="menuDivider">
+          <a href="#"><div class="custom-btn signStatus" onclick="signEvent()"></div></a>
+
+        </section>
+      </div>
+    </div>
+    <div class="col-7 offset-3 d-flex justify-content-center align-items-center">
+    </div>
+  </div>
+</header>
+<script>
+    (function() {
+
+      'use strict';
+
+      document.querySelector('.material-design-hamburger__icon').addEventListener(
+        'click',
+        function() {      
+          var child;
+  
+          this.parentNode.nextElementSibling.classList.toggle('menu--on');
+
+          child = this.childNodes[1].classList;
+
+          if (child.contains('material-design-hamburger__icon--to-arrow')) {
+            child.remove('material-design-hamburger__icon--to-arrow');
+            child.add('material-design-hamburger__icon--from-arrow');
+          } else {
+            child.remove('material-design-hamburger__icon--from-arrow');
+            child.add('material-design-hamburger__icon--to-arrow');
+          }
+
+          checkSignedIn();
+      });
+
+    })();
+  </script>

@@ -27,4 +27,22 @@ router.get('/profile', (req,res) => {
   res.sendFile(path.join(__dirname, '../views', 'profile.html'));
 });
 
+//Serve Terms&Conditions.html
+router.get('/Terms&Conditions', (req,res) => {
+  console.log("<TERMS AND CONDITIONS PAGE>");
+  res.sendFile(path.join(__dirname, '../views', 'Terms&Conditions.html'));
+});
+
+//Serve header.html
+router.get('/header', (req,res) => {
+  console.log("<HEADER DIV>");
+  res.sendFile(path.join(__dirname, '../views', 'header.html'));
+});
+
+//Serve footer.html
+router.get('/footer', (req,res) => {
+  console.log("<FOOTER DIV>");
+  res.sendFile(path.join(__dirname, '../views', 'footer.html'));
+});
+
 module.exports = router;
