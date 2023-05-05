@@ -286,16 +286,61 @@ api.GET(documentID, async function(response) {
     }
 });
 
-window.onload = function showSignInStatus(){
-    const element = document.getElementById('signInStatus');
 
+//Check for sign in status button
+window.onload = function showSignInStatus(){
 
     if (document.cookie.split("=")[1]) {
-        element.innerHTML = 'Sign Out';
+        $('.signStatus').text('Sign Out');
     } 
     else {
-        element.innerHTML = 'Sign In';
+        $('.signStatus').text('Sign In');
     }
+}
+function signEvent(){
+    const element = $('.signStatus').text();
+    if (element.includes('Sign Out')) {
+        deleteCookies();
+         document.location.reload();
+    }
+    if (element.includes('Sign In')) {
+        document.location.href = 'user'
+    }
+}
+
+//Function for clearing cookies
+function deleteCookies() {
+    var allCookies = document.cookie.split(';');
+    
+    // The "expire" attribute of every cookie is 
+    // Set to "Thu, 01 Jan 1970 00:00:00 GMT"
+    for (var i = 0; i < allCookies.length; i++)
+        document.cookie = allCookies[i] + "=;expires="
+        + new Date(0).toUTCString();
+}
+
+
+//Create Post Actions Button
+function secondaryCreateFunction(){
+
+    let current = window.location.href;
+
+
+    if(document.cookie.split("=")[1]){
+
+    }
+    else{
+        if (current.includes("/")){
+            current = (current.split("/"))[0] + '/user';
+        }
+        else{
+            current = current + '/user';
+        }
+        window.location.href = current;
+    }
+
+};
+
 }
 
 //check if a user is signed in

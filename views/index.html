@@ -63,7 +63,7 @@
                 <img class="profileIMG" src="images/account.png" height="65px" onclick="location.href='user'" style="cursor: pointer;">
                 <h2 style="text-align: center;" class="profileUsername">Sign In / Sign Up</h2>
               </div>
-              <a href=""><div class="custom-btn userName">Create Post</div></a>
+              <a class="secondaryCreatePost" onclick="secondaryCreateFunction()" href="#"><div class="custom-btn userName">Create Post</div></a>
               <hr class="menuDivider">
               <a href=""><div class="custom-btn">Previous Posts</div></a>
               <hr class="menuDivider">
@@ -71,7 +71,7 @@
               <hr class="menuDivider">
               <a href="user"><div class="custom-btn">Account Details</div></a>
               <hr class="menuDivider">
-              <a href="user"><div class="custom-btn" id="signInStatus"></div></a>
+              <a href="#"><div class="custom-btn signStatus" onclick="signEvent()"></div></a>
 
             </section>
           </div>
@@ -135,9 +135,10 @@
         <div class="row">
           <div class="col-6 justify-content-center align-items-center footer-left">
             <h1>Quick Links:</h1>
-            <a href="">Create Post</a>
+            <a class="secondaryCreatePost" onclick="secondaryCreateFunction()" href="#">Create Post</a>
             <a href="">About Us</a>
-            <a href="">Sign In</a>
+            <a href="">Account Details</a>
+            <a href="#" class="signStatus" onclick="signEvent()"></a>
             <a href="">Terms and Conditions</a>
           </div>
           <div class="col-6 justify-content-center align-items-center footer-right">
