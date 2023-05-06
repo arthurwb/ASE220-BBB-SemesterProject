@@ -28,6 +28,25 @@ function cancelForm() {
     $("#login-button").addClass("d-block").removeClass("d-none");
 }
 
+function alertUser(text, location) {
+    let sendTo = ""
+    if (!location) {
+        sendTo = "document.location.reload();";
+    } else {
+        sendTo = `document.location.href = "${location}"`;
+    }
+    $("body").append(`
+    <div class="fixed-top fixed-bottom d-flex justify-content-center align-items-center" style="background-color: rgba(0, 0, 0, 0.8);">
+        <div class="d-flex justify-content-center align-items-center bg-warning rounded" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <div class="text-center p-2">
+                ${text}
+                <button class="btn btn-primary d-block" type="button" onclick="${sendTo}">Close</button>
+            </div>
+        </div>
+    </div>
+    `)
+}
+
 function validation(username, password, email) {
     let response;
 
