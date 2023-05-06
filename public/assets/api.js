@@ -30,6 +30,7 @@ const api={
         });
     },
 	PUT:function(documentID, data, id, type){
+		console.log(type);
 		switch (type) {
 			case "comment":
 				console.log("PUT: comment");
@@ -73,6 +74,14 @@ const api={
 					console.log("axios: user edit user error: "+error);
 				});
 				break;
+			case "addLike":
+				console.log("PUT: add like");
+				console.log(`${api.endpoint}${documentID}/${id}/${type}`)
+				axios.put(`${api.endpoint}${documentID}/${id}/${type}`,data).then(function(response){
+					console.log(response);
+				}).catch(function(error) {
+					console.log("axios: add like error: "+error);
+				});
 			default:
 				console.log("PUT type error");
 		}
