@@ -1,109 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BBB Music - Sign In</title>
-    <!--The Bootstrap-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <!--The CSS-->
-    <link href="css/styles.css" rel="stylesheet">
-    <!--The JQuery-->
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-    <!--The Axios-->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</head>
-<body>
-    <div class="row">
-        <div class="col-2 m-2">
-            <button class="btn btn-dark" onclick="document.location.href = '/'">Back</button>
-        </div>
-    </div>
-    <div class="row d-flex justify-content-center">
-        <div class="col-4">
-            <div class="d-grid gap-2" style="margin-top: 1em;">
-                <button id="create-user-button" class="btn btn-primary d-block" type="button" onclick="showCreateUserForm()">Create New User</button>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BBB Music - Sign In</title>
+        <link rel="icon" href="images/logo_ICON.PNG">
+        <!-- Google Font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        <!--The Bootstrap-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+        <!--The CSS-->
+        <link href="stylesheets/styles.css" rel="stylesheet">
+        <!--The JQuery-->
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <!--The Axios-->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <!--Font Awesome-->
+        <script src="https://kit.fontawesome.com/7bf037d0fc.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="bg-dark">
+        <header id="header">
+        </header>
+        <main>
+            <div class="row">
+                <div class="col-2 m-2">
+                    <button class="btn" style="background: #fd9f57;" onclick="document.location.href = '/'">Back</button>
+                </div>
             </div>
-        </div>
-        <div class="col-4">
-            <div class="d-grid gap-2" style="margin-top: 1em;">
-                <button id="login-button" class="btn btn-secondary d-block" type="button" onclick="showLoginForm()">Login</button>
+            <div class="row d-flex justify-content-center">
+                <div class="col-4">
+                    <div class="d-grid gap-2" style="margin-top: 1em;">
+                        <button id="create-user-button" class="btn btn-primary d-block" type="button" onclick="showCreateUserForm()">Create New User</button>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="d-grid gap-2" style="margin-top: 1em;">
+                        <button id="login-button" class="btn btn-secondary d-block" type="button" onclick="showLoginForm()">Login</button>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <!-- Create New User -->
-    <div class="row">
-        <div class="col-10 offset-1">
-            <div id="userForm" class="d-none">
-                <h1 class="text-center">Create a New User</h1>
-                <form style="background-color: lightgray; padding: 20px;  border-radius: 10px;">
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username *</label>
-                    <input type="text" class="form-control" id="username" required>
+            <!-- Create New User -->
+            <div class="row">
+                <div class="col-10 offset-1">
+                    <div id="userForm" class="d-none">
+                        <h1 class="text-center" style="color: white;">Create a New User</h1>
+                        <form style="background-color: lightgray; padding: 20px;  border-radius: 10px;">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username *</label>
+                            <input type="text" class="form-control" id="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password * </label>
+                            <input type="password" class="form-control" id="password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email *</label>
+                            <input type="text" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="firstName">
+                        </div>
+                        <div class="mb-3">
+                            <label for="bio" class="form-label">Bio</label>
+                            <textarea class="form-control" id="bio" rows="3"></textarea>
+                        </div>
+                        <button class="btn btn-secondary" type="button" style="border-color: grey" onclick="cancelForm()">Cancel</button>
+                        <button class="btn btn-primary" type="button" onclick="submitForm('new')">Submit</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password * </label>
-                    <input type="password" class="form-control" id="password" required>
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email *</label>
-                    <input type="text" class="form-control" id="email" required>
-                </div>
-                <div class="mb-3">
-                    <label for="firstName" class="form-label">First Name</label>
-                    <input type="text" class="form-control" id="firstName">
-                </div>
-                <div class="mb-3">
-                    <label for="bio" class="form-label">Bio</label>
-                    <textarea class="form-control" id="bio" rows="3"></textarea>
-                </div>
-                <button class="btn btn-secondary" type="button" style="border-color: grey" onclick="cancelForm()">Cancel</button>
-                <button class="btn btn-primary" type="button" onclick="submitForm('new')">Submit</button>
-                </form>
             </div>
-        </div>
-    </div>
 
-    <!-- Login -->
-    <div class="row">
-        <div class="col-10 offset-1">
-            <div id="loginForm" class="d-none">
-                <h1 class="text-center">Login</h1>
-                <form style="background-color: lightgray; padding: 20px;  border-radius: 10px;">
-                <div class="mb-3">
-                    <label for="loginUsername" class="form-label">Username *</label>
-                    <input type="text" class="form-control" id="loginUsername" required>
+            <!-- Login -->
+            <div class="row">
+                <div class="col-10 offset-1">
+                    <div id="loginForm" class="d-none">
+                        <h1 class="text-center " style="color: white;">Login</h1>
+                        <form style="background-color: lightgray; padding: 20px;  border-radius: 10px;">
+                        <div class="mb-3">
+                            <label for="loginUsername" class="form-label">Username *</label>
+                            <input type="text" class="form-control" id="loginUsername" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">Password *</label>
+                            <input type="password" class="form-control" id="loginPassword" required>
+                        </div>
+                        <button class="btn btn-secondary" type="button" style="border-color: grey" onclick="cancelForm()">Cancel</button>
+                        <button class="btn btn-primary" type="button" onclick="submitForm('old')">Submit</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="loginPassword" class="form-label">Password *</label>
-                    <input type="password" class="form-control" id="loginPassword" required>
-                </div>
-                <button class="btn btn-secondary" type="button" style="border-color: grey" onclick="cancelForm()">Cancel</button>
-                <button class="btn btn-primary" type="button" onclick="submitForm('old')">Submit</button>
-                </form>
             </div>
-        </div>
-    </div>
-    <div class="d-flex justify-content-center align-items-center p-4" id="loginErrorCode" style="visibility: hidden;">
-        <p style="color: red;">There was an error with the inputed parameters for signing in. Please try again.</p>
-    </div>
-    <div class="d-flex justify-content-center align-items-center p-4" id="createAccoundErrorCode" style="visibility: hidden;">
-        <p style="color: red;">There was an error with the inputed parameters for creating an account. Make sure all fields are filled before submitting.</p>
-    </div>
-    <!-- Login Details -->
-    <div id="loginDetails" class="row">
-    </div>
+            <div class="d-flex justify-content-center align-items-center p-4" id="loginErrorCode" style="visibility: hidden;">
+                <p style="color: red;">There was an error with the inputed parameters for signing in. Please try again.</p>
+            </div>
+            <div class="d-flex justify-content-center align-items-center p-4" id="createAccoundErrorCode" style="visibility: hidden;">
+                <p style="color: red;">There was an error with the inputed parameters for creating an account. Make sure all fields are filled before submitting.</p>
+            </div>
+            <!-- Login Details -->
+            <div id="loginDetails" class="row">
+            </div>
 
-    <!-- User Creation Alert -->
-    <div class="position-absolute top-50 start-50 translate-middle alert alert-warning d-none" id="creationAlert">
-    </div>
-
+            <!-- User Creation Alert -->
+            <div class="position-absolute top-50 start-50 translate-middle alert alert-warning d-none" id="creationAlert">
+            </div>
+        </main>
+        <footer id="footer" style="margin: 0; padding: 0;">   
+        </footer>
+    <!--The ASSETS-->
     <script src="assets/api.js"></script>
     <script src="assets/database.js"></script>
     <script src="assets/getAllURLParams.js"></script>
     <script src="assets/cookies.js"></script>
     <script src="JavaScript/editUser.js"></script>
-</body>
+        <script>
+            $(async function() {
+                await Promise.all([
+                    new Promise((resolve, reject) => {
+                        $("#header").load("/header", resolve);
+                    }),
+                    new Promise((resolve, reject) => {
+                        $("#footer").load("/footer", resolve);
+                    })
+                ]);
+
+                $(".pageTitle").text("Account Portal");
+            });
+        </script>
+    </body> 
 </html>
+

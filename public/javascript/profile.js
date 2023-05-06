@@ -6,6 +6,8 @@ let username;
 api.GET_ITEM("Users", id, async function(response) {
     username = response[0].username;
     await axios.get(`${api.endpoint}getuserid/Users/${response[0].username}`,{}).then(function(res){
+        $("title").text("BBB Music - " + response[0].username);
+        $(".pageTitle").text(response[0].username);
         $(".profileImg").attr("src", `images/${res.data[0].profileImg}`);
         $("#username").text(response[0].username);
         $("#bio").text(response[0].bio);
@@ -46,8 +48,8 @@ function fillProfilePosts() {
             if (response.username == username) {
                 var newPost = `
                 <div class="row">
-                    <div class="card col-12 border-dark mb-3" style="margin-top: 2em; margin-bottom: 2em;">
-                        <div class="card-header bg-transparent border-dark">${response.username}</div>
+                    <div class="card col-12 border-dark my-3" style="background: #ccc; margin-bottom: 2em;">
+                        <div class="card-header border-dark">${response.username}</div>
                         <div class="card-body text-dark">
                             <h5 class="card-title">${response.title}</h5>
                             <p class="card-text">${response.rating} out of 10</p>
@@ -87,4 +89,67 @@ function updateProfilePicture() {
     })
 
     document.location.reload();
+}
+
+function signEvent(){
+    const element = $('.signStatus').text();
+    if (element.includes('Sign Out')) {
+        deleteCookies();
+        // alertUser("User logged out");
+        document.location.reload();
+    }
+    if (element.includes('Sign In')) {
+        document.location.href = 'user'
+    }
+}
+
+//Function for clearing cookies
+function deleteCookies() {
+    var allCookies = document.cookie.split(';');
+    
+    // The "expire" attribute of every cookie is 
+    // Set to "Thu, 01 Jan 1970 00:00:00 GMT"
+    for (var i = 0; i < allCookies.length; i++)
+        document.cookie = allCookies[i] + "=;expires="
+        + new Date(0).toUTCString();
+}
+
+//check if a user is signed in
+function checkSignedIn() {
+    if (document.cookie.split("=")[1]) {
+        api.GET_USER(document.cookie.split("=")[1], function(response) {
+            axios.get(`${api.endpoint}getuserid/Users/${response.username}`,{}).then(function(res){
+                $(".profileIMG").attr("src", `images/${res.data[0].profileImg}`);
+                $(".profileIMG").attr("onclick", `location.href='profile?id=${res.data[0]._id}'`)
+                $(".profileUsername").text(response.username)
+            })
+        })
+    }
+}
+
+//Go to Own Profile Function
+function goToSelfProfile(){
+    let selfID
+    let cookie = document.cookie.split("=")[1]
+    if(cookie){
+        api.GET_USER(cookie, function(response) {
+            selfID = response._id;
+            document.location.href = `profile?id=${selfID}`;
+        });
+    }
+    else{
+        window.location.href = 'user';
+    }
+
+}
+
+function goHome(){
+    document.location.href = '/'
+}
+
+function goTermsConditions(){
+    document.location.href = '/Terms&Conditions';
+}
+function goAboutUs(){
+    document.location.href = '/aboutUs';
 }
