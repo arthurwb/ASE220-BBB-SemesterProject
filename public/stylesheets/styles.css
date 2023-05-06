@@ -5,30 +5,26 @@ body{
     margin-right: 0;
     margin: 0;
     width: 100%;
+    font-family: 'Rubik', sans-serif;
 
-}
-p {
-    font-family: 'Courier New', Courier, monospace;
-}
+  }
 header{
     width: 100%;
     background-color: #ffffff;
+
 }
 header ul{
     text-align: center;
+
 }
 body,
 header {
   margin-right: 0;
-  
-}
-header .row{
-  box-shadow: 0px 15px 10px -15px red;    
-
 }
 main{
   /* background-color: #495769; */
   background-color: #373b3f;
+
 }
 .btn-primary{
   background-color: #fd9f57;
@@ -44,11 +40,16 @@ main{
   align-items: center;
   justify-content: space-between;
   margin-top: 12px;
-  padding: 5px;
+  margin-left: 16px;
+  padding: 5px 0px 5px 0px;
   border: none;
   cursor: pointer;
   background-color: transparent;
   width:fit-content;
+}
+
+.card-button img {
+  margin-right: 5px;
 }
 
 #paginiationButtons button{
@@ -84,6 +85,23 @@ main{
     height: 40px;
     border-radius: 0px 7px 7px 0px;
 }
+
+.user-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding: 5px 0px 5px 0px;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  width:fit-content;
+}
+
+.user-button img {
+  margin-right: 5px;
+}
+
 .container-fluid {
     padding-right: 0 !important;
   }
@@ -95,7 +113,7 @@ main{
 }
 .menu {
     font-size:1em;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Rubik', sans-serif;
     color: #333;
   }
 
@@ -357,4 +375,28 @@ footer a {
 .footer-left a:hover{
   color:#ffc395;
   transition: 0.3s;
+}
+
+
+/*profile.html CSS*/
+
+.profileHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding: 5px 0px 5px 0px;
+  width:fit-content;
+}
+
+.profileHeader img {
+  margin-right: 5px;
+}
+
+.profile-img-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width:fit-content;
+  align-items: center;
 }

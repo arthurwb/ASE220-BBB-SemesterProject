@@ -2,6 +2,9 @@
 const documentID = 'Users';
 
 function showCreateUserForm() {
+    if (document.getElementById("loginErrorCode").style.visibility = 'visible'){
+        document.getElementById("loginErrorCode").style.visibility = 'hidden';
+    }
     $("#userForm").addClass("d-block").removeClass("d-none");
     $("#create-user-button").addClass("d-none").removeClass("d-block");
     $("#login-button").addClass("d-none").removeClass("d-block");
@@ -9,6 +12,9 @@ function showCreateUserForm() {
 }
 
 function showLoginForm() {
+    if (document.getElementById("createAccoundErrorCode").style.visibility = 'visible'){
+        document.getElementById("createAccoundErrorCode").style.visibility = 'hidden';
+    }
     $("#loginForm").addClass("d-block").removeClass("d-none");
     $("#create-user-button").addClass("d-none").removeClass("d-block");
     $("#login-button").addClass("d-none").removeClass("d-block");
@@ -61,12 +67,14 @@ function verification(flag) {
 }
 
 function createNewUser() {
+    
     // Get the form input values
     const username = $("#username").val() || null;
     const password = $("#password").val() || null;
     const email = $("#email").val() || null;
     const firstName = $("#firstName").val() || null;
     const bio = $("#bio").val() || null;
+    const profileImg = "profile_img_8.png"
     console.log()
     axios({
         method: 'post',
@@ -76,14 +84,23 @@ function createNewUser() {
             password:password,
             email:email,
             firstName:firstName,
-            bio:bio
+            bio:bio,
+            profileImg:profileImg
         },
             validateStatus:()=>true
     })
         .then(function (response) {
         console.log(response);
+        document.location.href = document.location.origin;
         })
         .catch(function (error) {
+        if (document.getElementById("loginErrorCode").style.visibility = 'visible'){
+            document.getElementById("loginErrorCode").style.visibility = 'hidden';
+            document.getElementById("createAccoundErrorCode").style.visibility = 'visible';
+        }
+        else{
+            document.getElementById("createAccoundErrorCode").style.visibility = 'visible';
+        }
         console.log(error);
         });
 }
@@ -97,7 +114,7 @@ async function deleteUser(index) {
 function login() {
     const username = $("#loginUsername").val() || null;
     const password = $("#loginPassword").val() || null;
-    console.log()
+
     axios({
         method: 'post',
         url: '/api/data/auth/signin',
@@ -115,8 +132,16 @@ function login() {
         .then(function (response){
         cookies.set('jwt',response.headers.authorization.replace('Bearer ',''))
         console.log(response.headers.authorization.replace('Bearer ',''));
+        document.location.href = document.location.origin;
         })
         .catch(function (error) {
+            if (document.getElementById("createAccoundErrorCode").style.visibility = 'visible'){
+                document.getElementById("createAccoundErrorCode").style.visibility = 'hidden';
+                document.getElementById("loginErrorCode").style.visibility = 'visible';
+            }
+            else{
+                document.getElementById("loginErrorCode").style.visibility = 'visible';
+            }
         console.log(error);
         });
 }

@@ -18,20 +18,26 @@ function getCurrentDateTime() {
 }
 
 function showCreatePostForm() {
-    // Hide the original "Create New Post" button
-    $("#create-post-button").addClass("d-none").removeClass("d-block");
-    let cookie = document.cookie.split("=")[1]
-    let username = "no username";
-    if (cookie) {
-        api.GET_USER(cookie, function(response) {
-            $("#username").text(response.username);
-        });
-    } else {
-        $("#username").text("Not signed in");
-    }
+    alert("Test")
+    if(document.cookie.split("=")[1]){
+        // Hide the original "Create New Post" button
+        $("#create-post-button").addClass("d-none").removeClass("d-block");
+        let cookie = document.cookie.split("=")[1]
+        let username = "no username";
+        if (cookie) {
+            api.GET_USER(cookie, function(response) {
+                $("#username").text(response.username);
+            });
+        } else {
+            $("#username").text("Not signed in");
+        }
 
-    // Show the form
-    $("#postForm").addClass("d-block").removeClass("d-none");
+        // Show the form
+        $("#postForm").addClass("d-block").removeClass("d-none");
+    }
+    else{
+        window.location.href = document.location.href + "user";
+    }
 }
 
 function submitForm() {
@@ -54,111 +60,73 @@ function displaySuccessMessage() {
 function search() {
     let type = parseInt($("#inputGroupSelect01").val()) || null;
     const item = $("#form1").val() || null;
+    let url;
 
-    $("#backbutton").addClass("d-none");
-    $("#nextbutton").addClass("d-none");
+    if (type == 1) {
+        url = '/api/data/search?song='
+    }
+    if (type == 2) {
+        url = '/api/data/search?album='
+    }
+    if (type == 3) {
+        url = '/api/data/search?artist='
+    }
 
-    $("#paginiationButtons").html(`<button type="button" id="backbutton" onclick="location.href = '/';" class="btn btn-sm btn-outline-secondary" style="margin: 20px;">Back</button>`);
+    if (type != null && item != null && item != "null") {
 
-    console.log(item)
+        $("#backbutton").addClass("d-none");
+        $("#nextbutton").addClass("d-none");
+        $("#paginiationButtons").html(`<button type="button" id="backbutton" onclick="location.href = '/';" class="btn btn-sm btn-outline-secondary" style="margin: 20px;">Back</button>`);
+        
+        var index = 0;
+        axios ({
+            method: 'get',
+            url: url+item,
+                validateStatus:()=>true
+        })
+        .then(async function (response) {
+            $('#postContainer').empty();
 
-    switch(type) {
-        case 1:
-            axios({
-                method: 'get',
-                url: '/api/data/search?song='+item,
-                    validateStatus:()=>true
-            })
-                .then(function (response) {
-                    $('#postContainer').empty();
+            while (response.data[index] + 1) {
 
-                    // loop through each post in the response and create an HTML element to display it
-                    response.data.forEach(function(response) {
-                        const postHTML = `
-                        <div class="row">
-                            <div class="card col-12 border-success mb-3" style="margin-top: 2em; margin-bottom: 2em;">
-                                <div class="card-header bg-transparent border-success">${response.username}</div>
-                                <div class="card-body text-success">
-                                    <h5 class="card-title">${response.title}</h5>
-                                    <p class="card-text">${response.rating} out of 10</p>
-                                </div>
-                                <div class="card-footer bg-transparent border-success">
-                                    ${response.timestamp}
-                                    <a class="btn btn-primary" style="float: right;" onclick="location.href ='post?id=${response.id}';">View Post</a>
-                                </div>
-                            </div>
-                        </div>`;
-                        $('#postContainer').append(postHTML);
-                    });
-                })
-                .catch(function (error) {
-                console.log(error);
-            });
-            break;
-        case 2:
-            axios({
-                method: 'get',
-                url: '/api/data/search?album='+item,
-                    validateStatus:()=>true
-            })
-            .then(function (response) {
-                $('#postContainer').empty();
-
-                // loop through each post in the response and create an HTML element to display it
-                response.data.forEach(function(response) {
-                    const postHTML = `
+                //axios request to set id
+                await axios.get(`${api.endpoint}getuserid/Users/${response.data[index].username}`,{}).then(function(res){
+                    //template for creating a new post
+                    let userData;
+                    console.log(typeof res.data[0]._id)
+                    if (typeof res.data[0]._id === "undefined") { 
+                        userData = 0 
+                    } else { 
+                        userData = res.data[0]._id 
+                    }
+                    var newPost = `
                     <div class="row">
-                        <div class="card col-12 border-success mb-3" style="margin-top: 2em; margin-bottom: 2em;">
-                            <div class="card-header bg-transparent border-success">${response.username}</div>
-                            <div class="card-body text-success">
-                                <h5 class="card-title">${response.title}</h5>
-                                <p class="card-text">${response.rating} out of 10</p>
+                        <div class="card col-12 border-dark mb-3" style="margin-top: 2em; margin-bottom: 2em; margin-right: 0; background: #dddddd; right: 0;">
+                            <button class="card-button" onclick="location.href='profile?id=${userData}'">
+                                <img src="images/${res.data[0].profileImg}" height="45px" width="45px" style="vertical-align: middle;">
+                                <div>${response.data[index].username}</div>
+                            </button>
+                            <div class="card-body text-dark" ">
+                                <h5 class="card-title">${response.data[index].title}</h5>
+                                <p class="card-text">${response.data[index].rating} out of 10</p>
                             </div>
-                            <div class="card-footer bg-transparent border-success">
-                                ${response.timestamp}
-                                <a class="btn btn-primary" style="float: right;" onclick="location.href ='post?id=${response.id}';">View Post</a>
+                            <div class="card-footer bg-transparent border-dark">
+                                ${response.data[index].timestamp}
+                                <a class="btn btn-primary" style="float: right;" onclick="location.href ='post?id=${response.data[index].id}';">View Post</a>
                             </div>
                         </div>
                     </div>`;
-                    $('#postContainer').append(postHTML);
+                    //adds new post to page
+                    document.querySelector("#postContainer").innerHTML += newPost;
+                }).catch(function(error){
+                    console.log("axios error" + error);
                 });
+                index++
+            }
             })
-                .catch(function (error) {
-                console.log(error);
-            });
-            break;
-        case 3:
-            axios({
-                method: 'get',
-                url: '/api/data/search?artist='+item,
-                    validateStatus:()=>true
-            })
-            .then(function (response) {
-                $('#postContainer').empty();
-
-                // loop through each post in the response and create an HTML element to display it
-                response.data.forEach(function(response) {
-                    const postHTML = `
-                    <div class="row">
-                        <div class="card col-12 border-success mb-3" style="margin-top: 2em; margin-bottom: 2em;">
-                            <div class="card-header bg-transparent border-success">${response.username}</div>
-                            <div class="card-body text-success">
-                                <h5 class="card-title">${response.title}</h5>
-                                <p class="card-text">${response.rating} out of 10</p>
-                            </div>
-                            <div class="card-footer bg-transparent border-success">
-                                ${response.timestamp}
-                                <a class="btn btn-primary" style="float: right; background-color: #fd9f57;" onclick="location.href ='post?id=${response.id}';">View Post</a>
-                            </div>
-                        </div>
-                    </div>`;
-                    $('#postContainer').append(postHTML);
-                });
-            })
-                .catch(function (error) {
-                console.log(error);
-            });
-            break;
+            .catch(function (error) {
+            console.log(error);
+        });
     }
 }
 
@@ -185,6 +153,7 @@ function createPost() {
     let username = "username error";
     api.GET_USER(document.cookie.split("=")[1], function(response) {
         username = response.username;
+        console.log(username)
     });
     const artist = $("#artist").val() || null;
     const album = $("#album").val() || null;
@@ -276,7 +245,7 @@ api.GET(documentID, async function(response) {
             <div class="row">
                 <div class="card col-12 border-dark mb-3" style="margin-top: 2em; margin-bottom: 2em; margin-right: 0; background: #dddddd; right: 0;">
                     <button class="card-button" onclick="location.href='profile?id=${userData}'">
-                        <img src="images/account.png" height="20px" width="20px" style="vertical-align: middle;">
+                        <img src="images/${res.data[0].profileImg}" height="45px" width="45px" style="vertical-align: middle;">
                         <div>${response.data[index].username}</div>
                     </button>
                     <div class="card-body text-dark" ">
@@ -322,3 +291,93 @@ api.GET(documentID, async function(response) {
         elements.innerHTML += `<button type="button" id="nextbutton" onclick="location.href = '/?page=${page}';" class="btn btn-sm btn-outline-secondary" style="margin: 20px;">Next</button>`
     }
 });
+
+
+function signEvent(){
+    const element = $('.signStatus').text();
+    if (element.includes('Sign Out')) {
+        deleteCookies();
+         document.location.reload();
+    }
+    if (element.includes('Sign In')) {
+        document.location.href = 'user'
+    }
+}
+
+//Function for clearing cookies
+function deleteCookies() {
+    var allCookies = document.cookie.split(';');
+    
+    // The "expire" attribute of every cookie is 
+    // Set to "Thu, 01 Jan 1970 00:00:00 GMT"
+    for (var i = 0; i < allCookies.length; i++)
+        document.cookie = allCookies[i] + "=;expires="
+        + new Date(0).toUTCString();
+}
+
+
+//Create Post Actions Button
+async function secondaryCreateFunction(){
+
+    let current = window.location.href;
+
+
+    if(document.cookie.split("=")[1]){
+        if (window.location.href == document.location.origin || window.location.href == document.location.origin + '/'){
+            showCreatePostForm();
+        }
+        else{
+            window.location.href = document.location.origin;
+            document.addEventListener('DOMContentLoaded', function(){
+                showCreatePostForm();
+            });
+        }
+    }
+    else{
+        if (current.includes("/")){
+            current = (current.split("/"))[0] + '/user';
+        }
+        else{
+            current = current + '/user';
+        }
+        window.location.href = current;
+    }
+
+};
+
+//check if a user is signed in
+function checkSignedIn() {
+    if (document.cookie.split("=")[1]) {
+        api.GET_USER(document.cookie.split("=")[1], function(response) {
+            axios.get(`${api.endpoint}getuserid/Users/${response.username}`,{}).then(function(res){
+                $(".profileIMG").attr("src", `images/${res.data[0].profileImg}`);
+                $(".profileIMG").attr("onclick", `location.href='profile?id=${res.data[0]._id}'`)
+                $(".profileUsername").text(response.username)
+            })
+        })
+    }
+}
+
+//Go to Own Profile Function
+function goToSelfProfile(){
+    let selfID
+    let cookie = document.cookie.split("=")[1]
+    if(cookie){
+        api.GET_USER(cookie, function(response) {
+            selfID = response._id;
+            document.location.href = `profile?id=${selfID}`;
+        });
+    }
+    else{
+        window.location.href = 'user';
+    }
+
+}
+
+function goHome(){
+    document.location.href = '/'
+}
+
+function goTermsConditions(){
+    document.location.href = '/Terms&Conditions';
+}
