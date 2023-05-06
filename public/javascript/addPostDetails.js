@@ -18,12 +18,14 @@ api.GET(documentID, async function(response) {
         if (id == response.data[i].id && id != 0) {
             var post = response.data[i];
             $("#title").text(post.title);
+            $(".pageTitle").text(post.title + " - " + post.username);
+            $("title").text("BBB Music - " + post.title)
             await axios.get(`${api.endpoint}getuserid/Users/${post.username}`,{}).then(async function(res){
                 profileImg = res.data[0].profileImg
                 $("#user").html(`
                 <button class="user-button" onclick="location.href='profile?id=${res.data[0]._id}'">
                         <img src="/images/${res.data[0].profileImg}" height="50px" width="50px" style="vertical-align: middle;">
-                        <div>${post.username}</div>
+                        <div style="color: white;">${post.username}</div>
                 </button>
                 `)
             }).catch(function(error){
@@ -43,7 +45,7 @@ api.GET(documentID, async function(response) {
                     commentUserId = res2.data[0]._id
                     commentProfileImg = res2.data[0].profileImg
                     $("#post-comments").append(`
-                    <div class="border rounded p-2 mb-1">
+                    <div class="border rounded p-2 mb-2" style="background: #ccc; color: black;">
                         <button class="card-button" onclick="location.href='profile?id=${commentUserId}'" style="margin-left: 0; margin-top: 0;">
                             <img src="images/${commentProfileImg}" height="45px" width="45px" style="vertical-align: middle;">
                             <div>${comment.commentUsername}</div>
@@ -257,6 +259,67 @@ async function checkLikeStatus() {
     else if (likeCount > 1) {
         $("#likeCount").text(likeCount + " likes");
     }
+}
+
+function signEvent(){
+    const element = $('.signStatus').text();
+    if (element.includes('Sign Out')) {
+        deleteCookies();
+        alertUser("User logged out");
+    }
+    if (element.includes('Sign In')) {
+        document.location.href = 'user'
+    }
+}
+
+//Function for clearing cookies
+function deleteCookies() {
+    var allCookies = document.cookie.split(';');
+    
+    // The "expire" attribute of every cookie is 
+    // Set to "Thu, 01 Jan 1970 00:00:00 GMT"
+    for (var i = 0; i < allCookies.length; i++)
+        document.cookie = allCookies[i] + "=;expires="
+        + new Date(0).toUTCString();
+}
+//check if a user is signed in
+function checkSignedIn() {
+    if (document.cookie.split("=")[1]) {
+        api.GET_USER(document.cookie.split("=")[1], function(response) {
+            axios.get(`${api.endpoint}getuserid/Users/${response.username}`,{}).then(function(res){
+                $(".profileIMG").attr("src", `images/${res.data[0].profileImg}`);
+                $(".profileIMG").attr("onclick", `location.href='profile?id=${res.data[0]._id}'`)
+                $(".profileUsername").text(response.username)
+            })
+        })
+    }
+}
+
+//Go to Own Profile Function
+function goToSelfProfile(){
+    let selfID
+    let cookie = document.cookie.split("=")[1]
+    if(cookie){
+        api.GET_USER(cookie, function(response) {
+            selfID = response._id;
+            document.location.href = `profile?id=${selfID}`;
+        });
+    }
+    else{
+        window.location.href = 'user';
+    }
+
+}
+
+function goHome(){
+    document.location.href = '/'
+}
+
+function goTermsConditions(){
+    document.location.href = '/Terms&Conditions';
+}
+function goAboutUs(){
+    document.location.href = '/aboutUs';
 }
 
 function displayCommentCount() {
