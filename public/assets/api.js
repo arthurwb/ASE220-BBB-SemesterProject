@@ -77,20 +77,24 @@ const api={
 			case "addLike":
 				console.log("PUT: add like");
 				console.log(`${api.endpoint}${documentID}/${id}/${type}`)
-				axios.put(`${api.endpoint}${documentID}/${id}/${type}`,data).then(function(response){
-					console.log(response);
-				}).catch(function(error) {
-					console.log("axios: add like error: "+error);
-				});
+				if (data.username != null && data.username != undefined) {
+					axios.put(`${api.endpoint}${documentID}/${id}/${type}`,data).then(function(response){
+						console.log(response);
+					}).catch(function(error) {
+						console.log("axios: add like error: "+error);
+					});
+				}
 				break;
 			case "removeLike":
 				console.log("PUT: remove like");
 				console.log(`${api.endpoint}${documentID}/${id}/${type}`)
-				axios.put(`${api.endpoint}${documentID}/${id}/${type}`,data).then(function(response){
-					console.log(response);
-				}).catch(function(error) {
-					console.log("axios: remove like error: "+error);
-				});
+				if (data.username != null && data.username != undefined) {
+					axios.put(`${api.endpoint}${documentID}/${id}/${type}`,data).then(function(response){
+						console.log(response);
+					}).catch(function(error) {
+						console.log("axios: remove like error: "+error);
+					});
+				}
 				break
 			default:
 				console.log("PUT type error");
