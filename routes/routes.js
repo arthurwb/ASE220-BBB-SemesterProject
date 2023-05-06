@@ -45,4 +45,10 @@ router.get('/footer', (req,res) => {
   res.sendFile(path.join(__dirname, '../views', 'footer.html'));
 });
 
+//Serve aboutUs.html
+router.get('/aboutUs', (req,res) => {
+  console.log("<ABOUT US PAGE>");
+  res.sendFile(path.join(__dirname, '../views', 'aboutUs.html'));
+});
+
 module.exports = router;

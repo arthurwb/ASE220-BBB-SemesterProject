@@ -18,7 +18,6 @@ function getCurrentDateTime() {
 }
 
 function showCreatePostForm() {
-    alert("Test")
     if(document.cookie.split("=")[1]){
         // Hide the original "Create New Post" button
         $("#create-post-button").addClass("d-none").removeClass("d-block");
@@ -130,6 +129,25 @@ function search() {
     }
 }
 
+function alertUser(text, location) {
+    let sendTo = ""
+    if (!location) {
+        sendTo = "document.location.reload();";
+    } else {
+        sendTo = `document.location.href = "${location}"`;
+    }
+    $("body").append(`
+    <div class="fixed-top fixed-bottom d-flex justify-content-center align-items-center" style="background-color: rgba(0, 0, 0, 0.8);">
+        <div class="d-flex justify-content-center align-items-center bg-warning rounded" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <div class="text-center p-2">
+                ${text}
+                <button class="btn btn-primary d-block" type="button" onclick="${sendTo}">Close</button>
+            </div>
+        </div>
+    </div>
+    `)
+}
+
 // used to test the validation of a new post
 function validation(username, title, review, rating) {
     let response;
@@ -192,11 +210,10 @@ function createPost() {
 
             // Send an UPDATE request
             api.PUT(documentID, newData, -1, "post");
-            alert("Post Created");
-            document.location.reload();
+            alertUser("Post Created");
         });
     } else {
-        alert("Input not valid")
+        alertUser("Post details not valid");
     }
   }    
 
@@ -299,7 +316,7 @@ function signEvent(){
     const element = $('.signStatus').text();
     if (element.includes('Sign Out')) {
         deleteCookies();
-         document.location.reload();
+        alertUser("User logged out");
     }
     if (element.includes('Sign In')) {
         document.location.href = 'user'
@@ -316,36 +333,31 @@ function deleteCookies() {
         document.cookie = allCookies[i] + "=;expires="
         + new Date(0).toUTCString();
 }
+// //Create Post Actions Button
+// async function secondaryCreateFunction(){
+//     let current = window.location.href;
+//     if(document.cookie.split("=")[1]){
+//         if (window.location.href == document.location.origin || window.location.href == document.location.origin + '/'){
+//             showCreatePostForm();
+//         }
+//         else{
+//             window.location.href = document.location.origin;
+//             document.addEventListener('DOMContentLoaded', function(){
+//                 showCreatePostForm();
+//             });
+//         }
+//     }
+//     else{
+//         if (current.includes("/")){
+//             current = (current.split("/"))[0] + '/user';
+//         }
+//         else{
+//             current = current + '/user';
+//         }
+//         window.location.href = current;
+//     }
 
-
-//Create Post Actions Button
-async function secondaryCreateFunction(){
-
-    let current = window.location.href;
-
-
-    if(document.cookie.split("=")[1]){
-        if (window.location.href == document.location.origin || window.location.href == document.location.origin + '/'){
-            showCreatePostForm();
-        }
-        else{
-            window.location.href = document.location.origin;
-            document.addEventListener('DOMContentLoaded', function(){
-                showCreatePostForm();
-            });
-        }
-    }
-    else{
-        if (current.includes("/")){
-            current = (current.split("/"))[0] + '/user';
-        }
-        else{
-            current = current + '/user';
-        }
-        window.location.href = current;
-    }
-
-};
+// };
 
 //check if a user is signed in
 function checkSignedIn() {
@@ -382,4 +394,7 @@ function goHome(){
 
 function goTermsConditions(){
     document.location.href = '/Terms&Conditions';
+}
+function goAboutUs(){
+    document.location.href = '/aboutUs';
 }

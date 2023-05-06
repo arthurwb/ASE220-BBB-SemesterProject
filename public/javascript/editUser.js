@@ -28,14 +28,33 @@ function cancelForm() {
     $("#login-button").addClass("d-block").removeClass("d-none");
 }
 
+function alertUser(text, location) {
+    let sendTo = ""
+    if (!location) {
+        sendTo = "document.location.reload();";
+    } else {
+        sendTo = `document.location.href = "${location}"`;
+    }
+    $("body").append(`
+    <div class="fixed-top fixed-bottom d-flex justify-content-center align-items-center" style="background-color: rgba(0, 0, 0, 0.8);">
+        <div class="d-flex justify-content-center align-items-center bg-warning rounded" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <div class="text-center p-2">
+                ${text}
+                <button class="btn btn-primary d-block" type="button" onclick="${sendTo}">Close</button>
+            </div>
+        </div>
+    </div>
+    `)
+}
+
 function validation(username, password, email) {
     let response;
 
-    if (username == "") {
+    if (username == null) {
         response = false;
     } else if (password == null) {
         response = false;
-    } else if (email == "") {
+    } else if (email == null) {
         response = false;
     } else {
         response = true;
@@ -46,13 +65,13 @@ function validation(username, password, email) {
 
 function verification(flag) {
     // flag: true = success; false = fail
-    let userCreationSuccess = `
-    <div class="bg-success text-white p-1 m-1 w-25 text-center rounded">
+    const userCreationSuccess = `
+    <div class="bg-success text-white p-2 m-1 text-center rounded">
         User Created!
     </div>
     `;
-    let userCreationError = `
-    <div class="bg-danger text-white p-1 m-1 w-25 text-center rounded">
+    const userCreationError = `
+    <div class="bg-danger text-white p-2 m-1 text-center rounded">
             Invalid Input
     </div>
     `;
@@ -74,35 +93,41 @@ function createNewUser() {
     const email = $("#email").val() || null;
     const firstName = $("#firstName").val() || null;
     const bio = $("#bio").val() || null;
-    const profileImg = "profile_img_8.png"
-    console.log()
-    axios({
-        method: 'post',
-        url: '/api/data/auth/signup',
-        data: {
-            username:username,
-            password:password,
-            email:email,
-            firstName:firstName,
-            bio:bio,
-            profileImg:profileImg
-        },
-            validateStatus:()=>true
-    })
-        .then(function (response) {
-        console.log(response);
-        document.location.href = document.location.origin;
+    const profileImg = "profile_img_8.png";
+    let flag = false;
+    if (validation(username, password, email)) {
+        flag = true
+        axios({
+            method: 'post',
+            url: '/api/data/auth/signup',
+            data: {
+                username:username,
+                password:password,
+                email:email,
+                firstName:firstName,
+                bio:bio,
+                profileImg:profileImg
+            },
+                validateStatus:()=>true
         })
-        .catch(function (error) {
-        if (document.getElementById("loginErrorCode").style.visibility = 'visible'){
-            document.getElementById("loginErrorCode").style.visibility = 'hidden';
-            document.getElementById("createAccoundErrorCode").style.visibility = 'visible';
-        }
-        else{
-            document.getElementById("createAccoundErrorCode").style.visibility = 'visible';
-        }
-        console.log(error);
-        });
+            .then(function (response) {
+            console.log(response);
+            document.location.href = document.location.origin;
+            })
+            .catch(function (error) {
+            if (document.getElementById("loginErrorCode").style.visibility = 'visible'){
+                document.getElementById("loginErrorCode").style.visibility = 'hidden';
+                document.getElementById("createAccoundErrorCode").style.visibility = 'visible';
+            }
+            else{
+                document.getElementById("createAccoundErrorCode").style.visibility = 'visible';
+            }
+            console.log(error);
+            });
+    } else {
+        flag = false;
+    }
+    verification(flag);
 }
 
 async function deleteUser(index) {
