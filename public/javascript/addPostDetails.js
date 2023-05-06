@@ -47,7 +47,10 @@ api.GET(documentID, async function(response) {
                 })
             });
             api.GET_USER(document.cookie.split("=")[1], function(response) {
-                if (response.username == post.username) {
+                if (response.username == post.username || response.admin == true) {
+                    console.log("display delete button");
+                    console.log(document.cookie.split("=")[1]);
+                    console.log(post.username);
                     $("#deleteHolder").html(`<button id="post-delete-button" type="button" class="btn btn-error d-block" onclick="deletePost()">Delete Post</button>`);
                 }
             });
