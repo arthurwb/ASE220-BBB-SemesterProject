@@ -17,9 +17,19 @@ api.GET(documentID, async function(response) {
     for (i = 0; i < response.data.length; i++) {
         if (id == response.data[i].id && id != 0) {
             var post = response.data[i];
-            $("#title").text(post.title);
-            $(".pageTitle").text(post.title + " - " + post.username);
-            $("title").text("BBB Music - " + post.title)
+            $(async function() {
+                await Promise.all([
+                    new Promise((resolve, reject) => {
+                        $("#header").load("/header", resolve);
+                    }),
+                    new Promise((resolve, reject) => {
+                        $("#footer").load("/footer", resolve);
+                    })
+                ]);
+                $("#title").text(post.title);
+                $(".pageTitle").text(post.title + " - " + post.username);
+                $("title").text("BBB Music - " + post.title)
+            });
             await axios.get(`${api.endpoint}getuserid/Users/${post.username}`,{}).then(async function(res){
                 profileImg = res.data[0].profileImg
                 $("#user").html(`
