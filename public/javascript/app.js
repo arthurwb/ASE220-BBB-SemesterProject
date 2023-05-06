@@ -262,7 +262,7 @@ api.GET(documentID, async function(response) {
             }
             var newPost = `
             <div class="row">
-                <div class="card col-12 border-dark mb-3" style="margin-top: 2em; margin-bottom: 2em; margin-right: 0; background: #dddddd; right: 0;">
+                <div class="card offset-1 col-10  border-dark mb-3" style="margin-top: 2em; margin-bottom: 2em; margin-right: 0; background: #dddddd; right: 0;">
                     <button class="card-button" onclick="location.href='profile?id=${userData}'">
                         <img src="images/${res.data[0].profileImg}" height="45px" width="45px" style="vertical-align: middle;">
                         <div>${response.data[index].username}</div>
