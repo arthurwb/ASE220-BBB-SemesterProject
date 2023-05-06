@@ -169,26 +169,28 @@ function showEditPostForm() {
 
 // most of this code has been taken from app.js and slightly altered
 function showCreateCommentForm() {
-    //if ($("#"))
-    if (document.cookie.split("=")[1]) {
-        api.GET_USER(document.cookie.split("=")[1], function(response) {
-            $("#username").text(response.username);
-            // Show the form
-            $("#comment-form").addClass("d-block").removeClass("d-none");
-        });
-    } else {
-        $("#username").text("Not signed in");
+    if ($("#comment-form").hasClass("d-block")) {
+        $("#comment-form").addClass("d-none").removeClass("d-block");
+    }
+    else {
+        if (document.cookie.split("=")[1]) {
+            api.GET_USER(document.cookie.split("=")[1], function(response) {
+                $("#username").text(response.username);
+                // Show the form
+                $("#comment-form").addClass("d-block").removeClass("d-none");
+            });
+        } else {
+            $("#username").text("Not signed in");
+        }
     }
 }
 
 async function commentSubmitForm() {
     createComment();
-    $("#post-comment-button").addClass("d-block").removeClass("d-none");
     $("#comment-form").addClass("d-none").removeClass("d-block");
 }
 
 function commentCancelForm() {
-    $("#post-comment-button").addClass("d-block").removeClass("d-none");
     $("#comment-form").addClass("d-none").removeClass("d-block");
 }
 
