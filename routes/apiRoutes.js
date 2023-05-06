@@ -208,6 +208,22 @@ router.put('/data/:collection/:id/:type', async (req, res) => {
         {$set: {profileImg: req.body.profileImg}}
       )
       break;
+    case "addLike":
+      console.log(req.body.username);
+      console.log(req.params["id"])
+      result = await dbo.collection(req.params["collection"]).updateOne(
+        {_id:new ObjectId(req.params["id"])},
+        {$push: {likes: req.body.username}}
+      )
+      break;
+    case "removeLike":
+      console.log(req.body.username);
+      console.log(req.params["id"]);
+      result = await dbo.collection(req.params["collection"]).updateMany(
+        {_id: new ObjectId(req.params["id"])},
+        {$pull: {likes: req.body.username}}
+      );
+      break;
     default:
       console.log("incorrect type entered");
       break;
