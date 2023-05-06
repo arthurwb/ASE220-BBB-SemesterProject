@@ -157,8 +157,7 @@ function showEditPostForm() {
 
 // most of this code has been taken from app.js and slightly altered
 function showCreateCommentForm() {
-    // Hide the original "Create New Comment" button
-    $("#post-comment-button").addClass("d-none").removeClass("d-block");
+    //if ($("#"))
     if (document.cookie.split("=")[1]) {
         api.GET_USER(document.cookie.split("=")[1], function(response) {
             $("#username").text(response.username);
