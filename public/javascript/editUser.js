@@ -46,13 +46,13 @@ function validation(username, password, email) {
 
 function verification(flag) {
     // flag: true = success; false = fail
-    let userCreationSuccess = `
-    <div class="bg-success text-white p-1 m-1 w-25 text-center rounded">
+    const userCreationSuccess = `
+    <div class="bg-success text-white p-2 m-1 text-center rounded">
         User Created!
     </div>
     `;
-    let userCreationError = `
-    <div class="bg-danger text-white p-1 m-1 w-25 text-center rounded">
+    const userCreationError = `
+    <div class="bg-danger text-white p-2 m-1 text-center rounded">
             Invalid Input
     </div>
     `;
@@ -74,35 +74,41 @@ function createNewUser() {
     const email = $("#email").val() || null;
     const firstName = $("#firstName").val() || null;
     const bio = $("#bio").val() || null;
-    const profileImg = "profile_img_8.png"
-    console.log()
-    axios({
-        method: 'post',
-        url: '/api/data/auth/signup',
-        data: {
-            username:username,
-            password:password,
-            email:email,
-            firstName:firstName,
-            bio:bio,
-            profileImg:profileImg
-        },
-            validateStatus:()=>true
-    })
-        .then(function (response) {
-        console.log(response);
-        document.location.href = document.location.origin;
+    const profileImg = "profile_img_8.png";
+    let flag = false;
+    if (validation(username, password, email)) {
+        flag = true
+        axios({
+            method: 'post',
+            url: '/api/data/auth/signup',
+            data: {
+                username:username,
+                password:password,
+                email:email,
+                firstName:firstName,
+                bio:bio,
+                profileImg:profileImg
+            },
+                validateStatus:()=>true
         })
-        .catch(function (error) {
-        if (document.getElementById("loginErrorCode").style.visibility = 'visible'){
-            document.getElementById("loginErrorCode").style.visibility = 'hidden';
-            document.getElementById("createAccoundErrorCode").style.visibility = 'visible';
-        }
-        else{
-            document.getElementById("createAccoundErrorCode").style.visibility = 'visible';
-        }
-        console.log(error);
-        });
+            .then(function (response) {
+            console.log(response);
+            document.location.href = document.location.origin;
+            })
+            .catch(function (error) {
+            if (document.getElementById("loginErrorCode").style.visibility = 'visible'){
+                document.getElementById("loginErrorCode").style.visibility = 'hidden';
+                document.getElementById("createAccoundErrorCode").style.visibility = 'visible';
+            }
+            else{
+                document.getElementById("createAccoundErrorCode").style.visibility = 'visible';
+            }
+            console.log(error);
+            });
+    } else {
+        flag = false;
+    }
+    verification(flag);
 }
 
 async function deleteUser(index) {

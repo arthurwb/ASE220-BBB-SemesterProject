@@ -80,10 +80,6 @@ function editPost() {
     document.location.reload();
 }
 
-function displaySuccessMessage() {
-    console.log('Post successfully added!');
-}
-
 // used to test the validation of a new comment
 function validation(commentUsername, commentText) {
     let response;
@@ -109,13 +105,13 @@ async function createComment() {
         commentText: commentText
     }
 
-    if (validation(commentUsername, commentText)) {
+    if (validation(commentUsername, commentText) && commentUsername != "Not signed in") {
         api.PUT(documentID,newComment,id,"comment",function(putRes){
             console.log(putRes);
-            displaySuccessMessage();
-            // reloads the page so that you can see the new comment
-            document.location.reload();
         });
+        alert("Comment created");
+        document.location.reload();
+
     } else {
         alert("Username or comment text left empty");
     }
@@ -128,6 +124,7 @@ function showEditPostForm() {
     $("#editHolder").html(`
         <input type="text" class="form-control" id="newReview" value="${reviewText}"></input>
         <button id="editPostButton" type="button" onclick="editPost()">Submit</button>
+        <button id="undoEdit" type="button" onclick="document.location.reload();">Close</button>
     `)
 }
 
@@ -149,7 +146,6 @@ function showCreateCommentForm() {
 
 async function commentSubmitForm() {
     createComment();
-    console.log('Comment submitted!');
     $("#post-comment-button").addClass("d-block").removeClass("d-none");
     $("#comment-form").addClass("d-none").removeClass("d-block");
 }
