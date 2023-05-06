@@ -52,6 +52,7 @@ api.GET(documentID, async function(response) {
                     console.log(document.cookie.split("=")[1]);
                     console.log(post.username);
                     $("#deleteHolder").html(`<button id="post-delete-button" type="button" class="btn btn-error d-block" onclick="deletePost()">Delete Post</button>`);
+                    $("#editHolder").html(`<button id="post-edit-button" type="button" class="btn btn-warning d-block" onclick="showEditPostForm()">Edit Post</button>`);
                 }
             });
         }
@@ -67,6 +68,16 @@ function deletePost() {
         alert("Post Deleted");
         document.location.href = "/";
     });
+}
+
+function editPost() {
+    const data = $("#newReview").val();
+    console.log("editPost: " + data);
+    api.PUT(documentID, { review: data }, id, "editPost", function(putRes) {
+        console.log(putRes);
+    });
+    alert("Post Updated");
+    document.location.reload();
 }
 
 function displaySuccessMessage() {
@@ -108,6 +119,16 @@ async function createComment() {
     } else {
         alert("Username or comment text left empty");
     }
+}
+
+function showEditPostForm() {
+    const prefix = "Review - ";
+    const prefixIndex = $("#review").text().indexOf(prefix);
+    const reviewText = $("#review").text().slice(prefixIndex + prefix.length);
+    $("#editHolder").html(`
+        <input type="text" class="form-control" id="newReview" value="${reviewText}"></input>
+        <button id="editPostButton" type="button" onclick="editPost()">Submit</button>
+    `)
 }
 
 // most of this code has been taken from app.js and slightly altered
