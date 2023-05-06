@@ -10,6 +10,7 @@ let commentProfileImg;
 let commentUserId;
 let likesArray = [];
 let likeCount = 0;
+let commentCount = 0;
 
 //appends data to post page
 api.GET(documentID, async function(response) {  
@@ -37,6 +38,7 @@ api.GET(documentID, async function(response) {
             $("#rating").text(`Rating - ${post.rating} out of 10`);
             $("#review").text(`Review - ${post.review}`);
             post.comments.forEach(comment => {
+                commentCount++
                 axios.get(`${api.endpoint}getuserid/Users/${comment.commentUsername}`,{}).then(function(res2){
                     commentUserId = res2.data[0]._id
                     commentProfileImg = res2.data[0].profileImg
@@ -63,6 +65,7 @@ api.GET(documentID, async function(response) {
         }
     }
     checkLikeStatus();
+    displayCommentCount();
 });
 
 function alertUser(text, location) {
@@ -254,5 +257,17 @@ async function checkLikeStatus() {
     }
     else if (likeCount > 1) {
         $("#likeCount").text(likeCount + " likes");
+    }
+}
+
+function displayCommentCount() {
+    if (commentCount == 0) {
+        $("#commentCount").text("");
+    }
+    else if (commentCount == 1) {
+        $("#commentCount").text(commentCount + " comment");
+    }
+    else if (commentCount > 1) {
+        $("#commentCount").text(commentCount + " comments");
     }
 }
