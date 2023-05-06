@@ -316,7 +316,8 @@ function signEvent(){
     const element = $('.signStatus').text();
     if (element.includes('Sign Out')) {
         deleteCookies();
-        alertUser("User logged out");
+        // alertUser("User logged out");
+        document.location.reload();
     }
     if (element.includes('Sign In')) {
         document.location.href = 'user'
