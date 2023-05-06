@@ -39,7 +39,7 @@ api.GET(documentID, function(response) {
                 `);
             });
             api.GET_USER(document.cookie.split("=")[1], function(response) {
-                if (response.username == post.username) {
+                if (response.username == post.username || response.admin == true) {
                     console.log("display delete button");
                     console.log(document.cookie.split("=")[1]);
                     console.log(post.username);
