@@ -182,3 +182,65 @@ function submitForm(isNewUser) {
     $("#create-user-button").addClass("d-block").removeClass("d-none");
     $("#login-button").addClass("d-block").removeClass("d-none");
 }
+
+function signEvent(){
+    const element = $('.signStatus').text();
+    if (element.includes('Sign Out')) {
+        deleteCookies();
+        // alertUser("User logged out");
+        document.location.reload();
+    }
+    if (element.includes('Sign In')) {
+        document.location.href = 'user'
+    }
+}
+
+//Function for clearing cookies
+function deleteCookies() {
+    var allCookies = document.cookie.split(';');
+    
+    // The "expire" attribute of every cookie is 
+    // Set to "Thu, 01 Jan 1970 00:00:00 GMT"
+    for (var i = 0; i < allCookies.length; i++)
+        document.cookie = allCookies[i] + "=;expires="
+        + new Date(0).toUTCString();
+}
+//check if a user is signed in
+function checkSignedIn() {
+    if (document.cookie.split("=")[1]) {
+        api.GET_USER(document.cookie.split("=")[1], function(response) {
+            axios.get(`${api.endpoint}getuserid/Users/${response.username}`,{}).then(function(res){
+                $(".profileIMG").attr("src", `images/${res.data[0].profileImg}`);
+                $(".profileIMG").attr("onclick", `location.href='profile?id=${res.data[0]._id}'`)
+                $(".profileUsername").text(response.username)
+            })
+        })
+    }
+}
+
+//Go to Own Profile Function
+function goToSelfProfile(){
+    let selfID
+    let cookie = document.cookie.split("=")[1]
+    if(cookie){
+        api.GET_USER(cookie, function(response) {
+            selfID = response._id;
+            document.location.href = `profile?id=${selfID}`;
+        });
+    }
+    else{
+        window.location.href = 'user';
+    }
+
+}
+
+function goHome(){
+    document.location.href = '/'
+}
+
+function goTermsConditions(){
+    document.location.href = '/Terms&Conditions';
+}
+function goAboutUs(){
+    document.location.href = '/aboutUs';
+}
