@@ -70,8 +70,8 @@ api.GET(documentID, async function(response) {
                     console.log("display delete button");
                     console.log(document.cookie.split("=")[1]);
                     console.log(post.username);
-                    $("#deleteHolder").html(`<button id="post-delete-button" type="button" class="btn btn-error d-block" onclick="deletePost()">Delete Post</button>`);
-                    $("#editHolder").html(`<button id="post-edit-button" type="button" class="btn btn-warning d-block" onclick="showEditPostForm()">Edit Post</button>`);
+                    $("#deleteHolder").html(`<button id="post-delete-button" type="button" class="btn btn-primary m-1 d-block" onclick="deletePost()">Delete Post</button>`);
+                    $("#editHolder").html(`<button id="post-edit-button" type="button" class="btn btn-warning m-1 d-block" onclick="showEditPostForm()">Edit Post</button>`);
                 }
             });
         }
@@ -85,7 +85,7 @@ function alertUser(text, location) {
     if (!location) {
         sendTo = "document.location.reload();";
     } else {
-        sendTo = `document.location.href = "${location}"`;
+        sendTo = `document.location.href = '${location}'`;
     }
     $("body").append(`
     <div class="fixed-top fixed-bottom d-flex justify-content-center align-items-center" style="background-color: rgba(0, 0, 0, 0.8);">
@@ -105,8 +105,7 @@ function deletePost() {
     const postDelete = { id: parseInt(id) };
     api.DELETE(documentID, postDelete, function(response) {
         console.log(response);
-        alert("Post Deleted", "/");
-        document.location.href = "/";
+        alertUser("Post Deleted", "/");
     });
 }
 
@@ -116,8 +115,7 @@ function editPost() {
     api.PUT(documentID, { review: data }, id, "editPost", function(putRes) {
         console.log(putRes);
     });
-    alert("Post Updated");
-    document.location.reload();
+    alertUser("Post Updated");
 }
 
 // used to test the validation of a new comment
@@ -161,9 +159,9 @@ function showEditPostForm() {
     const prefixIndex = $("#review").text().indexOf(prefix);
     const reviewText = $("#review").text().slice(prefixIndex + prefix.length);
     $("#editHolder").html(`
-        <input type="text" class="form-control" id="newReview" value="${reviewText}"></input>
-        <button id="editPostButton" type="button" onclick="editPost()">Submit</button>
-        <button id="undoEdit" type="button" onclick="document.location.reload();">Close</button>
+        <input type="text" class="form-control m-1" id="newReview" value="${reviewText}"></input>
+        <button id="editPostButton" class="btn btn-warning" type="button" onclick="editPost()">Submit</button>
+        <button id="undoEdit" class="btn btn-warning" type="button" onclick="document.location.reload();">Close</button>
     `)
 }
 

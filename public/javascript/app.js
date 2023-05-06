@@ -171,50 +171,51 @@ function createPost() {
     let username = "username error";
     api.GET_USER(document.cookie.split("=")[1], function(response) {
         username = response.username;
-        console.log(username)
+        console.log(username);
+
+        const artist = $("#artist").val() || null;
+        const album = $("#album").val() || null;
+        const song = $("#song").val() || null;
+        const rating = $("#rating").val() || null;
+        const title = $("#title").val();
+        const review = $("#review").val();
+        const timestamp = getCurrentDateTime();
+        const comments = [];
+        const likes = [];
+        let isValid = validation(username, title, review, rating);
+
+        if (isValid) {
+            // Get the current data from the JSON blob
+            api.GET(documentID, function(response) {
+                // Generate a random 6 digit number that is not already in use
+                let id = Math.floor(Math.random() * 900000) + 100000;
+                while (response.data.some(post => post.id === id)) {
+                id = Math.floor(Math.random() * 900000) + 100000;
+                }
+
+                // Create a data object with the form input values and assigned ID
+                const newData = {
+                username,
+                artist,
+                album,
+                song,
+                rating,
+                title,
+                review,
+                timestamp,
+                id,
+                comments,
+                likes,
+                };
+
+                // Send an UPDATE request
+                api.PUT(documentID, newData, -1, "post");
+                alertUser("Post Created");
+            });
+        } else {
+            alertUser("Post details not valid");
+        }
     });
-    const artist = $("#artist").val() || null;
-    const album = $("#album").val() || null;
-    const song = $("#song").val() || null;
-    const rating = $("#rating").val() || null;
-    const title = $("#title").val();
-    const review = $("#review").val();
-    const timestamp = getCurrentDateTime();
-    const comments = [];
-    const likes = [];
-    let isValid = validation(username, title, review, rating);
-
-    if (isValid) {
-        // Get the current data from the JSON blob
-        api.GET(documentID, function(response) {
-            // Generate a random 6 digit number that is not already in use
-            let id = Math.floor(Math.random() * 900000) + 100000;
-            while (response.data.some(post => post.id === id)) {
-            id = Math.floor(Math.random() * 900000) + 100000;
-            }
-
-            // Create a data object with the form input values and assigned ID
-            const newData = {
-            username,
-            artist,
-            album,
-            song,
-            rating,
-            title,
-            review,
-            timestamp,
-            id,
-            comments,
-            likes,
-            };
-
-            // Send an UPDATE request
-            api.PUT(documentID, newData, -1, "post");
-            alertUser("Post Created");
-        });
-    } else {
-        alertUser("Post details not valid");
-    }
   }    
 
 //initilize variables
