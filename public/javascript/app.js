@@ -181,7 +181,6 @@ function createPost() {
     const review = $("#review").val();
     const timestamp = getCurrentDateTime();
     const comments = [];
-    const likes = [];
     let isValid = validation(username, title, review, rating);
 
     if (isValid) {
@@ -205,7 +204,6 @@ function createPost() {
             timestamp,
             id,
             comments,
-            likes,
             };
 
             // Send an UPDATE request

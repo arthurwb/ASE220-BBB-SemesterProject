@@ -50,11 +50,11 @@ function alertUser(text, location) {
 function validation(username, password, email) {
     let response;
 
-    if (username == null) {
+    if (username == "") {
         response = false;
     } else if (password == null) {
         response = false;
-    } else if (email == null) {
+    } else if (email == "") {
         response = false;
     } else {
         response = true;
