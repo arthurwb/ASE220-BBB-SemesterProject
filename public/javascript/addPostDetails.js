@@ -320,6 +320,7 @@ function goTermsConditions(){
 }
 function goAboutUs(){
     document.location.href = '/aboutUs';
+}
 
 function displayCommentCount() {
     if (commentCount == 0) {
