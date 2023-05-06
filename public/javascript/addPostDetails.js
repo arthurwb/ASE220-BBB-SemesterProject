@@ -47,13 +47,36 @@ api.GET(documentID, async function(response) {
                 })
             });
             api.GET_USER(document.cookie.split("=")[1], function(response) {
-                if (response.username == post.username) {
+                if (response.username == post.username || response.admin == true) {
+                    console.log("display delete button");
+                    console.log(document.cookie.split("=")[1]);
+                    console.log(post.username);
                     $("#deleteHolder").html(`<button id="post-delete-button" type="button" class="btn btn-error d-block" onclick="deletePost()">Delete Post</button>`);
+                    $("#editHolder").html(`<button id="post-edit-button" type="button" class="btn btn-warning d-block" onclick="showEditPostForm()">Edit Post</button>`);
                 }
             });
         }
     }
 });
+
+function alertUser(text, location) {
+    let sendTo = ""
+    if (!location) {
+        sendTo = "document.location.reload();";
+    } else {
+        sendTo = `document.location.href = "${location}"`;
+    }
+    $("body").append(`
+    <div class="fixed-top fixed-bottom d-flex justify-content-center align-items-center" style="background-color: rgba(0, 0, 0, 0.8);">
+        <div class="d-flex justify-content-center align-items-center bg-warning rounded" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <div class="text-center p-2">
+                ${text}
+                <button class="btn btn-primary d-block" type="button" onclick="${sendTo}">Close</button>
+            </div>
+        </div>
+    </div>
+    `)
+}
 
 // todo: authenticate 
 function deletePost() {
@@ -61,13 +84,19 @@ function deletePost() {
     const postDelete = { id: parseInt(id) };
     api.DELETE(documentID, postDelete, function(response) {
         console.log(response);
-        alert("Post Deleted");
+        alert("Post Deleted", "/");
         document.location.href = "/";
     });
 }
 
-function displaySuccessMessage() {
-    console.log('Post successfully added!');
+function editPost() {
+    const data = $("#newReview").val();
+    console.log("editPost: " + data);
+    api.PUT(documentID, { review: data }, id, "editPost", function(putRes) {
+        console.log(putRes);
+    });
+    alert("Post Updated");
+    document.location.reload();
 }
 
 // used to test the validation of a new comment
@@ -95,16 +124,26 @@ async function createComment() {
         commentText: commentText
     }
 
-    if (validation(commentUsername, commentText)) {
+    if (validation(commentUsername, commentText) && commentUsername != "Not signed in") {
         api.PUT(documentID,newComment,id,"comment",function(putRes){
             console.log(putRes);
-            displaySuccessMessage();
-            // reloads the page so that you can see the new comment
-            document.location.reload();
         });
+        alertUser("Comment created");
+
     } else {
-        alert("Username or comment text left empty");
+        alertUser("Username or comment text left empty");
     }
+}
+
+function showEditPostForm() {
+    const prefix = "Review - ";
+    const prefixIndex = $("#review").text().indexOf(prefix);
+    const reviewText = $("#review").text().slice(prefixIndex + prefix.length);
+    $("#editHolder").html(`
+        <input type="text" class="form-control" id="newReview" value="${reviewText}"></input>
+        <button id="editPostButton" type="button" onclick="editPost()">Submit</button>
+        <button id="undoEdit" type="button" onclick="document.location.reload();">Close</button>
+    `)
 }
 
 // most of this code has been taken from app.js and slightly altered
@@ -125,7 +164,6 @@ function showCreateCommentForm() {
 
 async function commentSubmitForm() {
     createComment();
-    console.log('Comment submitted!');
     $("#post-comment-button").addClass("d-block").removeClass("d-none");
     $("#comment-form").addClass("d-none").removeClass("d-block");
 }
