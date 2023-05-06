@@ -16,6 +16,7 @@ api.GET(documentID, async function(response) {
         if (id == response.data[i].id && id != 0) {
             var post = response.data[i];
             $("#title").text(post.title);
+            $(".pageTitle").text(post.title);
             await axios.get(`${api.endpoint}getuserid/Users/${post.username}`,{}).then(async function(res){
                 profileImg = res.data[0].profileImg
                 $("#user").html(`
