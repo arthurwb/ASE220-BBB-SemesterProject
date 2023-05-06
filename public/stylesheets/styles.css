@@ -108,8 +108,9 @@ main{
 
 #menu-container {
   position: fixed;
-  top: 0;
   z-index: 9999;
+  right:0 ;
+  
 }
 .menu {
     font-size:1em;
@@ -118,10 +119,10 @@ main{
   }
 
   .menu-div-header{
-   padding-left: 10%;
-   height: 8em;
+   height: 10em;
    text-align: center;
-   margin-top: 2em;
+   margin-top: 1em;
+   padding-bottom: 2em;
    border-bottom: solid gray 2px;
 
   }
@@ -132,7 +133,7 @@ main{
   .profileIMG{
     margin: auto;
     display: block;
-    margin-left: 5em;
+    height: 80%;
   }
 
   .menu div {
@@ -157,41 +158,65 @@ main{
     margin-bottom: 0em;
   }
 
-  .menu--off {
+  /* .menu--off {
     position: absolute;
-    right: -270%;
-    width: 175%;
     display: block;
     background: #eee;
     min-height: 600px;
-    height: 125%;
-    margin-top: 1em;
+    min-width: 300px;
     transition: all 300ms;
   }
   
   .menu--on {
-    right: -5em;
+    width: 175%;
     box-shadow: 8px 8px 20px 0 rgba(0, 0, 0, 0.2);
     transition: all 300ms;
-
   }
+ */
+
+ .menu--off {
+  position: absolute;
+  display: block;
+  background: #eee;
+  min-height: 600px;
+  min-width: 300px;
+  transition: all 300ms;
+  right: -30em;
+
+}
+
+.menu--on {
+  position: absolute;
+  display: inherit;
+  width: 95%;
+  box-shadow: 8px 8px 20px 0 rgba(0, 0, 0, 0.2);
+  transition: all 300ms;
+  right: 0.7em;
+}
+
+
+
+
+
   .material-design-hamburger{
     margin-left: 5em;
-    margin-top: 1em;
+    margin-top: 3em;
+
   }
   .material-design-hamburger button {
     display: block;
     border: none;
     background: none;
+    border-radius: 50%;
     outline: 0;
-
 
   }
   
   .material-design-hamburger__icon {
     padding: 3rem 1rem;
     cursor: pointer;
-
+    margin-right: 8em;
+    margin-bottom: 3em;
   
   }
 
@@ -205,6 +230,7 @@ main{
     position: relative;
     animation-duration: 300ms;
     animation-timing-function: ease-in-out;
+    opacity: 1.0;
 
   }
   
@@ -314,7 +340,7 @@ main{
   }
   
    .custom-btn{
-    text-align: left;
+    text-align: center;
     padding: 1em;
     background: #EEEEEE;
     transition: all 0.3s ease;
