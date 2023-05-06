@@ -51,4 +51,9 @@ router.get('/aboutUs', (req,res) => {
   res.sendFile(path.join(__dirname, '../views', 'aboutUs.html'));
 });
 
+//Route wildcard
+router.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views', 'errorPage.html'));
+});
+
 module.exports = router;
