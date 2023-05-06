@@ -64,25 +64,30 @@ function validation(username, password, email) {
     return response;
 }
 
-function verification(flag) {
-    // flag: true = success; false = fail
-    const userCreationSuccess = `
-    <div class="bg-success text-white p-2 m-1 text-center rounded">
-        User Created!
-    </div>
-    `;
-    const userCreationError = `
-    <div class="bg-danger text-white p-2 m-1 text-center rounded">
-            Invalid Input
-    </div>
-    `;
-
-    if (flag) {
-        $("#creationAlert").addClass("d-block").removeClass("d-none");
-        $("#creationAlert").html(userCreationSuccess);
+function alertUser(text, location) {
+    let sendTo = ""
+    if (!location) {
+        sendTo = "document.location.reload();";
     } else {
-        $("#creationAlert").addClass("d-block").removeClass("d-none");
-        $("#creationAlert").html(userCreationError);
+        sendTo = `document.location.href = '${location}'`;
+    }
+    $("body").append(`
+    <div class="fixed-top fixed-bottom d-flex justify-content-center align-items-center" style="background-color: rgba(0, 0, 0, 0.8);">
+        <div class="d-flex justify-content-center align-items-center bg-warning rounded" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <div class="text-center p-2">
+                ${text}
+                <button class="btn btn-primary d-block" type="button" onclick="${sendTo}">Close</button>
+            </div>
+        </div>
+    </div>
+    `)
+}
+
+function verification(flag, username, password) {
+    if (flag) {
+        login(username, password);
+    } else {
+        alertUser("Missing User Details");
     }
 }
 
@@ -128,7 +133,7 @@ function createNewUser() {
     } else {
         flag = false;
     }
-    verification(flag);
+    verification(flag, username, password);
 }
 
 async function deleteUser(index) {
@@ -137,39 +142,47 @@ async function deleteUser(index) {
     alert("user has been deleted");
 }
 
-function login() {
-    const username = $("#loginUsername").val() || null;
-    const password = $("#loginPassword").val() || null;
-
-    axios({
-        method: 'post',
-        url: '/api/data/auth/signin',
-        config:{
-        headers: {
-            'Authorization': 'Bearer ' + ''
-        }
-        },
-        data: {
-            username:username,
-            password:password
-        },
-            validateStatus:()=>true
-    })
-        .then(function (response){
-        cookies.set('jwt',response.headers.authorization.replace('Bearer ',''))
-        console.log(response.headers.authorization.replace('Bearer ',''));
-        document.location.href = document.location.origin;
+function login(passedUsername, passedPassword) {
+    let username = "";
+    let password = "";
+    if (passedUsername && passedPassword) {
+        username = passedUsername;
+        password = passedPassword;
+    } else {
+        username = $("#loginUsername").val() || null;
+        password = $("#loginPassword").val() || null;    
+    }
+    setTimeout(() => {
+        axios({
+            method: 'post',
+            url: '/api/data/auth/signin',
+            config:{
+            headers: {
+                'Authorization': 'Bearer ' + ''
+            }
+            },
+            data: {
+                username:username,
+                password:password
+            },
+                validateStatus:()=>true
         })
-        .catch(function (error) {
-            if (document.getElementById("createAccoundErrorCode").style.visibility = 'visible'){
-                document.getElementById("createAccoundErrorCode").style.visibility = 'hidden';
-                document.getElementById("loginErrorCode").style.visibility = 'visible';
-            }
-            else{
-                document.getElementById("loginErrorCode").style.visibility = 'visible';
-            }
-        console.log(error);
-        });
+            .then(function (response){
+                cookies.set('jwt',response.headers.authorization.replace('Bearer ',''))
+                console.log(response.headers.authorization.replace('Bearer ',''));
+                document.location.href = document.location.origin;
+            })
+            .catch(function (error) {
+                if (document.getElementById("createAccoundErrorCode").style.visibility = 'visible'){
+                    document.getElementById("createAccoundErrorCode").style.visibility = 'hidden';
+                    document.getElementById("loginErrorCode").style.visibility = 'visible';
+                }
+                else{
+                    document.getElementById("loginErrorCode").style.visibility = 'visible';
+                }
+            console.log(error);
+            });
+    }, 500);
 }
 
 function submitForm(isNewUser) {

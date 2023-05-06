@@ -70,7 +70,6 @@ api.GET(documentID, async function(response) {
                     console.log("display delete button");
                     console.log(document.cookie.split("=")[1]);
                     console.log(post.username);
-                    $("#deleteHolder").html(`<button id="post-delete-button" type="button" class="btn btn-primary m-1 d-block" onclick="deletePost()">Delete Post</button>`);
                     $("#editHolder").html(`<button id="post-edit-button" type="button" class="btn btn-warning m-1 d-block" onclick="showEditPostForm()">Edit Post</button>`);
                 }
             });
@@ -158,11 +157,12 @@ function showEditPostForm() {
     const prefix = "Review - ";
     const prefixIndex = $("#review").text().indexOf(prefix);
     const reviewText = $("#review").text().slice(prefixIndex + prefix.length);
+    $("#deleteHolder").html(`<button id="post-delete-button" type="button" class="btn btn-primary m-1 d-block" onclick="deletePost()">Delete Post</button>`);
     $("#editHolder").html(`
         <input type="text" class="form-control m-1" id="newReview" value="${reviewText}"></input>
         <button id="editPostButton" class="btn btn-warning" type="button" onclick="editPost()">Submit</button>
         <button id="undoEdit" class="btn btn-warning" type="button" onclick="document.location.reload();">Close</button>
-    `)
+    `);
 }
 
 // most of this code has been taken from app.js and slightly altered
