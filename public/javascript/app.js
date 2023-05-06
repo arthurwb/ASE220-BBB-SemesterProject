@@ -18,7 +18,6 @@ function getCurrentDateTime() {
 }
 
 function showCreatePostForm() {
-    alert("Test")
     if(document.cookie.split("=")[1]){
         // Hide the original "Create New Post" button
         $("#create-post-button").addClass("d-none").removeClass("d-block");
@@ -332,36 +331,31 @@ function deleteCookies() {
         document.cookie = allCookies[i] + "=;expires="
         + new Date(0).toUTCString();
 }
+// //Create Post Actions Button
+// async function secondaryCreateFunction(){
+//     let current = window.location.href;
+//     if(document.cookie.split("=")[1]){
+//         if (window.location.href == document.location.origin || window.location.href == document.location.origin + '/'){
+//             showCreatePostForm();
+//         }
+//         else{
+//             window.location.href = document.location.origin;
+//             document.addEventListener('DOMContentLoaded', function(){
+//                 showCreatePostForm();
+//             });
+//         }
+//     }
+//     else{
+//         if (current.includes("/")){
+//             current = (current.split("/"))[0] + '/user';
+//         }
+//         else{
+//             current = current + '/user';
+//         }
+//         window.location.href = current;
+//     }
 
-
-//Create Post Actions Button
-async function secondaryCreateFunction(){
-
-    let current = window.location.href;
-
-
-    if(document.cookie.split("=")[1]){
-        if (window.location.href == document.location.origin || window.location.href == document.location.origin + '/'){
-            showCreatePostForm();
-        }
-        else{
-            window.location.href = document.location.origin;
-            document.addEventListener('DOMContentLoaded', function(){
-                showCreatePostForm();
-            });
-        }
-    }
-    else{
-        if (current.includes("/")){
-            current = (current.split("/"))[0] + '/user';
-        }
-        else{
-            current = current + '/user';
-        }
-        window.location.href = current;
-    }
-
-};
+// };
 
 //check if a user is signed in
 function checkSignedIn() {
@@ -398,4 +392,7 @@ function goHome(){
 
 function goTermsConditions(){
     document.location.href = '/Terms&Conditions';
+}
+function goAboutUs(){
+    document.location.href = '/aboutUs';
 }
