@@ -134,19 +134,20 @@ function alertUser(text, location) {
     if (!location) {
         sendTo = "document.location.reload();";
     } else {
-        sendTo = `document.location.href = "${location}"`;
+        sendTo = `document.location.href = '${location}'`;
     }
     $("body").append(`
     <div class="fixed-top fixed-bottom d-flex justify-content-center align-items-center" style="background-color: rgba(0, 0, 0, 0.8);">
-        <div class="d-flex justify-content-center align-items-center bg-warning rounded" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-            <div class="text-center p-2">
+        <div class="d-flex justify-content-center align-items-center rounded" style="background:#fd9f57; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <div class="text-center p-2 col text-center">
                 ${text}
-                <button class="btn btn-primary d-block" type="button" onclick="${sendTo}">Close</button>
+                <button class="alertButtonClass btn btn-primary d-block mx-5" style="color: black; padding: 0em 1em 0em 1em" type="button" onclick="${sendTo}">Close</button>
             </div>
         </div>
     </div>
     `)
 }
+
 
 // used to test the validation of a new post
 function validation(username, title, review, rating) {

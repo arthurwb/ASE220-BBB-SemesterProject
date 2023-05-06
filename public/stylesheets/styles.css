@@ -29,8 +29,13 @@ main{
 .btn-primary{
   background-color: #fd9f57;
   border-color: #fd9f57;
+
 }
 .btn-primary:hover {
+  background-color: #ff8222;
+  border-color: #ff8222;
+}
+.btn-primary:active {
   background-color: #ff8222;
   border-color: #ff8222;
 }
@@ -157,22 +162,6 @@ main{
     margin-top: 0em;
     margin-bottom: 0em;
   }
-
-  /* .menu--off {
-    position: absolute;
-    display: block;
-    background: #eee;
-    min-height: 600px;
-    min-width: 300px;
-    transition: all 300ms;
-  }
-  
-  .menu--on {
-    width: 175%;
-    box-shadow: 8px 8px 20px 0 rgba(0, 0, 0, 0.2);
-    transition: all 300ms;
-  }
- */
 
  .menu--off {
   position: absolute;
@@ -425,4 +414,12 @@ footer a {
   flex-direction: row;
   width:fit-content;
   align-items: center;
+}
+
+.alertButtonClass:hover{
+  background: #878787;
+
+}
+.alertButtonClass{
+  background: #bebebe;
 }
