@@ -10,6 +10,10 @@ function getCurrentDateTime() {
     const ampm = hour >= 12 ? "PM" : "AM";
     hour = hour % 12;
     hour = hour ? hour : 12;
+
+
+
+    
     const minute = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
     const month = months[date.getMonth()];
     const day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
